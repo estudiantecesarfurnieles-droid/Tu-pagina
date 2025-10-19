@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A veces...</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #2c3e50 100%);
+            min-height: 100vh;
+            color: #ecf0f1;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Efecto de partículas sutiles */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(52, 152, 219, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(155, 89, 182, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .carta-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: rgba(44, 62, 80, 0.9);
+            border-radius: 20px;
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.3),
+                inset 0 0 30px rgba(52, 152, 219, 0.1);
+            padding: 50px;
+            position: relative;
+            z-index: 2;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .carta-header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid rgba(52, 152, 219, 0.3);
+            padding-bottom: 30px;
+        }
+
+        .fecha {
+            font-size: 1.1rem;
+            color: #3498db;
+            font-weight: 300;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .titulo-carta {
+            font-size: 2.5rem;
+            color: #ecf0f1;
+            font-weight: 300;
+            margin: 0;
+            text-shadow: 0 0 20px rgba(52, 152, 219, 0.5);
+            letter-spacing: 2px;
+        }
+
+        .carta-content {
+            line-height: 2;
+            font-size: 1.2rem;
+            text-align: left;
+            margin-bottom: 40px;
+            color: #bdc3c7;
+        }
+
+        .parrafo-destacado {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(155, 89, 182, 0.1) 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 3px solid #3498db;
+            margin: 25px 0;
+            font-style: italic;
+            color: #ecf0f1;
+        }
+
+        .firma {
+            text-align: right;
+            margin-top: 50px;
+            font-style: italic;
+            color: #3498db;
+            font-size: 1.3rem;
+            font-weight: 300;
+            border-top: 1px solid rgba(52, 152, 219, 0.3);
+            padding-top: 20px;
+        }
+
+        /* Efectos de luz sutil */
+        .luz-sutil {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(52, 152, 219, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: brillo 4s ease-in-out infinite;
+        }
+
+        .luz-sutil:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .luz-sutil:nth-child(2) { top: 20%; right: 15%; animation-delay: 2s; }
+        .luz-sutil:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 4s; }
+
+        @keyframes brillo {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .carta-container {
+                margin: 10px;
+                padding: 30px;
+            }
+            
+            .titulo-carta {
+                font-size: 2rem;
+            }
+            
+            .carta-content {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <style>
+    </style>
+    <!-- Luces sutiles -->
+    <div class="luz-sutil"></div>
+    <div class="luz-sutil"></div>
+    <div class="luz-sutil"></div>
+
+    <div class="carta-container">
+        <div class="carta-header">
+            <div class="fecha">📅 6 de octubre de 2025</div>
+            <h1 class="titulo-carta">"A veces…"</h1>
+        </div>
+
+        <div class="carta-content">
+            <p>Hoy me desperté con ese peso otra vez. No sé por qué, hay días en los que me siento tranquilo, y otros en los que simplemente me gana la costumbre de pensar en ti.</p>
+            
+            <p>Hace un mes que no hablamos, y aunque el tiempo sigue, a veces se siente igual que el primer día que nos alejamos.</p>
+            
+            <div class="parrafo-destacado">
+                <p>No te voy a mentir, he tenido ganas de llamarte, de escribirte, de saber si también piensas en mí. Pero algo dentro me dice que no debo hacerlo, que quizás ya no quieres saber nada, o que simplemente estás mejor así.</p>
+            </div>
+            
+            <p>A veces miro el teléfono, te veo en línea y me pregunto si también te cuesta no escribir. Si en algún momento del día te cruzan recuerdos míos, o si ya me dejaste en el pasado como algo que fue.</p>
+            
+            <p>Y no lo digo con rencor, solo con esa curiosidad que nace cuando el corazón aún no aprende del todo a soltar.</p>
+        </div>
+
+        <div class="firma">
+            <p>—Bebe koalita</p>
+        </div>
+    </div>
+
+    
+</body>
+</html>

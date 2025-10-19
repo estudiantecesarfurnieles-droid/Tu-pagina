@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Para mi Narizita 💛</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Video de fondo */
+    .video-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      background: black;
+    }
+
+    /* Carta */
+    .carta {
+      position: relative;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 700px;
+      margin: auto;
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      top: 50%;
+      transform: translateY(-50%);
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    h1 {
+      font-size: 32px;
+      color: #b34747;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #2d2d2d;
+      margin-bottom: 20px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-40px); }
+      to { opacity: 1; transform: translateY(-50%); }
+    }
+
+    /* Botón animado */
+    .btn-ramo {
+      background: linear-gradient(45deg, #f7c531, #f89b29);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 15px 40px;
+      font-size: 18px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: pulse 2s infinite;
+    }
+
+    .btn-ramo:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(248, 155, 41, 0.6);
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 rgba(248, 155, 41, 0.6); }
+      50% { box-shadow: 0 0 25px rgba(248, 155, 41, 0.9); }
+      100% { box-shadow: 0 0 0 rgba(248, 155, 41, 0.6); }
+    }
+
+    /* Imagen del ramo */
+    .ramo {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.5);
+      max-width: 300px;
+      opacity: 0;
+      z-index: 10;
+      transition: all 1s ease;
+    }
+
+    .ramo.show {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  </style>
+</head>
+<body>
+  <!-- Video de fondo -->
+  <video autoplay muted loop playsinline class="video-bg" id="bgVideo">
+    <source src="../videoflores.mp4" type="video/mp4">
+    Tu navegador no soporta video en HTML5.
+  </video>
+
+  <!-- Carta -->
+  <div class="carta">
+    <h1>Para mi Narizita 💛</h1>
+    <p>
+      Hoy, día del amor y la amistad, me acordé mucho de ti.<br>
+      Aunque ya no estemos juntos, quiero que sepas<br>
+      que todavía te pienso, te extraño y me hubiera encantado<br>
+      darte este ramo en persona.
+    </p>
+    <p>
+      Ojalá tu día haya sido tan bonito como lo eres tú,<br>
+      porque en mi corazón siempre tendrás un lugar especial.
+    </p>
+    <button class="btn-ramo" onclick="mostrarRamo()">🌼 Presiona aquí 🌼</button>
+  </div>
+
+  <!-- Imagen del ramo -->
+  <img src="../ramo.png" alt="Ramo de flores amarillas" class="ramo" id="ramo">
+
+  <script>
+    const video = document.getElementById("bgVideo");
+    video.muted = true;
+    video.play().catch(err => console.log("No se pudo reproducir automáticamente:", err));
+
+    function mostrarRamo() {
+      document.getElementById("ramo").classList.add("show");
+    }
+  </script>
+
+  <style>
+  </style>
+  
+</body>
+</html>

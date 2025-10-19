@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Carta 8 - 4:27 a.m.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+    <style>
+        :root{
+            --paper:#fffaf3;
+            --ink:#2a2a2a;
+            --accent:#d6896a;
+            --shadow:rgba(0,0,0,.18);
+        }
+        *{box-sizing:border-box}
+        html,body{height:100%;margin:0}
+        body{
+            background: radial-gradient(1200px 800px at 20% 10%, #ffe2d4 0%, transparent 60%),
+                        radial-gradient(1000px 700px at 90% 80%, #e5f0ff 0%, transparent 55%),
+                        linear-gradient(135deg, #1a1a1a, #1f2430);
+            display:flex;align-items:center;justify-content:center;
+            padding:16px;
+            min-height:100vh;
+        }
+        .letter-wrap{
+            position:relative;max-width:860px;width:100%;
+        }
+        .paper{
+            background:var(--paper);
+            color:var(--ink);
+            border-radius:18px;
+            padding:40px 44px;
+            box-shadow:0 25px 60px var(--shadow), inset 0 1px 0 rgba(255,255,255,.6);
+            background-image: repeating-linear-gradient(transparent 0 42px, rgba(214,137,106,.08) 42px 43px),
+                              radial-gradient(1400px 500px at -10% -30%, #fff 0%, #fffaf3 40%, #f8efe4 100%);
+            max-height:90vh;
+            overflow:auto;
+            -webkit-overflow-scrolling:touch;
+        }
+        .paper::before{
+            content:"";position:absolute;inset:0;pointer-events:none;
+            border-radius:18px;
+            background:linear-gradient(180deg, rgba(0,0,0,.06), transparent 30%),
+                       linear-gradient(90deg, rgba(255,255,255,.3), transparent 40%);
+            mix-blend-mode:multiply;filter:contrast(1.05);
+        }
+        .corner-ribbon{
+            position:absolute;top:14px;right:-8px;transform:rotate(12deg);
+            background:var(--accent);color:#fff;padding:6px 14px;border-radius:6px;
+            box-shadow:0 6px 18px rgba(214,137,106,.45);
+            font:600 12px/1 'Crimson Text', serif;letter-spacing:.8px;text-transform:uppercase
+        }
+        .heading{
+            margin:0 0 22px 0;display:flex;gap:10px;align-items:center;flex-wrap:wrap
+        }
+        .date{font:italic 600 18px 'Crimson Text', serif;opacity:.85}
+        .place{font:600 14px 'Crimson Text', serif;background:rgba(214,137,106,.12);color:#8a513a;padding:4px 10px;border-radius:999px}
+        .saludo{font:700 34px 'Caveat', cursive;margin:18px 0 8px;color:#6b3c2a}
+        .content{font:400 19px/1.75 'Crimson Text', serif;white-space:pre-wrap}
+        .content p{margin:16px 0}
+        .signature{margin-top:26px;font:600 22px 'Caveat', cursive;color:#6b3c2a}
+        .actions{display:flex;gap:12px;margin-top:28px}
+        .btn{
+            appearance:none;border:0;cursor:pointer;border-radius:12px;padding:10px 16px;
+            background:#1f2430;color:#fff;font:600 14px 'Crimson Text', serif;letter-spacing:.4px;
+            box-shadow:0 8px 20px rgba(0,0,0,.25);
+            text-decoration:none;display:inline-flex;align-items:center;gap:8px
+        }
+        .btn:hover{filter:brightness(1.08)}
+        .btn.ghost{background:transparent;color:#1f2430;border:1px solid rgba(0,0,0,.15)}
+        
+        @media (max-width:640px){
+            body{padding:10px}
+            .paper{padding:22px; max-height:92vh}
+            .saludo{font-size:28px}
+            .content{font-size:17px; line-height:1.7}
+        }
+        @media (max-height:700px){
+            .paper{padding:24px 28px; max-height:92vh}
+            .saludo{font-size:26px}
+            .content{font-size:16.5px}
+        }
+    </style>
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#d6896a">
+</head>
+<body>
+    <div class="letter-wrap">
+        <span class="corner-ribbon">Carta nocturna</span>
+        <article class="paper" role="article" aria-label="Carta de madrugada">
+            <header class="heading">
+                <span class="date">17 de octubre de 2025 – 4:27 a.m.</span>
+            </header>
+            <h1 class="saludo">Cachetitos,</h1>
+            <div class="content">
+                <p>Son las cuatro de la mañana y no puedo dormir. Me desperté a las tres y desde entonces no dejo de pensar en ti. No sé por qué todavía te siento tan cerca cuando ya no estás. Todo me recuerda a ti: la forma en que respirabas dormida, las conversaciones tontas, las risas, hasta los silencios.</p>
+                <p>Hay momentos en que intento convencerme de que estoy bien, pero apenas cierro los ojos todo se desmorona. Te extraño, y no es algo que pueda ocultar. Te extraño con rabia, con tristeza, con cariño, con todo al mismo tiempo. Es como si una parte de mí siguiera allá contigo, sin saber cómo volver.</p>
+                <p>A veces pienso que debería soltar todo esto, pero no puedo. No porque no quiera, sino porque todavía duele demasiado. Y supongo que escribirte esto es lo único que me ayuda a respirar un poco.</p>
+                <p>No busco nada con estas palabras. Solo necesitaba sacarlo. Porque hoy, a las cuatro de la mañana, sigo sintiéndote aquí...</p>
+                <p class="signature">Onta tich?</p>
+            </div>
+            
+        </article>
+    </div>
+    
+
+    <script>
+        // Sutil animación de entrada
+        document.querySelector('.paper').animate([
+            { transform:'translateY(12px)', opacity:.0 },
+            { transform:'translateY(0)', opacity:1 }
+        ], { duration:700, easing:'cubic-bezier(.2,.8,.2,1)' });
+    </script>
+    
+</body>
+</html>
+
+

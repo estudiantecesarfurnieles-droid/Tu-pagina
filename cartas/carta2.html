@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carta para Yulianis</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f8f0e3;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    margin: 0;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 900px;
+  }
+
+  @media(min-width: 600px){
+    .container {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+  }
+
+  .card {
+    background: #fff7f0;
+    border: 2px solid #ffd1c1;
+    border-radius: 15px;
+    padding: 30px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    overflow: hidden;
+  }
+
+  .line {
+    opacity: 0;
+    margin-bottom: 10px;
+  }
+
+  .line.show {
+    opacity: 1;
+    transition: opacity 0.5s;
+  }
+
+  /* Notita */
+  .note-container {
+    width: 100%;
+    max-width: 200px;
+    text-align: center;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .note-image {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%; /* cuadrado */
+    background: url('ruta_de_la_imagen.jpg') no-repeat center/cover;
+    border: 2px solid #ffd1c1;
+    border-radius: 10px;
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  .note-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 16px;
+  }
+
+  .note-popup {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 247, 240, 0.95);
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 14px;
+    box-sizing: border-box;
+    overflow-y: auto;
+  }
+
+  .note-popup p {
+    margin: 0;
+  }
+
+  .note-instruction {
+    font-size: 12px;
+    margin-top: 5px;
+    color: #555;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="card" id="card">
+    <!-- La carta se agregará aquí línea por línea con JS -->
+  </div>
+
+  <div class="note-container">
+    <div class="note-title">Notita 💌</div>
+    <div class="note-image" id="noteImage"></div>
+    <div class="note-popup" id="notePopup">
+      <p>Como siempre te digo, no espero respuesta alguna; simplemente tus acciones serán más que respuesta para mí.</p>
+    </div>
+    <div class="note-instruction">Dale clic para abrir</div>
+  </div>
+</div>
+
+<script>
+  // Texto de la carta
+  const textLines = [
+    "A veces digo, ¿por qué me aferro tanto a ti nuevamente si ya te había soltado?",
+    "Hay días en los que ni me entiendo, a veces simplemente no sé.",
+    "Hay días en los que te extraño mucho y me gustaría escribirte y decirte tantas cosas bonitas en una carta y sacarte una sonrisa.",
+    "Pero mi mente piensa: '¿Estoy siendo un pendejo haciendo esto? Tal vez ella está allá hablando con alguien más y tú aquí escribiéndole cartitas de amor'. Suena cruel, pero así es como pienso.",
+    "Recuerdo con claridad el día en que te escuché hablar por primera vez. Siempre habíamos hablado por mensaje y aquel día nos encontramos frente al colegio, en los portones de la cancha.",
+    "Yo estaba de copiloto en la moto, mi amigo Benjamin delante, y estábamos espalda con espalda.",
+    "Cuando me hablaste, fue tu voz y tu forma de expresarte lo que me impactó: tan dulce, tan auténtica, con un timbre que me llegó directo al corazón.",
+    "Sabes algo, a veces yo te digo que me llames no solo para hablar de lo que está pasando, lo hago solo por escuchar tu voz.",
+    "Siempre he esperado una llamada tuya; eso me haría muy feliz: una videollamada, sábado de pelis… esos pequeños detalles hacen toda la diferencia.",
+    "Sueno como un tonto escribiéndote todo esto, pero me gusta ser puntual con lo que siento.",
+    "Me cuesta confiar en ti. Recuerdo el día que me dijiste que se te había apagado el teléfono; yo vi que te habían llegado mensajes, y lo primero que pensé fue que habías salido de clases y te habías ido con Alex.",
+    "Luego me lo explicaste bien, y me pregunté por qué cuando llegaste no me habías dicho eso desde el principio. Solo quiero que seas sincera conmigo.",
+    "Soy una persona muy explosiva con mis sentimientos, y creo que eso ha sido la base de muchas veces en las que te reclamé de mala manera.",
+    "Pero algo que me gusta mucho de ti es que sabes lidiar conmigo; sabes calmarme en los momentos de ira o enojo, no solo cuando te reclamo, sino incluso cuando me enojo con mi familia o amigos.",
+    "Siempre encuentras la manera de tranquilizarme, y eso te hace increíble.",
+    "Lamento profundamente todas las cosas que te hice pasar y sé que también sufriste.",
+    "Me perdono a mí y te perdono a ti, porque todo lo que vivimos nos ha enseñado a entender el amor de verdad, no ese amor idealizado que muestran en películas o redes sociales."
+  ];
+
+  const card = document.getElementById('card');
+  let i = 0;
+
+  function showNextLine() {
+    if (i < textLines.length) {
+      const lineDiv = document.createElement('div');
+      lineDiv.classList.add('line');
+      lineDiv.textContent = textLines[i];
+      card.appendChild(lineDiv);
+
+      setTimeout(() => {
+        lineDiv.classList.add('show');
+        i++;
+        setTimeout(showNextLine, 800); // Tiempo entre líneas
+      }, 50);
+    }
+  }
+
+  showNextLine();
+
+  // Notita click
+  const noteImage = document.getElementById('noteImage');
+  const notePopup = document.getElementById('notePopup');
+
+  noteImage.addEventListener('click', () => {
+    if(notePopup.style.display === "block") {
+      notePopup.style.display = "none";
+    } else {
+      notePopup.style.display = "block";
+    }
+  });
+
+</script>
+
+<style>
+  .nav-fixed{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);display:flex;gap:12px;z-index:50}
+  .nav-btn{ text-decoration:none; padding:10px 16px; border-radius:12px; color:#fff }
+  .nav-btn.prev{ background:#d6336c }
+  .nav-btn.next{ background:#555 }
+</style>
+
+
+</body>
+</html>

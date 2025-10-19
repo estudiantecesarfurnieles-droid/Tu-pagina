@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>💕 Nuestro Rincón Especial 💕</title>
+  <link rel="stylesheet" href="./css/style.css" />
+  <!-- Fallback para Google Drive -->
+  <link rel="stylesheet" href="css/style.css" onerror="console.error('Error cargando CSS principal')" />
+</head>
+<body>
+  <!-- Audios -->
+  <audio id="musicaFondo" loop></audio>
+  <audio id="musicaCarta"></audio>
+  <audio id="musicaDespegueCohete" preload="auto"></audio>
+
+  <!-- Modal carta (iframe) -->
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-content">
+      <button class="cerrar" id="modalClose" aria-label="Cerrar">⬅️ Regresar</button>
+      <h3 id="modal-titulo"></h3>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Modal peluche -->
+  <div id="modal-peluche" class="modal hidden">
+    <div class="modal-content">
+      <button class="cerrar" onclick="cerrarModalPeluche()">⬅️ Regresar</button>
+      <h3 id="titulo-peluche"></h3>
+      <p id="texto-peluche"></p>
+    </div>
+  </div>
+
+  <!-- Modal imagen -->
+  <div id="modal-imagen" class="modal hidden">
+    <div class="modal-content-img">
+      <button class="cerrar" onclick="cerrarModalImagen()">⬅️ Regresar</button>
+      <div id="media-container">
+        <img id="imagen-ampliada" src="" alt="Media ampliada" />
+      </div>
+    </div>
+  </div>
+
+  <!-- SECCIÓN: Bienvenida -->
+  <section id="bienvenida" class="pantalla">
+    <div class="bienvenida-bg"></div>
+    
+    
+    
+    <!-- Hero Section Principal -->
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="hero-greeting">
+          <h1 id="saludo">Buenos días mi amor 💖</h1>
+          <p class="hero-message" id="frase-romantica">Como estas hoy mi amor? estaba esperando que entraras nuevamente a la esta pagina apra decirte que amo tus cachetitossssssssssssssssssssss 😍</p>
+        </div>
+        
+        <!-- Peluches Centrados -->
+        <div class="peluches-hero">
+          <div class="peluche-container" id="peluche-tich">
+            <div class="peluche-card">
+              <img src="img/tich1.jpg" alt="Tich" class="peluche-img">
+              <div class="peluche-name">Tich</div>
+            </div>
+            <div id="frase-tich" class="globito"></div>
+          </div>
+          
+          <div class="love-connector">
+            <div class="heart-pulse">💕</div>
+            <div class="connection-line"></div>
+          </div>
+          
+          <div class="peluche-container" id="peluche-camila">
+            <div class="peluche-card">
+              <img src="img/camila1.jpg" alt="Camila" class="peluche-img">
+              <div class="peluche-name">Camila</div>
+            </div>
+            <div id="frase-camila" class="globito"></div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Elementos decorativos flotantes -->
+      <div class="floating-elements">
+        <div class="floating-heart">💖</div>
+        <div class="floating-heart">💕</div>
+        <div class="floating-heart">💝</div>
+        <div class="floating-heart">💗</div>
+        <div class="floating-heart">💘</div>
+        <div class="floating-star">✨</div>
+        <div class="floating-star">⭐</div>
+        <div class="floating-star">🌟</div>
+        <div class="floating-star">💫</div>
+        <div class="floating-star">⭐</div>
+        <div class="floating-emoji">🌸</div>
+        <div class="floating-emoji">🌺</div>
+        <div class="floating-emoji">🌻</div>
+        <div class="floating-emoji">🌷</div>
+        <div class="floating-emoji">🌹</div>
+        <div class="floating-emoji">🌼</div>
+      </div>
+      
+      <!-- Partículas de fondo -->
+      <div class="background-particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+      </div>
+      
+    </div>
+
+    <!-- Botón de contexto -->
+    <div id="boton-contexto-container" class="boton-contexto-container hidden">
+      <button id="boton-contexto" class="boton-contexto" onclick="mostrarContextoConversacion()">
+        💭 Contexto de la conversación
+      </button>
+    </div>
+
+  </section>
+
+  <!-- Botón "Iniciar Aventura" -->
+  <button id="btnIniciarAventura" class="btn-iniciar-aventura hidden">Iniciar Aventura</button>
+
+  <!-- 🎮 BARRA DE CARGA DE JUEGO ÉPICA -->
+  <div id="screenShatterContainer" class="screen-shatter-container hidden">
+    <!-- ✨ Partículas de fondo mejoradas -->
+    <div class="background-particles">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      
+      <!-- 🌟 Estrellas brillantes -->
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      
+      <!-- 💫 Corazones flotantes -->
+      <div class="heart">💖</div>
+      <div class="heart">💕</div>
+      <div class="heart">💝</div>
+    </div>
+    
+    <!-- 🎯 Contenedor principal -->
+    <div class="loading-container">
+      <!-- 🎮 Título del juego -->
+      <div class="game-title">Nuestro Rincón Especial</div>
+      
+      <!-- 📊 Barra de progreso -->
+      <div class="progress-container">
+        <div class="progress-bar"></div>
+      </div>
+      
+      <!-- 🎯 Porcentaje -->
+      <div class="loading-percentage" id="loadingPercentage">0%</div>
+      
+      <!-- 🎮 Estado de carga -->
+      <div class="loading-status" id="loadingStatus">Iniciando aventura...</div>
+    </div>
+  </div>
+
+  <!-- MENÚ -->
+  <section id="menu" class="pantalla hidden">
+    <button class="btn-sec btn-volver" onclick="playButtonSound(); volverASeccionAnterior()" style="position: absolute; top: 20px; left: 20px; z-index: 1000;">⬅️ Volver</button>
+    <div class="sections-modern">
+      <div class="sections-header">
+        <h2>Tu rincón especial</h2>
+        <p>Elige una aventura hecha con amor</p>
+      </div>
+      
+      <div class="sections-grid">
+        <div class="section-card featured" onclick="playButtonSound(); mostrarSeccion('historia')">
+          <div class="section-icon">📖</div>
+          <div class="section-content">
+            <h3>Historia</h3>
+            <p>Nuestro libro</p>
+          </div>
+          <div class="section-hover"></div>
+          <div class="featured-badge">✨</div>
+        </div>
+        
+        <div class="section-card" onclick="playButtonSound(); mostrarSeccion('cartas')">
+          <div class="section-icon">💌</div>
+          <div class="section-content">
+            <h3>Cartas</h3>
+            <p>Palabras del corazón</p>
+          </div>
+          <div class="section-hover"></div>
+        </div>
+        
+        <div class="section-card" onclick="playButtonSound(); mostrarSeccion('fotos')">
+          <div class="section-icon">📸</div>
+          <div class="section-content">
+            <h3>Fotos</h3>
+            <p>Nuestros momentos</p>
+          </div>
+          <div class="section-hover"></div>
+        </div>
+        
+        <div class="section-card" onclick="playButtonSound(); mostrarSeccion('extraño')" style="grid-column: 2; grid-row: 2;">
+          <div class="section-icon">❤️</div>
+          <div class="section-content">
+            <h3>Te extraño</h3>
+            <p>Un abrazo virtual</p>
+          </div>
+          <div class="section-hover"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARTAS -->
+  <section id="cartas" class="pantalla hidden">
+    <button class="btn-sec" onclick="volverASeccionAnterior()" style="position: absolute; top: 20px; left: 20px; z-index: 1000;">⬅️ Volver al menú</button>
+    <div class="cartas-hero">
+      <div class="corazones-fondo" aria-hidden="true"></div>
+      <h2>💌 Cartas</h2>
+      <p class="cartas-sub">Mensajes que te abrazan incluso cuando estamos lejos. 📅 Nueva carta cada sábado a las 7:00 PM</p>
+    </div>
+
+    <div id="listaCartas" class="contenedor-cartas" role="list"></div>
+  </section>
+
+  <!-- FOTOS -->
+  <section id="fotos" class="pantalla hidden">
+    <button class="btn-sec btn-volver" onclick="playButtonSound(); volverASeccionAnterior()" style="position: absolute; top: 20px; left: 20px; z-index: 1000;">⬅️ Volver al menú</button>
+    <div class="fotos-hero">
+      <div class="fotos-particles" aria-hidden="true"></div>
+      <h2>📸 Nuestros Momentos</h2>
+      <p class="fotos-sub">Cada imagen guarda un pedacito de nuestro corazón 💕</p>
+    </div>
+
+    <div class="contenedor-galeria">
+      <div class="galeria-fotos">
+        <!-- Se llena dinámicamente con JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- PELI -->
+  <section id="peli" class="pantalla hidden">
+    <button class="btn-sec btn-volver" onclick="playButtonSound(); volverASeccionAnterior()" style="position: absolute; top: 20px; left: 20px; z-index: 1000;">⬅️ Volver al menú</button>
+    <div class="peli-hero">
+      <div class="peli-stars" aria-hidden="true"></div>
+      <h2>🎬 Nuestra Cita Virtual</h2>
+      <p class="peli-sub">Mantita, palomitas y mucho amor a distancia 💕 📅 Link habilitado todos los sábados a las 7:00 PM</p>
+    </div>
+
+    <div class="caja-pelicula pelicula-romantica">
+      <div class="pelicula-header">
+        <h3 id="tituloPelicula">Nuestra película del corazón</h3>
+        <p id="descripcionPelicula">Cada película es una excusa para estar juntos, aunque sea a través de la pantalla.</p>
+      </div>
+      <div class="link-container">
+        <input type="text" id="linkPelicula" readonly value="https://meet.google.com/..." aria-label="Enlace de la película">
+        <button id="copiarLink" class="btn-copiar">🔗 Copiar link</button>
+      </div>
+      <div class="pelicula-tips">
+        <p>💡 Tip: Prepara las palomitas y tu mantita favorita</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORACIÓN -->
+  <section id="oracion" class="pantalla hidden">
+    <button class="btn-sec btn-volver" onclick="playButtonSound(); volverASeccionAnterior()" style="position: absolute; top: 20px; left: 20px; z-index: 1000;">⬅️ Volver al menú</button>
+    <div class="oracion-hero">
+      <div class="oracion-light" aria-hidden="true"></div>
+      <h2>🙏 Nuestro Momento Sagrado</h2>
+      <p class="oracion-sub">Cuando nuestras almas se encuentran en oración ✨ 📅 Nuevo link cada madrugada a las 3:00 AM</p>
+    </div>
+
+    <div class="caja-oracion oracion-romantica">
+      <div class="oracion-header">
+        <h3 id="tituloOracion">Hora de oración — 03:00 a.m.</h3>
+        <p id="descripcionOracion">Cada madrugada, nuestros corazones se unen en una sola plegaria. El enlace aparecerá aquí cuando sea la hora.</p>
+      </div>
+
+      <div class="link-container-oracion">
+        <input type="text" id="linkOracion" readonly placeholder="El link se mostrará diariamente a las 3:00 a.m." aria-label="Enlace de oracion" />
+        <button id="guardarLinkOracion" class="btn-copiar hidden">💾 Guardar</button>
+        <button id="copiarLinkOracion" class="btn-copiar" disabled>🔗 Copiar link</button>
+      </div>
+
+      <div class="oracion-versiculo">
+        <p>"Donde dos o tres se reúnen en mi nombre, allí estoy yo en medio de ellos" - Mateo 18:20</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TE EXTRAÑO -->
+  <section id="extraño" class="pantalla hidden">
+    <button class="btn-sec btn-volver" onclick="playButtonSound(); volverASeccionAnterior()" style="position: absolute; top: 20px; left: 20px; z-index: 1000;">⬅️ Volver</button>
+    <div class="extraño-hero">
+      <div class="extraño-hearts" aria-hidden="true"></div>
+      <h2>❤️ Te Extraño Mucho</h2>
+      <p class="extraño-sub">El rincón donde mis abrazos viajan hasta ti 💕</p>
+    </div>
+
+    <div class="extraño-container">
+      <div class="extraño-mensaje">
+        <div class="corazon-pulsante">💖</div>
+        <h3>Mi amor, te extraño...</h3>
+        <p>Te extraño es el lugar donde mi amor por ti se hace más fuerte en la distancia.
+Cada vez que vengas aquí, quiero que sientas que mis abrazos y besos te alcanzan aunque no estemos juntos.
+Este espacio es para recordarte cuánto significas para mí, lo importante que eres en mi vida y lo mucho que deseo tenerte siempre a mi lado.
+
+Porque incluso cuando no estoy contigo físicamente, mi corazón late por ti en cada instante. ❤️.</p>
+        <button class="btn-extraño" onclick="mostrarMensajeExtraño()">
+          <span class="corazon-animado">💕</span>
+        </button>
+        <p style="text-align: center; margin-top: 10px; color: #8b4a6b; font-style: italic;">Presiona aquí</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 📖 NUESTRA HISTORIA - LIBRO VINTAGE -->
+  <section id="historia" class="pantalla hidden">
+    <button class="btn-sec btn-volver" onclick="playButtonSound(); volverASeccionAnterior()" style="position: absolute; top: 20px; left: 20px; z-index: 1000;">⬅️ Volver al menú</button>
+    
+    <!-- 📚 Contenedor del libro vintage -->
+    <div class="vintage-book-container">
+      <!-- 📖 Libro cerrado vintage -->
+      <div id="vintage-book-closed" class="vintage-book-closed" onclick="abrirLibroVintage()">
+        <div class="vintage-cover">
+          <div class="vintage-spine"></div>
+          <div class="vintage-pages-stack"></div>
+          <div class="vintage-title-section">
+            <h1 class="vintage-main-title">Nuestra Historia</h1>
+            <p class="vintage-subtitle">Un amor que comenzó en pandemia</p>
+            <div class="vintage-authors">
+              <p>Cachetitos & Bebé Koalita</p>
+            </div>
+            <div class="vintage-year">2024</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 📖 Libro abierto vintage -->
+      <div id="vintage-book-open" class="vintage-book-open hidden">
+        <div class="vintage-pages-container">
+          <!-- Página izquierda -->
+          <div class="vintage-page left-vintage-page">
+            <div class="vintage-page-content" id="left-vintage-content">
+              <!-- Contenido de la página izquierda -->
+            </div>
+          </div>
+          
+          <!-- Página derecha -->
+          <div class="vintage-page right-vintage-page">
+            <div class="vintage-page-content" id="right-vintage-content">
+              <!-- Contenido de la página derecha -->
+            </div>
+          </div>
+        </div>
+        
+        <!-- Controles vintage -->
+        <div class="vintage-controls">
+          <button class="vintage-btn" onclick="irAPortadaVintage()">📖 Portada</button>
+          <button id="vintage-prev-btn" class="vintage-btn" onclick="paginaAnteriorVintage()">← Anterior</button>
+          <span id="vintage-page-info" class="vintage-page-info">Página 1 de 1</span>
+          <button id="vintage-next-btn" class="vintage-btn" onclick="paginaSiguienteVintage()">Siguiente →</button>
+          <button class="vintage-btn cerrar-vintage" onclick="cerrarLibroVintage()">📖 Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EmailJS para notificaciones de respaldo -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script src="./js/contenido-libro.js"></script>
+  <script src="./js/conversaciones.js"></script>
+  <script src="./js/script.js"></script>
+</body>
+</html>

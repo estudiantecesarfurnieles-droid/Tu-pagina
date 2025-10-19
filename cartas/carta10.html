@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestro reencuentro</title>
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&display=swap');
+		html,body{height:100%;margin:0}
+		body{
+			font-family:'Cormorant Garamond', serif;
+			background: radial-gradient(1000px 600px at 15% 10%, #f3ecff 0%, transparent 60%),
+			            radial-gradient(900px 600px at 85% 80%, #ffe7ef 0%, transparent 55%),
+			            linear-gradient(135deg,#141824,#1c2130);
+			color:#1e1e1e;
+			display:flex;align-items:center;justify-content:center;min-height:100vh;padding:16px;
+		}
+        .wrap{position:relative;max-width:900px;width:100%;}
+        .card{
+            background:linear-gradient(180deg,#fffdf8 0%,#fff7fb 100%);
+            border-radius:24px;padding:46px 52px;
+            box-shadow:0 28px 60px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.7);
+            text-align:left;position:relative;overflow:hidden
+        }
+        .card::before{content:'';position:absolute;inset:-40% -10% auto -10%;height:60%;background:radial-gradient(closest-side,#ffdbe8,transparent 70%);opacity:.35;filter:blur(8px)}
+        h1{font-family:'Playfair Display', serif;margin:0 0 14px 0;font-size:40px;color:#a24578}
+        .fecha{font-size:14px;color:#8b6f82;margin-bottom:22px}
+        .texto{
+            font-size:19px;
+            line-height:1.9;
+            color:#2c2a32;
+            white-space:pre-line; /* respeta saltos de linea y permite ajuste automático */
+            max-width:70ch; /* longitud de línea ideal para lectura */
+            margin:0 auto; /* centrado dentro de la tarjeta */
+            text-align:left;
+            letter-spacing:.1px;
+            overflow-wrap:anywhere;
+        }
+		@media (max-width: 640px){
+			.card{padding:28px 22px;border-radius:18px}
+			h1{font-size:30px}
+			.texto{font-size:17px;line-height:1.75;max-width:100%}
+		}
+        .firma{margin-top:26px;font-weight:700;color:#a24578}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div class="card" role="article" aria-label="Nuestro regreso">
+			<h1>Nuestro reencuentro</h1>
+			<div class="fecha">Domingo, 19 de octubre de 2025</div>
+			<div class="texto">Mi amor,
+ 
+ Anoche fue una noche que quedará grabada en mi corazón por siempre. Después de tanto tiempo, después de un mes y medio sin hablarnos, de habernos distanciado de una forma que dolía más de lo que puedo explicar… por fin volvimos a encontrarnos.
+ 
+ Te entregué esa página que estuve preparando durante tres meses, con cada palabra pensándola para ti, con cada detalle lleno de lo que siento. Y verte llorar de felicidad al leerla… no tienes idea de cuánto significó eso para mí. Tus lágrimas no eran de tristeza, eran de emoción, y en ese momento supe que valió la pena todo el tiempo que me tomó hacerla, porque era para ti. Solo para ti.
+ 
+ Volver a hablar contigo fue como volver a respirar. Sentía que me faltabas en todo. Te extrañaba tanto… tu risa, tu voz, tu forma de verme. Pero sobre todo, extrañaba esos cachetitos tuyos que se ponen aún más grandes y hermosos cuando sonríes. Dios, cómo me encanta verte sonreír.
+ 
+ 
+ 
+ Con todo mi amor
+  </div>
+			<div class="firma">— Koalita</div>
+		</div>
+	</div>
+
+	
+</body>
+</html>
+
+

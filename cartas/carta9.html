@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi Narizita ✨</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@700&family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&display=swap');
+        body { font-family: 'Cormorant Garamond', serif; color: #121113; margin: 0; background: #0d0d2b; position: relative; }
+        .star { position: fixed; background-color: #ffffff; border-radius: 50%; animation: twinkle linear infinite; }
+        @keyframes twinkle { 0% { transform: scale(0.8); opacity: 0.5; } 50% { transform: scale(1.2); opacity: 1; } 100% { transform: scale(0.8); opacity: 0.5; } }
+        .main-content { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 50px 20px; box-sizing: border-box; position: relative; z-index: 10; transition: opacity 0.8s ease, transform 0.8s ease; }
+        .main-content.hide { opacity: 0; transform: scale(0.9); }
+        .carta { background-color: rgba(255, 255, 255, 0.9); padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); animation: fadeIn 2s ease-in-out; position: relative; width: 100%; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        .titulo { font-family: 'Playfair Display', serif; font-size: 3em; color: #ad1457; margin-bottom: 20px; text-align: center; }
+        .texto { font-size: 1.2em; line-height: 1.8; margin-bottom: 30px; white-space: pre-wrap; text-align: left; padding-left: 10px; padding-right: 10px; }
+        .firma { font-family: 'Dancing Script', cursive; font-size: 1.8em; margin-top: 40px; color: #880e4f; text-align: right; }
+        .fecha { font-style: italic; font-size: 1em; color: #757575; margin-bottom: 15px; text-align: left; }
+        .boton-sorpresa { display: block; width: fit-content; margin: 30px auto 0 auto; padding: 15px 30px; background-color: #ad1457; color: white; border: none; border-radius: 30px; font-family: 'Playfair Display', serif; font-size: 1.3em; cursor: pointer; transition: background-color 0.3s ease, transform 0.3s ease; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); }
+        .boton-sorpresa:hover { background-color: #880e4f; transform: translateY(-3px); }
+        .subtexto-boton { display: block; font-family: 'Cormorant Garamond', serif; font-size: 0.9em; color: #757575; margin-top: 5px; text-align: center; }
+        .sorpresa-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.98); display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: opacity 0.8s ease, visibility 0.8s ease; z-index: 100; }
+        .sorpresa-overlay.show { opacity: 1; visibility: visible; }
+        .mensaje-final { font-family: 'Playfair Display', serif; font-size: 4em; color: #ad1457; text-align: center; margin-bottom: 30px; animation: scaleIn 1.5s ease-out forwards; line-height: 1.2; }
+        @keyframes scaleIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .emoji { position: absolute; font-size: 3em; animation: floatAndFade 5s linear infinite; opacity: 0; pointer-events: none; }
+        @keyframes floatAndFade { 0% { transform: translateY(100vh) translateX(0); opacity: 0; } 10% { opacity: 1; } 80% { opacity: 1; } 100% { transform: translateY(-20vh) translateX(var(--x-offset, 0)); opacity: 0; } }
+        .nav-fixed{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);display:flex;gap:12px;z-index:50}
+        .nav-btn{ text-decoration:none; padding:10px 16px; border-radius:12px; color:#fff }
+        .nav-btn.prev{ background:#ad1457 }
+        .nav-btn.next{ background:#555 }
+    </style>
+</head>
+<body>
+    <div class="main-content" id="mainContent">
+        <div class="carta">
+            <div class="fecha">Miércoles, 17 de Septiembre de 2025</div>
+            <div class="titulo">Palabras que no entregué</div>
+            <div class="texto">
+                Narizita,
+
+                Hoy ha sido un día bastante pesado, de esos en los que el cansancio me pesa un poco más de lo normal. Te he extrañado mucho, y la verdad, me moría por escribirte. A veces me siento así, con ganas de decirte cómo me siento, pero no quiero molestarte. Así que simplemente me nace escribir estas cartas y guardarlas. Algún día las leerás y sabrás que en días como hoy, solo tú estabas en mi mente.
+
+                Extraño tanto el mundo que construimos, y en días como este, créeme que nada me haría más feliz que besar tus cachetitos. Aún siento ese vacío de estas dos semanas sin ti, pero me aferro a la esperanza de que todo estará bien.
+
+                Espero que tu día haya sido excelente. Hoy, como todas las noches a las 3 de la madrugada, le pedí a Dios que enviara sus ángeles para que te guarden y te protejan dondequiera que te encuentres. No olvides nunca que te amo y que amo tu narizita tanto como tus cachetitos.
+            </div>
+            <div class="firma">
+                Con todo mi amor,
+                Tu chico
+            </div>
+        </div>
+    </div>
+
+    
+
+    <div class="sorpresa-overlay" id="sorpresaOverlay">
+        <div class="mensaje-final">Besitos para la narizita y los cachetitos 💖</div>
+    </div>
+
+    <script>
+        const body = document.body; const numStars = 100;
+        for (let i = 0; i < numStars; i++) {
+            const star = document.createElement('div'); star.classList.add('star');
+            star.style.left = `${Math.random() * 100}vw`; star.style.top = `${Math.random() * 100}vh`;
+            const size = Math.random() * 3 + 1; star.style.width = `${size}px`; star.style.height = `${size}px`;
+            star.style.animationDuration = `${Math.random() * 2 + 1}s`; star.style.animationDelay = `${Math.random() * 5}s`;
+            body.appendChild(star);
+        }
+    </script>
+</body>
+<!-- Navegación corregida -->
