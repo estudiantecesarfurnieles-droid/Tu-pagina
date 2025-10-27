@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta de Apoyo - Cachetitos</title>
+    <style>
+        body {
+            font-family: 'Dancing Script', cursive;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .carta-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .carta-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 192, 203, 0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        .carta-header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .carta-titulo {
+            font-size: 2.5rem;
+            color: #8B5CF6;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            font-weight: bold;
+        }
+        
+        .carta-fecha {
+            font-size: 1.2rem;
+            color: #A855F7;
+            font-style: italic;
+        }
+        
+        .carta-saludo {
+            font-size: 1.8rem;
+            color: #EC4899;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .carta-contenido {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #374151;
+            text-align: justify;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .carta-contenido p {
+            margin-bottom: 20px;
+            text-indent: 20px;
+        }
+        
+        .carta-contenido .destacado {
+            background: linear-gradient(135deg, #F3E8FF, #E9D5FF);
+            padding: 15px;
+            border-radius: 15px;
+            border-left: 5px solid #8B5CF6;
+            margin: 20px 0;
+            font-weight: bold;
+            color: #6B21A8;
+        }
+        
+        .carta-contenido .especial {
+            background: linear-gradient(135deg, #FEF3C7, #FDE68A);
+            padding: 15px;
+            border-radius: 15px;
+            border-left: 5px solid #F59E0B;
+            margin: 20px 0;
+            font-weight: bold;
+            color: #92400E;
+        }
+        
+        .carta-firma {
+            text-align: right;
+            margin-top: 40px;
+            font-size: 1.4rem;
+            color: #8B5CF6;
+            font-weight: bold;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .corazones-flotantes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .corazon-flotante {
+            position: absolute;
+            color: rgba(236, 72, 153, 0.3);
+            font-size: 1.5rem;
+            animation: flotar 8s linear infinite;
+        }
+        
+        @keyframes flotar {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .corazon-flotante:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .corazon-flotante:nth-child(2) { left: 20%; animation-delay: 2s; }
+        .corazon-flotante:nth-child(3) { left: 30%; animation-delay: 4s; }
+        .corazon-flotante:nth-child(4) { left: 40%; animation-delay: 6s; }
+        .corazon-flotante:nth-child(5) { left: 50%; animation-delay: 1s; }
+        .corazon-flotante:nth-child(6) { left: 60%; animation-delay: 3s; }
+        .corazon-flotante:nth-child(7) { left: 70%; animation-delay: 5s; }
+        .corazon-flotante:nth-child(8) { left: 80%; animation-delay: 7s; }
+        .corazon-flotante:nth-child(9) { left: 90%; animation-delay: 1.5s; }
+        
+        .boton-cerrar {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #8B5CF6, #A855F7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+            transition: all 0.3s ease;
+            z-index: 3;
+        }
+        
+        .boton-cerrar:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+        }
+        
+        @media (max-width: 768px) {
+            .carta-container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .carta-titulo {
+                font-size: 2rem;
+            }
+            
+            .carta-contenido {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="carta-container">
+        <button class="boton-cerrar" onclick="window.close()">×</button>
+        
+        <div class="corazones-flotantes">
+            <div class="corazon-flotante">💕</div>
+            <div class="corazon-flotante">💖</div>
+            <div class="corazon-flotante">💗</div>
+            <div class="corazon-flotante">💘</div>
+            <div class="corazon-flotante">💝</div>
+            <div class="corazon-flotante">💞</div>
+            <div class="corazon-flotante">💟</div>
+            <div class="corazon-flotante">💕</div>
+            <div class="corazon-flotante">💖</div>
+        </div>
+        
+        <div class="carta-header">
+            <div class="carta-titulo">💌 Carta de Apoyo 💌</div>
+            <div class="carta-fecha">Diciembre 2024</div>
+        </div>
+        
+        <div class="carta-saludo">Mi querida Cachetitos,</div>
+        
+        <div class="carta-contenido">
+            <p>Sé que en estos momentos estás pasando por días difíciles, y aunque no siempre tengo las palabras perfectas, quiero que sepas que estoy aquí para ti en todo momento. Se que estar lejos de casa, te trae muchas veces esa sensación de estar sola y sobrecargada. Los trabajos, las obligaciones, el tiempo que parece nunca alcanzar… sé que te estresan y que a veces solo deseas que todo se calme un poco.</p>
+            
+            <div class="destacado">
+                Quiero que sepas lo orgulloso que estoy de ti, de todo lo que estás logrando y del esfuerzo que pones en todo lo que haces. Sé que no siempre es fácil, pero también sé que eres increíblemente fuerte y capaz.
+            </div>
+            
+            <p>Aunque ahora puedas sentir que todo está en tu contra, te prometo que todo va a estar bien. Estás dando lo mejor de ti, y eso es más que suficiente.</p>
+            
+            <div class="especial">
+                Piensa en esos momentos en el pueblo, con tu familia, tus amigos y todo lo que te hace sentir en paz. Esos días están cerca, y cuando lleguen, podrás descansar, relajarte y volver a sentir esa tranquilidad que tanto te mereces.
+            </div>
+            
+            <p>Ya verás, pronto todo se irá calmando, y podrás recargar energías para seguir adelante con aún más fuerza.</p>
+            
+            <p>Recuerda que no estás sola, mi amor. Aunque no esté ahí contigo físicamente, siempre estoy pensando en ti, apoyándote y esperando con ganas esos momentos en los que podamos compartir un rato tranquilo, sin preocupaciones. Te admiro mucho, Cachetitos, y quiero que sepas que tienes todo mi apoyo, ahora y siempre.</p>
+            
+            <div class="destacado">
+                Todo va a estar bien, mi amor. Ya verás.
+            </div>
+        </div>
+        
+        <div class="carta-firma">
+            Con todo mi amor,<br>
+            <span style="font-size: 1.6rem; color: #EC4899;">Tu bebe Koalita 💕</span>
+        </div>
+    </div>
+</body>
+</html>
