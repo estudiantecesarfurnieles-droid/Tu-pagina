@@ -381,8 +381,8 @@ function actualizarProgreso() {
 // Función para reproducir sonido (usar la existente)
 function playButtonSound() {
   // Usar la función existente del script principal
-  if (typeof window.playButtonSound === 'function') {
-    window.playButtonSound();
+  if (typeof window.playButtonChime === 'function') {
+    window.playButtonChime();
   }
 }
 
