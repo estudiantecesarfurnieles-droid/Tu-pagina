@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Carta de Amor</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Source+Sans+Pro:wght@300;400;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Caveat:wght@400;500;600;700&family=Kalam:wght@300;400;700&display=swap');
   
   * {
     margin: 0;
@@ -14,349 +14,394 @@
   }
 
   body {
-    font-family: 'Source Sans Pro', sans-serif;
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #1e3c72 100%);
-    color: #2c3e50;
-    padding: 20px;
+    font-family: 'Kalam', cursive;
+    background: #0a0a0a;
+    color: #ffffff;
+    padding: 0;
+    margin: 0;
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
+    cursor: crosshair;
   }
 
-  /* Efectos de fondo elegantes */
-  body::before {
-    content: '';
+  /* Efecto de papel arrugado */
+  .paper-texture {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: 
-      radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
-      radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 0;
-    animation: backgroundPulse 15s ease-in-out infinite;
-  }
-
-  @keyframes backgroundPulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
-  }
-
-  /* Elementos decorativos flotantes */
-  .floating-element {
-    position: absolute;
-    font-size: 1.5rem;
-    opacity: 0.6;
+    background: 
+      radial-gradient(circle at 20% 30%, rgba(139, 69, 19, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(160, 82, 45, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 40% 80%, rgba(101, 67, 33, 0.06) 0%, transparent 50%),
+      linear-gradient(45deg, rgba(0,0,0,0.02) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.02) 75%),
+      linear-gradient(-45deg, rgba(0,0,0,0.02) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.02) 75%);
+    background-size: 100% 100%, 100% 100%, 100% 100%, 20px 20px, 20px 20px;
     pointer-events: none;
     z-index: 1;
-    animation: floatElegant 12s infinite ease-in-out;
+    animation: paperRustle 8s ease-in-out infinite;
   }
 
-  @keyframes floatElegant {
-    0%, 100% { 
-      transform: translateY(0) rotate(0deg) scale(1); 
-      opacity: 0.6; 
-    }
-    25% { 
-      transform: translateY(-15px) rotate(5deg) scale(1.1); 
-      opacity: 0.8; 
-    }
-    50% { 
-      transform: translateY(-30px) rotate(-3deg) scale(0.9); 
-      opacity: 0.4; 
-    }
-    75% { 
-      transform: translateY(-15px) rotate(8deg) scale(1.05); 
-      opacity: 0.7; 
-    }
+  @keyframes paperRustle {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.95; transform: scale(1.01); }
   }
 
-  /* Contenedor principal */
+  /* Contenedor principal con efecto de papel */
   .carta-container {
-    max-width: 900px;
-    margin: 0 auto;
-    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
-    border-radius: 30px;
-    padding: 50px;
-    box-shadow: 
-      0 30px 60px rgba(0, 0, 0, 0.2),
-      0 0 0 1px rgba(255, 255, 255, 0.3),
-      inset 0 2px 0 rgba(255, 255, 255, 0.4);
     position: relative;
+    max-width: 600px;
+    margin: 20px auto;
+    background: #1a1a1a;
+    border: 2px solid #8B4513;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: 
+      0 0 0 1px #654321,
+      inset 0 0 0 1px #8B4513,
+      0 10px 30px rgba(0, 0, 0, 0.8);
     z-index: 2;
-    backdrop-filter: blur(20px);
-    border: 3px solid transparent;
-    background-clip: padding-box;
+    transform: rotate(-1deg);
+    animation: paperFloat 6s ease-in-out infinite;
   }
 
-  /* Decoración de esquinas elegante */
+  @keyframes paperFloat {
+    0%, 100% { transform: rotate(-1deg) translateY(0); }
+    50% { transform: rotate(1deg) translateY(-5px); }
+  }
+
+  /* Efecto de doblez en las esquinas */
   .carta-container::before {
     content: '';
     position: absolute;
-    top: 15px;
-    left: 15px;
-    right: 15px;
-    bottom: 15px;
-    border: 2px solid transparent;
-    border-image: linear-gradient(45deg, #667eea, #764ba2, #667eea) 1;
-    border-radius: 20px;
-    pointer-events: none;
+    top: -5px;
+    right: -5px;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, #654321 0%, #8B4513 50%, #654321 100%);
+    transform: rotate(45deg);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    z-index: 3;
   }
 
-  /* Título principal */
-  .carta-titulo {
-    text-align: center;
-    color: #2c3e50;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 3.5rem;
-    font-weight: 600;
-    margin-bottom: 40px;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background: linear-gradient(45deg, #2c3e50, #34495e, #2c3e50);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .carta-container::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: -5px;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, #654321 0%, #8B4513 50%, #654321 100%);
+    transform: rotate(45deg);
+    box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.5);
+    z-index: 3;
+  }
+
+  /* Contenido interno */
+  .carta-content {
+    padding: 40px 30px;
+    background: 
+      linear-gradient(90deg, rgba(139, 69, 19, 0.1) 0%, transparent 2%, transparent 98%, rgba(139, 69, 19, 0.1) 100%),
+      linear-gradient(0deg, rgba(139, 69, 19, 0.1) 0%, transparent 2%, transparent 98%, rgba(139, 69, 19, 0.1) 100%);
+    background-size: 100% 100%, 100% 100%;
     position: relative;
-    animation: titleElegance 4s ease-in-out infinite alternate;
   }
 
-  @keyframes titleElegance {
-    0% { filter: drop-shadow(0 0 8px rgba(44, 62, 80, 0.3)); }
-    100% { filter: drop-shadow(0 0 20px rgba(44, 62, 80, 0.6)); }
+  /* Líneas de escritura a mano */
+  .carta-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 24px,
+        rgba(139, 69, 19, 0.1) 24px,
+        rgba(139, 69, 19, 0.1) 25px
+      );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Título con efecto de escritura a mano */
+  .carta-titulo {
+    font-family: 'Caveat', cursive;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #FFD700;
+    text-align: center;
+    margin-bottom: 30px;
+    text-shadow: 
+      2px 2px 0px #8B4513,
+      4px 4px 8px rgba(0, 0, 0, 0.8);
+    transform: rotate(-0.5deg);
+    position: relative;
+    z-index: 2;
+    animation: titleShake 4s ease-in-out infinite;
+  }
+
+  @keyframes titleShake {
+    0%, 100% { transform: rotate(-0.5deg) translateX(0); }
+    25% { transform: rotate(0.5deg) translateX(1px); }
+    50% { transform: rotate(-0.3deg) translateX(-1px); }
+    75% { transform: rotate(0.3deg) translateX(0.5px); }
   }
 
   /* Subtítulo */
   .carta-subtitulo {
+    font-family: 'Amatic SC', cursive;
+    font-size: 1.8rem;
+    color: #DAA520;
     text-align: center;
-    color: #7f8c8d;
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    font-style: italic;
-    margin-bottom: 50px;
-    opacity: 0.8;
+    margin-bottom: 40px;
+    transform: rotate(0.3deg);
+    position: relative;
+    z-index: 2;
+    animation: subtitleFloat 5s ease-in-out infinite;
+  }
+
+  @keyframes subtitleFloat {
+    0%, 100% { transform: rotate(0.3deg) translateY(0); }
+    50% { transform: rotate(-0.2deg) translateY(-2px); }
   }
 
   /* Contenido de la carta */
   .carta-contenido {
     font-size: 1.1rem;
-    line-height: 1.9;
-    color: #2c3e50;
-    text-align: justify;
-  }
-
-  /* Párrafos con estilo elegante */
-  .carta-contenido p {
-    margin-bottom: 25px;
+    line-height: 1.6;
+    color: #F5F5DC;
     position: relative;
-    padding-left: 30px;
-    transition: all 0.4s ease;
-    font-weight: 400;
+    z-index: 2;
   }
 
+  /* Párrafos con efecto de escritura irregular */
+  .carta-contenido p {
+    margin-bottom: 20px;
+    position: relative;
+    transform: rotate(0deg);
+    animation: paragraphDrift 8s ease-in-out infinite;
+  }
+
+  .carta-contenido p:nth-child(odd) {
+    transform: rotate(0.2deg);
+    margin-left: 5px;
+  }
+
+  .carta-contenido p:nth-child(even) {
+    transform: rotate(-0.1deg);
+    margin-right: 5px;
+  }
+
+  @keyframes paragraphDrift {
+    0%, 100% { transform: rotate(0deg) translateY(0); }
+    25% { transform: rotate(0.1deg) translateY(1px); }
+    50% { transform: rotate(-0.1deg) translateY(0); }
+    75% { transform: rotate(0.05deg) translateY(-1px); }
+  }
+
+  /* Efecto de tinta que se seca */
   .carta-contenido p::before {
-    content: '❦';
+    content: '';
     position: absolute;
-    left: 0;
     top: 0;
-    font-size: 18px;
-    color: #667eea;
-    opacity: 0.7;
-    font-family: 'Cormorant Garamond', serif;
-    animation: ornamentPulse 3s ease-in-out infinite;
+    left: -10px;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(to bottom, #8B4513, transparent);
+    opacity: 0.3;
+    animation: inkDrip 3s ease-in-out infinite;
   }
 
-  @keyframes ornamentPulse {
-    0%, 100% { 
-      transform: scale(1); 
-      opacity: 0.7; 
-      color: #667eea;
-    }
-    50% { 
-      transform: scale(1.2); 
-      opacity: 1; 
-      color: #764ba2;
-    }
+  @keyframes inkDrip {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 0.1; transform: scaleY(0.8); }
+  }
+
+  /* Efectos de hover únicos */
+  .carta-container:hover {
+    transform: rotate(0deg) translateY(-10px);
+    box-shadow: 
+      0 0 0 1px #654321,
+      inset 0 0 0 1px #8B4513,
+      0 20px 50px rgba(0, 0, 0, 0.9);
+    transition: all 0.3s ease;
   }
 
   .carta-contenido p:hover {
-    transform: translateX(8px);
-    color: #1a252f;
-    padding-left: 35px;
-  }
-
-  /* Efectos de hover para el contenedor */
-  .carta-container:hover {
-    transform: translateY(-5px);
-    box-shadow: 
-      0 40px 80px rgba(0, 0, 0, 0.25),
-      0 0 0 1px rgba(255, 255, 255, 0.4),
-      inset 0 2px 0 rgba(255, 255, 255, 0.5);
-  }
-
-  /* Scrollbar personalizado elegante */
-  .carta-container::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  .carta-container::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-  }
-
-  .carta-container::-webkit-scrollbar-thumb {
-    background: linear-gradient(45deg, #667eea, #764ba2);
-    border-radius: 4px;
-  }
-
-  .carta-container::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(45deg, #5a6fd8, #6a4190);
+    color: #FFD700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    transform: rotate(0deg) translateX(5px);
+    transition: all 0.3s ease;
   }
 
   /* Responsive design */
   @media (max-width: 768px) {
-    body {
-      padding: 15px;
-    }
-    
     .carta-container {
-      padding: 35px;
-      border-radius: 25px;
+      max-width: 90%;
+      margin: 15px auto;
+      transform: rotate(-0.5deg);
     }
     
-    .carta-titulo {
-      font-size: 2.5rem;
-      margin-bottom: 30px;
-    }
-    
-    .carta-subtitulo {
-      font-size: 1rem;
-      margin-bottom: 35px;
-    }
-    
-    .carta-contenido {
-      font-size: 1rem;
-    }
-    
-    .carta-contenido p {
-      padding-left: 25px;
-      margin-bottom: 20px;
-    }
-    
-    .floating-element {
-      font-size: 1.2rem;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .carta-container {
-      padding: 25px;
+    .carta-content {
+      padding: 30px 20px;
     }
     
     .carta-titulo {
       font-size: 2rem;
     }
     
+    .carta-subtitulo {
+      font-size: 1.5rem;
+    }
+    
+    .carta-contenido {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .carta-container {
+      max-width: 95%;
+      transform: rotate(-0.3deg);
+    }
+    
+    .carta-content {
+      padding: 25px 15px;
+    }
+    
+    .carta-titulo {
+      font-size: 1.8rem;
+    }
+    
     .carta-contenido {
       font-size: 0.95rem;
     }
-    
-    .carta-contenido p {
-      padding-left: 22px;
-    }
   }
 
-  /* Animación de entrada elegante */
+  /* Animación de entrada única */
   .carta-container {
-    animation: slideInElegant 1s ease-out;
+    animation: paperSlideIn 1.2s ease-out;
   }
 
-  @keyframes slideInElegant {
+  @keyframes paperSlideIn {
     0% {
       opacity: 0;
-      transform: translateY(40px) scale(0.95);
+      transform: rotate(-45deg) translateY(100px) scale(0.5);
+    }
+    50% {
+      opacity: 0.7;
+      transform: rotate(-10deg) translateY(20px) scale(0.8);
     }
     100% {
       opacity: 1;
-      transform: translateY(0) scale(1);
+      transform: rotate(-1deg) translateY(0) scale(1);
     }
   }
 
-  /* Efectos de partículas adicionales */
-  .carta-container::after {
-    content: '';
-    position: absolute;
-    top: -30px;
-    left: -30px;
-    right: -30px;
-    bottom: -30px;
-    background: radial-gradient(circle at 30% 30%, rgba(102, 126, 234, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 70% 70%, rgba(118, 75, 162, 0.05) 0%, transparent 50%);
-    border-radius: 40px;
+  /* Efecto de polvo de papel */
+  .paper-dust {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
-    z-index: -1;
-    animation: particleElegant 20s ease-in-out infinite;
+    z-index: 0;
   }
 
-  @keyframes particleElegant {
-    0%, 100% { transform: rotate(0deg) scale(1); }
-    50% { transform: rotate(180deg) scale(1.1); }
+  .paper-dust::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    width: 2px;
+    height: 2px;
+    background: #8B4513;
+    border-radius: 50%;
+    animation: dustFloat1 12s linear infinite;
+  }
+
+  .paper-dust::after {
+    content: '';
+    position: absolute;
+    top: 60%;
+    right: 15%;
+    width: 1px;
+    height: 1px;
+    background: #654321;
+    border-radius: 50%;
+    animation: dustFloat2 15s linear infinite;
+  }
+
+  @keyframes dustFloat1 {
+    0% { transform: translateY(0) translateX(0); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+  }
+
+  @keyframes dustFloat2 {
+    0% { transform: translateY(0) translateX(0); opacity: 0; }
+    15% { opacity: 1; }
+    85% { opacity: 1; }
+    100% { transform: translateY(-100vh) translateX(-30px); opacity: 0; }
   }
 </style>
 </head>
 <body>
 
-<!-- Elementos decorativos flotantes -->
-<div class="floating-element" style="top: 8%; left: 4%; animation-delay: 0s;">❦</div>
-<div class="floating-element" style="top: 15%; right: 6%; animation-delay: 1s;">✧</div>
-<div class="floating-element" style="top: 25%; left: 2%; animation-delay: 2s;">❋</div>
-<div class="floating-element" style="top: 35%; right: 4%; animation-delay: 3s;">✿</div>
-<div class="floating-element" style="top: 45%; left: 6%; animation-delay: 4s;">❁</div>
-<div class="floating-element" style="top: 55%; right: 2%; animation-delay: 5s;">✽</div>
-<div class="floating-element" style="top: 65%; left: 8%; animation-delay: 6s;">❀</div>
-<div class="floating-element" style="top: 75%; right: 5%; animation-delay: 7s;">✾</div>
-<div class="floating-element" style="top: 85%; left: 3%; animation-delay: 8s;">✿</div>
+<!-- Efecto de papel arrugado -->
+<div class="paper-texture"></div>
+
+<!-- Polvo de papel flotante -->
+<div class="paper-dust"></div>
 
 <div class="carta-container">
-    <h1 class="carta-titulo">Carta de Amor</h1>
-    <p class="carta-subtitulo">Para mi amada</p>
-    
-    <div class="carta-contenido">
-        <p>A veces digo, ¿por qué me aferro tanto a ti nuevamente si ya te había soltado?</p>
+    <div class="carta-content">
+        <h1 class="carta-titulo">Carta de Amor</h1>
+        <p class="carta-subtitulo">Escrita a mano con el corazón</p>
         
-        <p>Hay días en los que ni me entiendo, a veces simplemente no sé.</p>
-        
-        <p>Hay días en los que te extraño mucho y me gustaría escribirte y decirte tantas cosas bonitas en una carta y sacarte una sonrisa.</p>
-        
-        <p>Pero mi mente piensa: '¿Estoy siendo un pendejo haciendo esto? Tal vez ella está allá hablando con alguien más y tú aquí escribiéndole cartitas de amor'. Suena cruel, pero así es como pienso.</p>
-        
-        <p>Recuerdo con claridad el día en que te escuché hablar por primera vez. Siempre habíamos hablado por mensaje y aquel día nos encontramos frente al colegio, en los portones de la cancha.</p>
-        
-        <p>Yo estaba de copiloto en la moto, mi amigo Benjamin delante, y estábamos espalda con espalda.</p>
-        
-        <p>Cuando me hablaste, fue tu voz y tu forma de expresarte lo que me impactó: tan dulce, tan auténtica, con un timbre que me llegó directo al corazón.</p>
-        
-        <p>Sabes algo, a veces yo te digo que me llames no solo para hablar de lo que está pasando, lo hago solo por escuchar tu voz.</p>
-        
-        <p>Siempre he esperado una llamada tuya; eso me haría muy feliz: una videollamada, sábado de pelis… esos pequeños detalles hacen toda la diferencia.</p>
-        
-        <p>Sueno como un tonto escribiéndote todo esto, pero me gusta ser puntual con lo que siento.</p>
-        
-        <p>Me cuesta confiar en ti. Recuerdo el día que me dijiste que se te había apagado el teléfono; yo vi que te habían llegado mensajes, y lo primero que pensé fue que habías salido de clases y te habías ido con Alex.</p>
-        
-        <p>Luego me lo explicaste bien, y me pregunté por qué cuando llegaste no me habías dicho eso desde el principio. Solo quiero que seas sincera conmigo.</p>
-        
-        <p>Soy una persona muy explosiva con mis sentimientos, y creo que eso ha sido la base de muchas veces en las que te reclamé de mala manera.</p>
-        
-        <p>Pero algo que me gusta mucho de ti es que sabes lidiar conmigo; sabes calmarme en los momentos de ira o enojo, no solo cuando te reclamo, sino incluso cuando me enojo con mi familia o amigos.</p>
-        
-        <p>Siempre encuentras la manera de tranquilizarme, y eso te hace increíble.</p>
-        
-        <p>Lamento profundamente todas las cosas que te hice pasar y sé que también sufriste.</p>
-        
-        <p>Me perdono a mí y te perdono a ti, porque todo lo que vivimos nos ha enseñado a entender el amor de verdad, no ese amor idealizado que muestran en películas o redes sociales.</p>
+        <div class="carta-contenido">
+            <p>A veces digo, ¿por qué me aferro tanto a ti nuevamente si ya te había soltado?</p>
+            
+            <p>Hay días en los que ni me entiendo, a veces simplemente no sé.</p>
+            
+            <p>Hay días en los que te extraño mucho y me gustaría escribirte y decirte tantas cosas bonitas en una carta y sacarte una sonrisa.</p>
+            
+            <p>Pero mi mente piensa: '¿Estoy siendo un pendejo haciendo esto? Tal vez ella está allá hablando con alguien más y tú aquí escribiéndole cartitas de amor'. Suena cruel, pero así es como pienso.</p>
+            
+            <p>Recuerdo con claridad el día en que te escuché hablar por primera vez. Siempre habíamos hablado por mensaje y aquel día nos encontramos frente al colegio, en los portones de la cancha.</p>
+            
+            <p>Yo estaba de copiloto en la moto, mi amigo Benjamin delante, y estábamos espalda con espalda.</p>
+            
+            <p>Cuando me hablaste, fue tu voz y tu forma de expresarte lo que me impactó: tan dulce, tan auténtica, con un timbre que me llegó directo al corazón.</p>
+            
+            <p>Sabes algo, a veces yo te digo que me llames no solo para hablar de lo que está pasando, lo hago solo por escuchar tu voz.</p>
+            
+            <p>Siempre he esperado una llamada tuya; eso me haría muy feliz: una videollamada, sábado de pelis… esos pequeños detalles hacen toda la diferencia.</p>
+            
+            <p>Sueno como un tonto escribiéndote todo esto, pero me gusta ser puntual con lo que siento.</p>
+            
+            <p>Me cuesta confiar en ti. Recuerdo el día que me dijiste que se te había apagado el teléfono; yo vi que te habían llegado mensajes, y lo primero que pensé fue que habías salido de clases y te habías ido con Alex.</p>
+            
+            <p>Luego me lo explicaste bien, y me pregunté por qué cuando llegaste no me habías dicho eso desde el principio. Solo quiero que seas sincera conmigo.</p>
+            
+            <p>Soy una persona muy explosiva con mis sentimientos, y creo que eso ha sido la base de muchas veces en las que te reclamé de mala manera.</p>
+            
+            <p>Pero algo que me gusta mucho de ti es que sabes lidiar conmigo; sabes calmarme en los momentos de ira o enojo, no solo cuando te reclamo, sino incluso cuando me enojo con mi familia o amigos.</p>
+            
+            <p>Siempre encuentras la manera de tranquilizarme, y eso te hace increíble.</p>
+            
+            <p>Lamento profundamente todas las cosas que te hice pasar y sé que también sufriste.</p>
+            
+            <p>Me perdono a mí y te perdono a ti, porque todo lo que vivimos nos ha enseñado a entender el amor de verdad, no ese amor idealizado que muestran en películas o redes sociales.</p>
+        </div>
     </div>
 </div>
 
