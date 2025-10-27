@@ -3,25 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Carta para ti</title>
+<title>Carta Dulce</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap');
   
-  body {
+  * {
     margin: 0;
-    padding: 20px;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
-    overflow-x: hidden;
-    color: #2d3748;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+    padding: 0;
+    box-sizing: border-box;
   }
 
-  /* Partículas de fondo mejoradas */
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+    color: #2d3748;
+    padding: 20px;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Partículas de fondo */
   body::before {
     content: '';
     position: fixed;
@@ -30,101 +32,85 @@
     width: 100%;
     height: 100%;
     background-image: 
-      radial-gradient(circle at 15% 85%, rgba(255, 182, 193, 0.4) 0%, transparent 50%),
-      radial-gradient(circle at 85% 15%, rgba(255, 192, 203, 0.4) 0%, transparent 50%),
-      radial-gradient(circle at 50% 50%, rgba(255, 218, 185, 0.3) 0%, transparent 50%),
-      radial-gradient(circle at 25% 25%, rgba(255, 182, 193, 0.2) 0%, transparent 50%);
+      radial-gradient(circle at 15% 85%, rgba(255, 182, 193, 0.3) 0%, transparent 50%),
+      radial-gradient(circle at 85% 15%, rgba(255, 192, 203, 0.3) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(255, 218, 185, 0.2) 0%, transparent 50%);
     pointer-events: none;
     z-index: 0;
-    animation: backgroundShift 20s ease-in-out infinite;
+    animation: backgroundFloat 20s ease-in-out infinite;
   }
 
-  @keyframes backgroundShift {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.8; }
+  @keyframes backgroundFloat {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.05); }
   }
 
-  /* Elementos flotantes mejorados */
-  .floating {
+  /* Elementos flotantes */
+  .floating-heart {
     position: absolute;
-    animation: floatEnhanced 12s infinite ease-in-out;
-    opacity: 0.9;
-    font-size: 2.5rem;
+    font-size: 2rem;
+    opacity: 0.8;
     pointer-events: none;
     z-index: 1;
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+    animation: float 8s infinite ease-in-out;
   }
 
-  @keyframes floatEnhanced {
-    0% { 
-      transform: translateY(0) rotate(0deg) scale(1); 
-      opacity: 0.9; 
-    }
-    25% { 
-      transform: translateY(-30px) rotate(15deg) scale(1.1); 
-      opacity: 1; 
-    }
-    50% { 
-      transform: translateY(-60px) rotate(-10deg) scale(0.9); 
+  @keyframes float {
+    0%, 100% { 
+      transform: translateY(0) rotate(0deg); 
       opacity: 0.8; 
     }
-    75% { 
-      transform: translateY(-30px) rotate(20deg) scale(1.05); 
+    50% { 
+      transform: translateY(-20px) rotate(10deg); 
       opacity: 1; 
-    }
-    100% { 
-      transform: translateY(0) rotate(0deg) scale(1); 
-      opacity: 0.9; 
     }
   }
 
-  /* Contenedor principal rediseñado */
-  .container {
-    max-width: 900px;
-    width: 100%;
-    padding: 50px;
+  /* Contenedor principal */
+  .carta-container {
+    max-width: 800px;
+    margin: 0 auto;
     background: linear-gradient(145deg, #ffffff 0%, #fef7f7 100%);
-    border-radius: 30px;
+    border-radius: 25px;
+    padding: 40px;
     box-shadow: 
-      0 30px 60px rgba(0, 0, 0, 0.15),
+      0 25px 50px rgba(0, 0, 0, 0.15),
       0 0 0 1px rgba(255, 255, 255, 0.2),
       inset 0 1px 0 rgba(255, 255, 255, 0.3);
     position: relative;
     z-index: 2;
-    margin: 20px;
     backdrop-filter: blur(10px);
     border: 2px solid transparent;
     background-clip: padding-box;
   }
 
   /* Decoración de esquinas */
-  .container::before {
+  .carta-container::before {
     content: '';
     position: absolute;
-    top: 15px;
-    left: 15px;
-    right: 15px;
-    bottom: 15px;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
     border: 2px solid transparent;
     border-image: linear-gradient(45deg, #ff6b9d, #c44569, #f8b500, #ff6b9d) 1;
-    border-radius: 20px;
+    border-radius: 15px;
     pointer-events: none;
   }
 
-  /* Título mejorado */
-  h1 {
+  /* Título */
+  .carta-titulo {
     text-align: center;
     color: #d6336c;
     font-family: 'Dancing Script', cursive;
-    font-size: 3.5em;
+    font-size: 3rem;
     font-weight: 700;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background: linear-gradient(45deg, #d6336c, #ff6b9d, #c44569);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    position: relative;
     animation: titleGlow 3s ease-in-out infinite alternate;
   }
 
@@ -133,25 +119,27 @@
     100% { filter: drop-shadow(0 0 15px rgba(214, 51, 108, 0.6)); }
   }
 
-  /* Párrafos mejorados */
-  p {
-    font-size: 1.3em;
-    line-height: 2em;
-    margin-bottom: 25px;
-    text-align: justify;
+  /* Párrafos */
+  .carta-contenido {
+    font-size: 1.1rem;
+    line-height: 1.8;
     color: #2d3748;
-    font-weight: 400;
+    text-align: justify;
+  }
+
+  .carta-contenido p {
+    margin-bottom: 20px;
     position: relative;
-    padding-left: 20px;
+    padding-left: 25px;
     transition: all 0.3s ease;
   }
 
-  p::before {
+  .carta-contenido p::before {
     content: '💕';
     position: absolute;
-    left: -5px;
+    left: 0;
     top: 0;
-    font-size: 16px;
+    font-size: 14px;
     opacity: 0.7;
     animation: heartBeat 2s ease-in-out infinite;
   }
@@ -161,149 +149,134 @@
     50% { transform: scale(1.2); opacity: 1; }
   }
 
-  p:hover {
+  .carta-contenido p:hover {
     transform: translateX(5px);
     color: #1a202c;
   }
 
   /* Efectos de hover para el contenedor */
-  .container:hover {
-    transform: translateY(-5px);
+  .carta-container:hover {
+    transform: translateY(-3px);
     box-shadow: 
-      0 40px 80px rgba(0, 0, 0, 0.2),
+      0 30px 60px rgba(0, 0, 0, 0.2),
       0 0 0 1px rgba(255, 255, 255, 0.3),
       inset 0 1px 0 rgba(255, 255, 255, 0.4);
   }
 
   /* Scrollbar personalizado */
-  .container::-webkit-scrollbar {
-    width: 8px;
+  .carta-container::-webkit-scrollbar {
+    width: 6px;
   }
 
-  .container::-webkit-scrollbar-track {
+  .carta-container::-webkit-scrollbar-track {
     background: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
+    border-radius: 3px;
   }
 
-  .container::-webkit-scrollbar-thumb {
+  .carta-container::-webkit-scrollbar-thumb {
     background: linear-gradient(45deg, #ff6b9d, #c44569);
-    border-radius: 4px;
+    border-radius: 3px;
   }
 
-  .container::-webkit-scrollbar-thumb:hover {
+  .carta-container::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(45deg, #ff5a8a, #b83a5e);
   }
 
-  /* Responsive mejorado */
+  /* Responsive */
   @media (max-width: 768px) {
     body {
       padding: 10px;
     }
     
-    .container {
-      padding: 30px;
-      margin: 10px;
-      border-radius: 25px;
+    .carta-container {
+      padding: 25px;
+      border-radius: 20px;
     }
     
-    h1 {
-      font-size: 2.5em;
-      margin-bottom: 30px;
+    .carta-titulo {
+      font-size: 2.2rem;
+      margin-bottom: 25px;
     }
     
-    p {
-      font-size: 1.1em;
-      line-height: 1.8em;
-      margin-bottom: 20px;
-      padding-left: 15px;
+    .carta-contenido {
+      font-size: 1rem;
     }
     
-    .floating {
-      font-size: 2rem;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .container {
-      padding: 20px;
-      margin: 5px;
+    .carta-contenido p {
+      padding-left: 20px;
+      margin-bottom: 15px;
     }
     
-    h1 {
-      font-size: 2em;
-    }
-    
-    p {
-      font-size: 1em;
-      padding-left: 10px;
-    }
-    
-    .floating {
+    .floating-heart {
       font-size: 1.5rem;
     }
   }
 
+  @media (max-width: 480px) {
+    .carta-container {
+      padding: 20px;
+    }
+    
+    .carta-titulo {
+      font-size: 1.8rem;
+    }
+    
+    .carta-contenido {
+      font-size: 0.95rem;
+    }
+    
+    .carta-contenido p {
+      padding-left: 18px;
+    }
+  }
+
   /* Animación de entrada */
-  .container {
-    animation: slideInUp 1s ease-out;
+  .carta-container {
+    animation: slideInUp 0.8s ease-out;
   }
 
   @keyframes slideInUp {
     0% {
       opacity: 0;
-      transform: translateY(50px);
+      transform: translateY(30px);
     }
     100% {
       opacity: 1;
       transform: translateY(0);
     }
   }
-
-  /* Efectos de partículas adicionales */
-  .container::after {
-    content: '';
-    position: absolute;
-    top: -50px;
-    left: -50px;
-    right: -50px;
-    bottom: -50px;
-    background: radial-gradient(circle at 20% 20%, rgba(255, 182, 193, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(255, 192, 203, 0.1) 0%, transparent 50%);
-    border-radius: 50px;
-    pointer-events: none;
-    z-index: -1;
-    animation: particleFloat 15s ease-in-out infinite;
-  }
-
-  @keyframes particleFloat {
-    0%, 100% { transform: rotate(0deg) scale(1); }
-    50% { transform: rotate(180deg) scale(1.1); }
-  }
 </style>
 </head>
 <body>
 
-<!-- Elementos flotantes mejorados con más variedad -->
-<div class="floating" style="top:8%; left:3%; animation-delay:0s;">💕</div>
-<div class="floating" style="top:45%; left:85%; animation-delay:2s;">💖</div>
-<div class="floating" style="top:15%; left:55%; animation-delay:4s;">🌹</div>
-<div class="floating" style="top:65%; left:10%; animation-delay:1s;">🌺</div>
-<div class="floating" style="top:25%; left:92%; animation-delay:3s;">💝</div>
-<div class="floating" style="top:75%; left:65%; animation-delay:5s;">🌸</div>
-<div class="floating" style="top:35%; left:25%; animation-delay:6s;">💗</div>
-<div class="floating" style="top:55%; left:45%; animation-delay:7s;">🌷</div>
-<div class="floating" style="top:85%; left:35%; animation-delay:8s;">💐</div>
-<div class="floating" style="top:5%; left:75%; animation-delay:9s;">🌻</div>
+<!-- Elementos flotantes -->
+<div class="floating-heart" style="top: 10%; left: 5%; animation-delay: 0s;">💕</div>
+<div class="floating-heart" style="top: 20%; right: 8%; animation-delay: 1s;">💖</div>
+<div class="floating-heart" style="top: 40%; left: 3%; animation-delay: 2s;">🌹</div>
+<div class="floating-heart" style="top: 60%; right: 5%; animation-delay: 3s;">🌺</div>
+<div class="floating-heart" style="top: 80%; left: 7%; animation-delay: 4s;">💝</div>
+<div class="floating-heart" style="top: 30%; right: 12%; animation-delay: 5s;">🌸</div>
+<div class="floating-heart" style="top: 70%; left: 10%; animation-delay: 6s;">💗</div>
+<div class="floating-heart" style="top: 50%; right: 3%; animation-delay: 7s;">🌷</div>
 
-<div class="container">
-    <h1>Para ti ❤️</h1>
-    <p>Hoy quiero abrir mi corazón de la manera más sincera. A veces siento que estamos en lo más alto y al siguiente día caemos sin explicación. Un día puedo serlo todo para ti y al otro ya no sabes ni cómo verme.</p>
-    <p>Sabes que te amo y que mi pensar es construir una relación bonita contigo, donde ambos nos entendamos y nos hagamos muy felices. Quiero que nuestro amor sea un lugar seguro, no un campo de dudas.</p>
-    <p>Solo quiero sinceridad, sin mentiras, sin actitudes que hieran, sin confusión, arrogancia, orgullo o estrés innecesario. Si de verdad quieres que sea yo quien te haga feliz, demuéstralo con amor, no con esas cosas que nos lastiman.</p>
-    <p>Dame mucho amor, porque tengo corazón de pollito y créeme que incluso mientras escribo esta carta se me llena el corazón de emoción y los ojos de lágrimas… todo por el simple hecho de que lo único que quiero es ser amado sin complicaciones.</p>
-    <p>Quiero entregarle ese mismo amor a una persona que me dé estabilidad, que me respete y que tenga claro lo que quiere conmigo, porque yo solo deseo dar y recibir mucho amor.</p>
-    <p>Quiero que seas sincera conmigo, que si algo no te gusta me lo digas, que si estás ocupada o no puedes responderme me lo hagas saber. A veces mi mente imagina otros escenarios y eso no es lindo. Quiero saber si buscas algo bonito y real o si solo quieres algo pasajero, pero que seas clara y que también me entiendas.</p>
-    <p>No quiero que respondas esta ni ninguna otra carta que yo te escriba, solo lo hago para que sepas cómo me siento y las cosas que quiero para ambos. La única respuesta que quisiera sería que mejoraras esas cosas, o en su defecto solo dime que quieres que quedemos solo para coger.</p>
+<div class="carta-container">
+    <h1 class="carta-titulo">Para ti ❤️</h1>
+    
+    <div class="carta-contenido">
+        <p>Hoy quiero abrir mi corazón de la manera más sincera. A veces siento que estamos en lo más alto y al siguiente día caemos sin explicación. Un día puedo serlo todo para ti y al otro ya no sabes ni cómo verme.</p>
+        
+        <p>Sabes que te amo y que mi pensar es construir una relación bonita contigo, donde ambos nos entendamos y nos hagamos muy felices. Quiero que nuestro amor sea un lugar seguro, no un campo de dudas.</p>
+        
+        <p>Solo quiero sinceridad, sin mentiras, sin actitudes que hieran, sin confusión, arrogancia, orgullo o estrés innecesario. Si de verdad quieres que sea yo quien te haga feliz, demuéstralo con amor, no con esas cosas que nos lastiman.</p>
+        
+        <p>Dame mucho amor, porque tengo corazón de pollito y créeme que incluso mientras escribo esta carta se me llena el corazón de emoción y los ojos de lágrimas… todo por el simple hecho de que lo único que quiero es ser amado sin complicaciones.</p>
+        
+        <p>Quiero entregarle ese mismo amor a una persona que me dé estabilidad, que me respete y que tenga claro lo que quiere conmigo, porque yo solo deseo dar y recibir mucho amor.</p>
+        
+        <p>Quiero que seas sincera conmigo, que si algo no te gusta me lo digas, que si estás ocupada o no puedes responderme me lo hagas saber. A veces mi mente imagina otros escenarios y eso no es lindo. Quiero saber si buscas algo bonito y real o si solo quieres algo pasajero, pero que seas clara y que también me entiendas.</p>
+        
+        <p>No quiero que respondas esta ni ninguna otra carta que yo te escriba, solo lo hago para que sepas cómo me siento y las cosas que quiero para ambos. La única respuesta que quisiera sería que mejoraras esas cosas, o en su defecto solo dime que quieres que quedemos solo para coger.</p>
+    </div>
 </div>
 
 </body>
