@@ -190,15 +190,19 @@ function mostrarMensajeEspecial() {
 
 // Enviar mensaje a WhatsApp
 function enviarMensajeWhatsApp() {
+  console.log('🔍 Función enviarMensajeWhatsApp llamada');
+  
   const textarea = document.getElementById('mensaje-textarea');
   const mensaje = textarea.value.trim();
+  
+  console.log('📝 Mensaje obtenido:', mensaje);
   
   if (!mensaje) {
     alert('Por favor escribe un mensaje antes de enviar 💕');
     return;
   }
   
-  // Tu número de WhatsApp (sin código de país, solo el número)
+  // Tu número de WhatsApp
   const numeroWhatsApp = '3146684264';
   
   // Crear el mensaje con formato especial
@@ -207,11 +211,29 @@ function enviarMensajeWhatsApp() {
   // Codificar el mensaje para URL
   const mensajeCodificado = encodeURIComponent(mensajeCompleto);
   
-  // Crear URL de WhatsApp (método más simple)
-  const urlWhatsApp = `https://wa.me/57${numeroWhatsApp}?text=${mensajeCodificado}`;
+  // Crear URL de WhatsApp
+  const urlWhatsApp = `https://wa.me/573146684264?text=${mensajeCodificado}`;
   
-  // Abrir WhatsApp directamente
-  window.open(urlWhatsApp, '_blank');
+  console.log('🔗 URL generada:', urlWhatsApp);
+  
+  // Intentar abrir WhatsApp con método más robusto
+  try {
+    console.log('🚀 Intentando abrir WhatsApp...');
+    // Crear un enlace temporal
+    const link = document.createElement('a');
+    link.href = urlWhatsApp;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    console.log('✅ WhatsApp abierto exitosamente');
+  } catch (error) {
+    console.error('❌ Error al abrir WhatsApp:', error);
+    // Fallback: usar window.open
+    window.open(urlWhatsApp, '_blank');
+    console.log('🔄 Usando método alternativo');
+  }
   
   // Mostrar mensaje de confirmación
   mostrarConfirmacionEnvio();
