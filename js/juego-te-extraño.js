@@ -356,27 +356,6 @@ function actualizarProgreso() {
   progresoTexto.textContent = `Pregunta ${preguntaActual + 1} de ${preguntas.length}`;
 }
 
-// Función de prueba para WhatsApp
-function probarWhatsApp() {
-  const mensajePrueba = "Hola, este es un mensaje de prueba desde el juego 💕";
-  const numeroWhatsApp = '3146684264';
-  const mensajeCompleto = `💕 Mensaje especial de Camila 💕\n\n${mensajePrueba}\n\n💖 Enviado desde nuestro universo de amor 💖`;
-  const mensajeCodificado = encodeURIComponent(mensajeCompleto);
-  
-  // Probar diferentes formatos de URL
-  const urls = [
-    `https://wa.me/57${numeroWhatsApp}?text=${mensajeCodificado}`,
-    `https://wa.me/573146684264?text=${mensajeCodificado}`,
-    `https://web.whatsapp.com/send?phone=57${numeroWhatsApp}&text=${mensajeCodificado}`,
-    `https://web.whatsapp.com/send?phone=573146684264&text=${mensajeCodificado}`
-  ];
-  
-  console.log('URLs de prueba:', urls);
-  
-  // Intentar con la primera URL
-  window.open(urls[0], '_blank');
-}
-
 // Función para reproducir sonido (usar la existente)
 function playButtonSound() {
   // Usar la función existente del script principal
