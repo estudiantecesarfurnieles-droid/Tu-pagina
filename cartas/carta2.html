@@ -3,24 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Carta para Yulianis</title>
+<title>Carta de Amor</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Source+Sans+Pro:wght@300;400;600&display=swap');
   
-  body {
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px;
+  * {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Source Sans Pro', sans-serif;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #1e3c72 100%);
+    color: #2c3e50;
+    padding: 20px;
+    min-height: 100vh;
     position: relative;
     overflow-x: hidden;
   }
 
-  /* Partículas flotantes de fondo */
+  /* Efectos de fondo elegantes */
   body::before {
     content: '';
     position: fixed;
@@ -29,349 +32,333 @@
     width: 100%;
     height: 100%;
     background-image: 
-      radial-gradient(circle at 20% 80%, rgba(255, 182, 193, 0.3) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, rgba(255, 192, 203, 0.3) 0%, transparent 50%),
-      radial-gradient(circle at 40% 40%, rgba(255, 218, 185, 0.2) 0%, transparent 50%);
+      radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
     pointer-events: none;
     z-index: 0;
+    animation: backgroundPulse 15s ease-in-out infinite;
   }
 
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-    width: 100%;
-    max-width: 1000px;
-    position: relative;
-    z-index: 1;
+  @keyframes backgroundPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
   }
 
-  @media(min-width: 768px){
-    .container {
-      flex-direction: row;
-      align-items: flex-start;
-      gap: 40px;
-    }
-  }
-
-  /* Carta principal con diseño elegante */
-  .card {
-    background: linear-gradient(145deg, #ffffff 0%, #fef7f7 100%);
-    border: none;
-    border-radius: 25px;
-    padding: 40px;
-    width: 100%;
-    max-width: 700px;
-    box-shadow: 
-      0 25px 50px rgba(0, 0, 0, 0.15),
-      0 0 0 1px rgba(255, 255, 255, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    overflow: hidden;
-    position: relative;
-    backdrop-filter: blur(10px);
-  }
-
-  /* Decoración de esquinas */
-  .card::before {
-    content: '';
+  /* Elementos decorativos flotantes */
+  .floating-element {
     position: absolute;
-    top: 20px;
-    left: 20px;
-    right: 20px;
-    bottom: 20px;
-    border: 2px solid transparent;
-    border-image: linear-gradient(45deg, #ff6b9d, #c44569, #f8b500) 1;
-    border-radius: 15px;
-    pointer-events: none;
-  }
-
-  /* Líneas de texto con animación mejorada */
-  .line {
-    opacity: 0;
-    margin-bottom: 15px;
-    font-size: 16px;
-    line-height: 1.8;
-    color: #2d3748;
-    font-weight: 400;
-    transform: translateY(20px);
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    padding-left: 20px;
-  }
-
-  .line::before {
-    content: '💕';
-    position: absolute;
-    left: -10px;
-    top: 0;
-    font-size: 12px;
+    font-size: 1.5rem;
     opacity: 0.6;
-  }
-
-  .line.show {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Notita rediseñada */
-  .note-container {
-    width: 100%;
-    max-width: 250px;
-    text-align: center;
-    flex-shrink: 0;
-    position: relative;
-  }
-
-  .note-title {
-    font-family: 'Dancing Script', cursive;
-    font-weight: 700;
-    font-size: 24px;
-    margin-bottom: 15px;
-    color: #ffffff;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    background: linear-gradient(45deg, #ff6b9d, #c44569);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .note-image {
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-bottom: 100%;
-    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
-    border: 3px solid rgba(255, 255, 255, 0.3);
-    border-radius: 20px;
-    cursor: pointer;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 4rem;
-    box-shadow: 
-      0 15px 35px rgba(0, 0, 0, 0.2),
-      0 5px 15px rgba(0, 0, 0, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-  }
-
-  .note-image:hover {
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 
-      0 20px 40px rgba(0, 0, 0, 0.25),
-      0 10px 20px rgba(0, 0, 0, 0.15),
-      inset 0 1px 0 rgba(255, 255, 255, 0.4);
-  }
-
-  .note-image::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3) 0%, transparent 50%);
     pointer-events: none;
+    z-index: 1;
+    animation: floatElegant 12s infinite ease-in-out;
   }
 
-  .note-popup {
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: linear-gradient(145deg, #ffffff 0%, #fef7f7 100%);
-    border: 2px solid #ff6b9d;
-    border-radius: 15px;
-    padding: 20px;
-    margin-bottom: 15px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-    display: none;
-    width: 200px;
-    font-size: 14px;
-    line-height: 1.6;
-    color: #2d3748;
-    backdrop-filter: blur(10px);
-    z-index: 10;
-  }
-
-  .note-popup::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    border: 10px solid transparent;
-    border-top-color: #ff6b9d;
-  }
-
-  .note-instruction {
-    margin-top: 15px;
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.8);
-    font-style: italic;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-  }
-
-  /* Animaciones adicionales */
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-  }
-
-  .note-image {
-    animation: float 3s ease-in-out infinite;
-  }
-
-  /* Responsive mejorado */
-  @media (max-width: 767px) {
-    .container {
-      gap: 20px;
+  @keyframes floatElegant {
+    0%, 100% { 
+      transform: translateY(0) rotate(0deg) scale(1); 
+      opacity: 0.6; 
     }
-    
-    .card {
-      padding: 25px;
-      border-radius: 20px;
+    25% { 
+      transform: translateY(-15px) rotate(5deg) scale(1.1); 
+      opacity: 0.8; 
     }
-    
-    .line {
-      font-size: 15px;
-      padding-left: 15px;
+    50% { 
+      transform: translateY(-30px) rotate(-3deg) scale(0.9); 
+      opacity: 0.4; 
     }
-    
-    .note-title {
-      font-size: 20px;
-    }
-    
-    .note-image {
-      font-size: 3rem;
+    75% { 
+      transform: translateY(-15px) rotate(8deg) scale(1.05); 
+      opacity: 0.7; 
     }
   }
 
-  /* Efectos de hover mejorados */
-  .card:hover {
-    transform: translateY(-2px);
+  /* Contenedor principal */
+  .carta-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 30px;
+    padding: 50px;
     box-shadow: 
       0 30px 60px rgba(0, 0, 0, 0.2),
       0 0 0 1px rgba(255, 255, 255, 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.4);
+      inset 0 2px 0 rgba(255, 255, 255, 0.4);
+    position: relative;
+    z-index: 2;
+    backdrop-filter: blur(20px);
+    border: 3px solid transparent;
+    background-clip: padding-box;
   }
 
-  /* Scrollbar personalizado */
-  .card::-webkit-scrollbar {
+  /* Decoración de esquinas elegante */
+  .carta-container::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border: 2px solid transparent;
+    border-image: linear-gradient(45deg, #667eea, #764ba2, #667eea) 1;
+    border-radius: 20px;
+    pointer-events: none;
+  }
+
+  /* Título principal */
+  .carta-titulo {
+    text-align: center;
+    color: #2c3e50;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    font-weight: 600;
+    margin-bottom: 40px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(45deg, #2c3e50, #34495e, #2c3e50);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    animation: titleElegance 4s ease-in-out infinite alternate;
+  }
+
+  @keyframes titleElegance {
+    0% { filter: drop-shadow(0 0 8px rgba(44, 62, 80, 0.3)); }
+    100% { filter: drop-shadow(0 0 20px rgba(44, 62, 80, 0.6)); }
+  }
+
+  /* Subtítulo */
+  .carta-subtitulo {
+    text-align: center;
+    color: #7f8c8d;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    margin-bottom: 50px;
+    opacity: 0.8;
+  }
+
+  /* Contenido de la carta */
+  .carta-contenido {
+    font-size: 1.1rem;
+    line-height: 1.9;
+    color: #2c3e50;
+    text-align: justify;
+  }
+
+  /* Párrafos con estilo elegante */
+  .carta-contenido p {
+    margin-bottom: 25px;
+    position: relative;
+    padding-left: 30px;
+    transition: all 0.4s ease;
+    font-weight: 400;
+  }
+
+  .carta-contenido p::before {
+    content: '❦';
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 18px;
+    color: #667eea;
+    opacity: 0.7;
+    font-family: 'Cormorant Garamond', serif;
+    animation: ornamentPulse 3s ease-in-out infinite;
+  }
+
+  @keyframes ornamentPulse {
+    0%, 100% { 
+      transform: scale(1); 
+      opacity: 0.7; 
+      color: #667eea;
+    }
+    50% { 
+      transform: scale(1.2); 
+      opacity: 1; 
+      color: #764ba2;
+    }
+  }
+
+  .carta-contenido p:hover {
+    transform: translateX(8px);
+    color: #1a252f;
+    padding-left: 35px;
+  }
+
+  /* Efectos de hover para el contenedor */
+  .carta-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+      0 40px 80px rgba(0, 0, 0, 0.25),
+      0 0 0 1px rgba(255, 255, 255, 0.4),
+      inset 0 2px 0 rgba(255, 255, 255, 0.5);
+  }
+
+  /* Scrollbar personalizado elegante */
+  .carta-container::-webkit-scrollbar {
     width: 8px;
   }
 
-  .card::-webkit-scrollbar-track {
+  .carta-container::-webkit-scrollbar-track {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 4px;
   }
 
-  .card::-webkit-scrollbar-thumb {
-    background: linear-gradient(45deg, #ff6b9d, #c44569);
+  .carta-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #667eea, #764ba2);
     border-radius: 4px;
   }
 
-  .card::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(45deg, #ff5a8a, #b83a5e);
+  .carta-container::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, #5a6fd8, #6a4190);
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    body {
+      padding: 15px;
+    }
+    
+    .carta-container {
+      padding: 35px;
+      border-radius: 25px;
+    }
+    
+    .carta-titulo {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+    }
+    
+    .carta-subtitulo {
+      font-size: 1rem;
+      margin-bottom: 35px;
+    }
+    
+    .carta-contenido {
+      font-size: 1rem;
+    }
+    
+    .carta-contenido p {
+      padding-left: 25px;
+      margin-bottom: 20px;
+    }
+    
+    .floating-element {
+      font-size: 1.2rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .carta-container {
+      padding: 25px;
+    }
+    
+    .carta-titulo {
+      font-size: 2rem;
+    }
+    
+    .carta-contenido {
+      font-size: 0.95rem;
+    }
+    
+    .carta-contenido p {
+      padding-left: 22px;
+    }
+  }
+
+  /* Animación de entrada elegante */
+  .carta-container {
+    animation: slideInElegant 1s ease-out;
+  }
+
+  @keyframes slideInElegant {
+    0% {
+      opacity: 0;
+      transform: translateY(40px) scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  /* Efectos de partículas adicionales */
+  .carta-container::after {
+    content: '';
+    position: absolute;
+    top: -30px;
+    left: -30px;
+    right: -30px;
+    bottom: -30px;
+    background: radial-gradient(circle at 30% 30%, rgba(102, 126, 234, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(118, 75, 162, 0.05) 0%, transparent 50%);
+    border-radius: 40px;
+    pointer-events: none;
+    z-index: -1;
+    animation: particleElegant 20s ease-in-out infinite;
+  }
+
+  @keyframes particleElegant {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.1); }
   }
 </style>
 </head>
 <body>
 
-<div class="container">
-  <div class="card" id="card">
-    <!-- La carta se agregará aquí línea por línea con JS -->
-  </div>
+<!-- Elementos decorativos flotantes -->
+<div class="floating-element" style="top: 8%; left: 4%; animation-delay: 0s;">❦</div>
+<div class="floating-element" style="top: 15%; right: 6%; animation-delay: 1s;">✧</div>
+<div class="floating-element" style="top: 25%; left: 2%; animation-delay: 2s;">❋</div>
+<div class="floating-element" style="top: 35%; right: 4%; animation-delay: 3s;">✿</div>
+<div class="floating-element" style="top: 45%; left: 6%; animation-delay: 4s;">❁</div>
+<div class="floating-element" style="top: 55%; right: 2%; animation-delay: 5s;">✽</div>
+<div class="floating-element" style="top: 65%; left: 8%; animation-delay: 6s;">❀</div>
+<div class="floating-element" style="top: 75%; right: 5%; animation-delay: 7s;">✾</div>
+<div class="floating-element" style="top: 85%; left: 3%; animation-delay: 8s;">✿</div>
 
-  <div class="note-container">
-    <div class="note-title">Notita 💌</div>
-    <div class="note-image" id="noteImage">💕</div>
-    <div class="note-popup" id="notePopup">
-      <p>Como siempre te digo, no espero respuesta alguna; simplemente tus acciones serán más que respuesta para mí.</p>
+<div class="carta-container">
+    <h1 class="carta-titulo">Carta de Amor</h1>
+    <p class="carta-subtitulo">Para mi amada</p>
+    
+    <div class="carta-contenido">
+        <p>A veces digo, ¿por qué me aferro tanto a ti nuevamente si ya te había soltado?</p>
+        
+        <p>Hay días en los que ni me entiendo, a veces simplemente no sé.</p>
+        
+        <p>Hay días en los que te extraño mucho y me gustaría escribirte y decirte tantas cosas bonitas en una carta y sacarte una sonrisa.</p>
+        
+        <p>Pero mi mente piensa: '¿Estoy siendo un pendejo haciendo esto? Tal vez ella está allá hablando con alguien más y tú aquí escribiéndole cartitas de amor'. Suena cruel, pero así es como pienso.</p>
+        
+        <p>Recuerdo con claridad el día en que te escuché hablar por primera vez. Siempre habíamos hablado por mensaje y aquel día nos encontramos frente al colegio, en los portones de la cancha.</p>
+        
+        <p>Yo estaba de copiloto en la moto, mi amigo Benjamin delante, y estábamos espalda con espalda.</p>
+        
+        <p>Cuando me hablaste, fue tu voz y tu forma de expresarte lo que me impactó: tan dulce, tan auténtica, con un timbre que me llegó directo al corazón.</p>
+        
+        <p>Sabes algo, a veces yo te digo que me llames no solo para hablar de lo que está pasando, lo hago solo por escuchar tu voz.</p>
+        
+        <p>Siempre he esperado una llamada tuya; eso me haría muy feliz: una videollamada, sábado de pelis… esos pequeños detalles hacen toda la diferencia.</p>
+        
+        <p>Sueno como un tonto escribiéndote todo esto, pero me gusta ser puntual con lo que siento.</p>
+        
+        <p>Me cuesta confiar en ti. Recuerdo el día que me dijiste que se te había apagado el teléfono; yo vi que te habían llegado mensajes, y lo primero que pensé fue que habías salido de clases y te habías ido con Alex.</p>
+        
+        <p>Luego me lo explicaste bien, y me pregunté por qué cuando llegaste no me habías dicho eso desde el principio. Solo quiero que seas sincera conmigo.</p>
+        
+        <p>Soy una persona muy explosiva con mis sentimientos, y creo que eso ha sido la base de muchas veces en las que te reclamé de mala manera.</p>
+        
+        <p>Pero algo que me gusta mucho de ti es que sabes lidiar conmigo; sabes calmarme en los momentos de ira o enojo, no solo cuando te reclamo, sino incluso cuando me enojo con mi familia o amigos.</p>
+        
+        <p>Siempre encuentras la manera de tranquilizarme, y eso te hace increíble.</p>
+        
+        <p>Lamento profundamente todas las cosas que te hice pasar y sé que también sufriste.</p>
+        
+        <p>Me perdono a mí y te perdono a ti, porque todo lo que vivimos nos ha enseñado a entender el amor de verdad, no ese amor idealizado que muestran en películas o redes sociales.</p>
     </div>
-    <div class="note-instruction">Dale clic para abrir</div>
-  </div>
 </div>
-
-<script>
-  // Texto de la carta
-  const textLines = [
-    "A veces digo, ¿por qué me aferro tanto a ti nuevamente si ya te había soltado?",
-    "Hay días en los que ni me entiendo, a veces simplemente no sé.",
-    "Hay días en los que te extraño mucho y me gustaría escribirte y decirte tantas cosas bonitas en una carta y sacarte una sonrisa.",
-    "Pero mi mente piensa: '¿Estoy siendo un pendejo haciendo esto? Tal vez ella está allá hablando con alguien más y tú aquí escribiéndole cartitas de amor'. Suena cruel, pero así es como pienso.",
-    "Recuerdo con claridad el día en que te escuché hablar por primera vez. Siempre habíamos hablado por mensaje y aquel día nos encontramos frente al colegio, en los portones de la cancha.",
-    "Yo estaba de copiloto en la moto, mi amigo Benjamin delante, y estábamos espalda con espalda.",
-    "Cuando me hablaste, fue tu voz y tu forma de expresarte lo que me impactó: tan dulce, tan auténtica, con un timbre que me llegó directo al corazón.",
-    "Sabes algo, a veces yo te digo que me llames no solo para hablar de lo que está pasando, lo hago solo por escuchar tu voz.",
-    "Siempre he esperado una llamada tuya; eso me haría muy feliz: una videollamada, sábado de pelis… esos pequeños detalles hacen toda la diferencia.",
-    "Sueno como un tonto escribiéndote todo esto, pero me gusta ser puntual con lo que siento.",
-    "Me cuesta confiar en ti. Recuerdo el día que me dijiste que se te había apagado el teléfono; yo vi que te habían llegado mensajes, y lo primero que pensé fue que habías salido de clases y te habías ido con Alex.",
-    "Luego me lo explicaste bien, y me pregunté por qué cuando llegaste no me habías dicho eso desde el principio. Solo quiero que seas sincera conmigo.",
-    "Soy una persona muy explosiva con mis sentimientos, y creo que eso ha sido la base de muchas veces en las que te reclamé de mala manera.",
-    "Pero algo que me gusta mucho de ti es que sabes lidiar conmigo; sabes calmarme en los momentos de ira o enojo, no solo cuando te reclamo, sino incluso cuando me enojo con mi familia o amigos.",
-    "Siempre encuentras la manera de tranquilizarme, y eso te hace increíble.",
-    "Lamento profundamente todas las cosas que te hice pasar y sé que también sufriste.",
-    "Me perdono a mí y te perdono a ti, porque todo lo que vivimos nos ha enseñado a entender el amor de verdad, no ese amor idealizado que muestran en películas o redes sociales."
-  ];
-
-  function initCarta() {
-    const card = document.getElementById('card');
-    if (!card) return; // Si no existe el elemento, salir
-    
-    let i = 0;
-
-    function showNextLine() {
-      if (i < textLines.length) {
-        const lineDiv = document.createElement('div');
-        lineDiv.classList.add('line');
-        lineDiv.textContent = textLines[i];
-        card.appendChild(lineDiv);
-
-        setTimeout(() => {
-          lineDiv.classList.add('show');
-          i++;
-          setTimeout(showNextLine, 1000); // Tiempo entre líneas aumentado para mejor lectura
-        }, 100);
-      }
-    }
-
-    showNextLine();
-  }
-
-  // Ejecutar cuando el DOM esté listo
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCarta);
-  } else {
-    initCarta();
-  }
-
-  // Notita click
-  function initNotita() {
-    const noteImage = document.getElementById('noteImage');
-    const notePopup = document.getElementById('notePopup');
-    
-    if (noteImage && notePopup) {
-      noteImage.addEventListener('click', () => {
-        if(notePopup.style.display === "block") {
-          notePopup.style.display = "none";
-        } else {
-          notePopup.style.display = "block";
-        }
-      });
-    }
-  }
-
-  // Ejecutar cuando el DOM esté listo
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initNotita);
-  } else {
-    initNotita();
-  }
-</script>
 
 </body>
 </html>
