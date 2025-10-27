@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>💕 Nuestro Rincón Especial 💕</title>
+  <title>💖 Nuestro Universo de Amor 💖</title>
   <link rel="stylesheet" href="./css/style.css" />
   <!-- Fallback para Google Drive -->
   <link rel="stylesheet" href="css/style.css" onerror="console.error('Error cargando CSS principal')" />
@@ -17,7 +17,7 @@
   <!-- Modal carta (iframe) -->
   <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
     <div class="modal-content">
-      <button class="cerrar" id="modalClose" aria-label="Cerrar">⬅️ Regresar</button>
+      <button class="cerrar" id="modalClose" aria-label="Cerrar">✕ Cerrar</button>
       <h3 id="modal-titulo"></h3>
       <div id="modal-body"></div>
     </div>
@@ -52,8 +52,8 @@
     <div class="hero-container">
       <div class="hero-content">
         <div class="hero-greeting">
-          <h1 id="saludo">Buenos días mi amor 💖</h1>
-          <p class="hero-message" id="frase-romantica">Como estas hoy mi amor? estaba esperando que entraras nuevamente a la esta pagina apra decirte que amo tus cachetitossssssssssssssssssssss 😍</p>
+          <h1 id="saludo">Bienvenida a Nuestro Universo 💖</h1>
+          <p class="hero-message" id="frase-romantica">Mi amor, cada día que pasas aquí es una nueva aventura llena de amor. Te amo más que las estrellas en el cielo ✨😍</p>
         </div>
         
         <!-- Peluches Centrados -->
@@ -122,53 +122,85 @@
       </button>
     </div>
 
+    <!-- Botón "Explorar Universo" -->
+    <button id="btnIniciarAventura" class="btn-iniciar-aventura hidden">✨ Explorar Universo ✨</button>
   </section>
 
-  <!-- Botón "Iniciar Aventura" -->
-  <button id="btnIniciarAventura" class="btn-iniciar-aventura hidden">Iniciar Aventura</button>
-
-  <!-- 🎮 BARRA DE CARGA DE JUEGO ÉPICA -->
+  <!-- 🌌 PANTALLA DE CARGA ÉPICA Y CREATIVA -->
   <div id="screenShatterContainer" class="screen-shatter-container hidden">
-    <!-- ✨ Partículas de fondo mejoradas -->
-    <div class="background-particles">
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
-      
-      <!-- 🌟 Estrellas brillantes -->
-      <div class="star"></div>
-      <div class="star"></div>
-      <div class="star"></div>
-      <div class="star"></div>
-      
-      <!-- 💫 Corazones flotantes -->
-      <div class="heart">💖</div>
-      <div class="heart">💕</div>
-      <div class="heart">💝</div>
+    <!-- ✨ Fondo cósmico con galaxias -->
+    <div class="cosmic-background">
+      <div class="galaxy"></div>
+      <div class="nebula"></div>
+      <div class="cosmic-dust"></div>
     </div>
     
-    <!-- 🎯 Contenedor principal -->
+    <!-- 🌟 Partículas estelares -->
+    <div class="stellar-particles">
+      <div class="star-particle"></div>
+      <div class="star-particle"></div>
+      <div class="star-particle"></div>
+      <div class="star-particle"></div>
+      <div class="star-particle"></div>
+      <div class="star-particle"></div>
+      <div class="star-particle"></div>
+      <div class="star-particle"></div>
+      <div class="star-particle"></div>
+      <div class="star-particle"></div>
+    </div>
+    
+    <!-- 💖 Corazones cósmicos -->
+    <div class="cosmic-hearts">
+      <div class="cosmic-heart">💖</div>
+      <div class="cosmic-heart">💕</div>
+      <div class="cosmic-heart">💝</div>
+      <div class="cosmic-heart">💗</div>
+      <div class="cosmic-heart">💘</div>
+      <div class="cosmic-heart">💞</div>
+    </div>
+    
+    <!-- 🚀 Contenedor principal -->
     <div class="loading-container">
-      <!-- 🎮 Título del juego -->
-      <div class="game-title">Nuestro Rincón Especial</div>
-      
-      <!-- 📊 Barra de progreso -->
-      <div class="progress-container">
-        <div class="progress-bar"></div>
+      <!-- 🌌 Título cósmico -->
+      <div class="cosmic-title">
+        <div class="title-text">Nuestro Universo de Amor</div>
+        <div class="title-glow"></div>
       </div>
       
-      <!-- 🎯 Porcentaje -->
-      <div class="loading-percentage" id="loadingPercentage">0%</div>
+      <!-- 💫 Peluches flotantes -->
+      <div class="floating-peluches">
+        <div class="peluche-float tich-float">
+          <img src="img/tich1.jpg" alt="Tich" class="peluche-img-float">
+          <div class="peluche-trail"></div>
+        </div>
+        <div class="peluche-float camila-float">
+          <img src="img/camila1.jpg" alt="Camila" class="peluche-img-float">
+          <div class="peluche-trail"></div>
+        </div>
+      </div>
       
-      <!-- 🎮 Estado de carga -->
-      <div class="loading-status" id="loadingStatus">Iniciando aventura...</div>
+      <!-- 🌟 Barra de progreso cósmica -->
+      <div class="cosmic-progress-container">
+        <div class="progress-track">
+          <div class="progress-fill" id="cosmicProgressFill"></div>
+          <div class="progress-particles"></div>
+        </div>
+        <div class="progress-glow"></div>
+      </div>
+      
+      <!-- 📊 Información de carga -->
+      <div class="loading-info">
+        <div class="loading-percentage" id="loadingPercentage">0%</div>
+        <div class="loading-status" id="loadingStatus">Preparando el universo...</div>
+        <div class="loading-substatus" id="loadingSubstatus">Cargando estrellas de amor...</div>
+      </div>
+      
+      <!-- ✨ Efectos adicionales -->
+      <div class="loading-effects">
+        <div class="pulse-ring"></div>
+        <div class="pulse-ring"></div>
+        <div class="pulse-ring"></div>
+      </div>
     </div>
   </div>
 
@@ -177,16 +209,16 @@
     <button class="btn-sec btn-volver" onclick="playButtonSound(); volverASeccionAnterior()" style="position: absolute; top: 20px; left: 20px; z-index: 1000;">⬅️ Volver</button>
     <div class="sections-modern">
       <div class="sections-header">
-        <h2>Tu rincón especial</h2>
-        <p>Elige una aventura hecha con amor</p>
+        <h2>Nuestro Universo de Amor</h2>
+        <p>Descubre cada rincón de nuestro mundo especial</p>
       </div>
       
       <div class="sections-grid">
         <div class="section-card featured" onclick="playButtonSound(); mostrarSeccion('historia')">
           <div class="section-icon">📖</div>
           <div class="section-content">
-            <h3>Historia</h3>
-            <p>Nuestro libro</p>
+            <h3>Nuestra Historia</h3>
+            <p>El libro de nuestro amor</p>
           </div>
           <div class="section-hover"></div>
           <div class="featured-badge">✨</div>
@@ -195,8 +227,8 @@
         <div class="section-card" onclick="playButtonSound(); mostrarSeccion('cartas')">
           <div class="section-icon">💌</div>
           <div class="section-content">
-            <h3>Cartas</h3>
-            <p>Palabras del corazón</p>
+            <h3>Cartas de Amor</h3>
+            <p>Mensajes del corazón</p>
           </div>
           <div class="section-hover"></div>
         </div>
@@ -204,8 +236,8 @@
         <div class="section-card" onclick="playButtonSound(); mostrarSeccion('fotos')">
           <div class="section-icon">📸</div>
           <div class="section-content">
-            <h3>Fotos</h3>
-            <p>Nuestros momentos</p>
+            <h3>Nuestros Momentos</h3>
+            <p>Recuerdos eternos</p>
           </div>
           <div class="section-hover"></div>
         </div>
@@ -213,7 +245,7 @@
         <div class="section-card" onclick="playButtonSound(); mostrarSeccion('extraño')" style="grid-column: 2; grid-row: 2;">
           <div class="section-icon">❤️</div>
           <div class="section-content">
-            <h3>Te extraño</h3>
+            <h3>Te Extraño</h3>
             <p>Un abrazo virtual</p>
           </div>
           <div class="section-hover"></div>
@@ -227,7 +259,7 @@
     <button class="btn-sec" onclick="volverASeccionAnterior()" style="position: absolute; top: 20px; left: 20px; z-index: 1000;">⬅️ Volver al menú</button>
     <div class="cartas-hero">
       <div class="corazones-fondo" aria-hidden="true"></div>
-      <h2>💌 Cartas</h2>
+      <h2>💌 Cartas de Amor</h2>
       <p class="cartas-sub">Mensajes que te abrazan incluso cuando estamos lejos. 📅 Nueva carta cada sábado a las 7:00 PM</p>
     </div>
 
@@ -310,21 +342,121 @@
       <p class="extraño-sub">El rincón donde mis abrazos viajan hasta ti 💕</p>
     </div>
 
-    <div class="extraño-container">
-      <div class="extraño-mensaje">
-        <div class="corazon-pulsante">💖</div>
-        <h3>Mi amor, te extraño...</h3>
-        <p>Te extraño es el lugar donde mi amor por ti se hace más fuerte en la distancia.
-Cada vez que vengas aquí, quiero que sientas que mis abrazos y besos te alcanzan aunque no estemos juntos.
-Este espacio es para recordarte cuánto significas para mí, lo importante que eres en mi vida y lo mucho que deseo tenerte siempre a mi lado.
-
-Porque incluso cuando no estoy contigo físicamente, mi corazón late por ti en cada instante. ❤️.</p>
-        <button class="btn-extraño" onclick="mostrarMensajeExtraño()">
+    <!-- 🎮 JUEGO DE PREGUNTAS DIVERTIDO -->
+    <div class="juego-container">
+      <!-- Pantalla de inicio del juego -->
+      <div id="juego-inicio" class="juego-pantalla">
+        <div class="juego-titulo">
+          <h3>🎮 Juego del Amor 💕</h3>
+          <p>¡Demuestra cuánto me conoces, mi amor!</p>
+        </div>
+        <div class="juego-descripcion">
+          <p>Responde las preguntas correctamente y gana corazones. ¡Cada respuesta correcta te acerca más a mí! 💖</p>
+        </div>
+        <button class="btn-juego-iniciar" onclick="iniciarJuego()">
+          <span class="corazon-animado">💕</span>
+          ¡Comenzar Juego!
           <span class="corazon-animado">💕</span>
         </button>
-        <p style="text-align: center; margin-top: 10px; color: #8b4a6b; font-style: italic;">Presiona aquí</p>
       </div>
 
+      <!-- Pantalla del juego -->
+      <div id="juego-preguntas" class="juego-pantalla hidden">
+        <div class="juego-header">
+          <div class="juego-puntuacion">
+            <span class="corazones-puntuacion" id="corazones-puntuacion">💖💖💖💖💖</span>
+            <span class="puntuacion-texto" id="puntuacion-texto">Puntuación: 0</span>
+          </div>
+          <div class="juego-progreso">
+            <div class="progreso-bar" id="progreso-bar"></div>
+            <span class="progreso-texto" id="progreso-texto">Pregunta 1 de 5</span>
+          </div>
+        </div>
+
+        <div class="juego-pregunta">
+          <h3 id="pregunta-texto">¿Cuál es mi color favorito?</h3>
+          <div class="opciones-container" id="opciones-container">
+            <!-- Se llena dinámicamente -->
+          </div>
+        </div>
+
+        <div class="juego-feedback hidden" id="juego-feedback">
+          <div class="feedback-contenido">
+            <div class="feedback-icono" id="feedback-icono">🎉</div>
+            <div class="feedback-mensaje" id="feedback-mensaje">¡Correcto! Te amo mucho 💕</div>
+            <button class="btn-siguiente" onclick="siguientePregunta()">Siguiente Pregunta</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pantalla de mensaje especial -->
+      <div id="juego-mensaje-especial" class="juego-pantalla hidden">
+        <div class="mensaje-especial-contenido">
+          <div class="mensaje-especial-titulo">
+            <h3>💕 Pregunta Especial 💕</h3>
+            <p>¡Una última pregunta muy importante!</p>
+          </div>
+          
+          <div class="mensaje-especial-pregunta">
+            <h4>¿Me extrañas?</h4>
+            <p>Escribe un mensaje especial para mí y lo recibiré en mi WhatsApp 💙</p>
+          </div>
+          
+          <div class="mensaje-especial-formulario">
+            <textarea 
+              id="mensaje-textarea" 
+              placeholder="Escribe aquí tu mensaje especial... 💕"
+              maxlength="500"
+              rows="4"
+            ></textarea>
+            <div class="mensaje-contador">
+              <span id="contador-caracteres">0/500</span>
+            </div>
+          </div>
+          
+          <div class="mensaje-especial-botones">
+            <button class="btn-enviar-whatsapp" onclick="enviarMensajeWhatsApp()">
+              <span class="whatsapp-icon">📱</span>
+              Enviar a WhatsApp
+              <span class="corazon-animado">💕</span>
+            </button>
+            <button class="btn-probar-whatsapp" onclick="probarWhatsApp()" style="background: #f59e0b; color: white; border: none; padding: 15px 25px; border-radius: var(--border-radius-md); font-size: 1rem; font-weight: 600; cursor: pointer; margin: 0 10px;">
+              🧪 Probar WhatsApp
+            </button>
+            <button class="btn-saltar-mensaje" onclick="saltarMensaje()">
+              Saltar Mensaje
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pantalla de resultados -->
+      <div id="juego-resultados" class="juego-pantalla hidden">
+        <div class="resultados-contenido">
+          <div class="resultados-titulo">
+            <h3 id="resultados-titulo">¡Increíble! 🎉</h3>
+            <p id="resultados-subtitulo">¡Sabes todo sobre mí!</p>
+          </div>
+          <div class="resultados-puntuacion">
+            <div class="puntuacion-final" id="puntuacion-final">5/5</div>
+            <div class="corazones-finales" id="corazones-finales">💖💖💖💖💖</div>
+          </div>
+          <div class="resultados-mensaje" id="resultados-mensaje">
+            <p>¡Eres la persona más especial del mundo! Cada respuesta correcta me recuerda por qué te amo tanto. 💕</p>
+            <p>Te extraño mucho, mi amor. Este juego es solo una pequeña forma de decirte que siempre estás en mi corazón. ❤️</p>
+          </div>
+          <div class="resultados-botones">
+            <button class="btn-jugar-nuevamente" onclick="reiniciarJuego()">
+              <span class="corazon-animado">💕</span>
+              Jugar Nuevamente
+              <span class="corazon-animado">💕</span>
+            </button>
+            <button class="btn-volver-menu" onclick="volverASeccionAnterior()">
+              ⬅️ Volver al Menú
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -384,6 +516,8 @@ Porque incluso cuando no estoy contigo físicamente, mi corazón late por ti en 
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script src="./js/contenido-libro.js"></script>
   <script src="./js/conversaciones.js"></script>
+  <script src="./js/loading-epic.js"></script>
+  <script src="./js/juego-te-extraño.js"></script>
   <script src="./js/script.js"></script>
 </body>
 </html>
