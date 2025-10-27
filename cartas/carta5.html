@@ -5,83 +5,295 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Carta para ti</title>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+  
+  body {
+    margin: 0;
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+    overflow-x: hidden;
+    color: #2d3748;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  /* Partículas de fondo mejoradas */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      radial-gradient(circle at 15% 85%, rgba(255, 182, 193, 0.4) 0%, transparent 50%),
+      radial-gradient(circle at 85% 15%, rgba(255, 192, 203, 0.4) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(255, 218, 185, 0.3) 0%, transparent 50%),
+      radial-gradient(circle at 25% 25%, rgba(255, 182, 193, 0.2) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+    animation: backgroundShift 20s ease-in-out infinite;
+  }
+
+  @keyframes backgroundShift {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+  }
+
+  /* Elementos flotantes mejorados */
+  .floating {
+    position: absolute;
+    animation: floatEnhanced 12s infinite ease-in-out;
+    opacity: 0.9;
+    font-size: 2.5rem;
+    pointer-events: none;
+    z-index: 1;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+  }
+
+  @keyframes floatEnhanced {
+    0% { 
+      transform: translateY(0) rotate(0deg) scale(1); 
+      opacity: 0.9; 
+    }
+    25% { 
+      transform: translateY(-30px) rotate(15deg) scale(1.1); 
+      opacity: 1; 
+    }
+    50% { 
+      transform: translateY(-60px) rotate(-10deg) scale(0.9); 
+      opacity: 0.8; 
+    }
+    75% { 
+      transform: translateY(-30px) rotate(20deg) scale(1.05); 
+      opacity: 1; 
+    }
+    100% { 
+      transform: translateY(0) rotate(0deg) scale(1); 
+      opacity: 0.9; 
+    }
+  }
+
+  /* Contenedor principal rediseñado */
+  .container {
+    max-width: 900px;
+    width: 100%;
+    padding: 50px;
+    background: linear-gradient(145deg, #ffffff 0%, #fef7f7 100%);
+    border-radius: 30px;
+    box-shadow: 
+      0 30px 60px rgba(0, 0, 0, 0.15),
+      0 0 0 1px rgba(255, 255, 255, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    position: relative;
+    z-index: 2;
+    margin: 20px;
+    backdrop-filter: blur(10px);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+
+  /* Decoración de esquinas */
+  .container::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border: 2px solid transparent;
+    border-image: linear-gradient(45deg, #ff6b9d, #c44569, #f8b500, #ff6b9d) 1;
+    border-radius: 20px;
+    pointer-events: none;
+  }
+
+  /* Título mejorado */
+  h1 {
+    text-align: center;
+    color: #d6336c;
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.5em;
+    font-weight: 700;
+    margin-bottom: 40px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(45deg, #d6336c, #ff6b9d, #c44569);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    animation: titleGlow 3s ease-in-out infinite alternate;
+  }
+
+  @keyframes titleGlow {
+    0% { filter: drop-shadow(0 0 5px rgba(214, 51, 108, 0.3)); }
+    100% { filter: drop-shadow(0 0 15px rgba(214, 51, 108, 0.6)); }
+  }
+
+  /* Párrafos mejorados */
+  p {
+    font-size: 1.3em;
+    line-height: 2em;
+    margin-bottom: 25px;
+    text-align: justify;
+    color: #2d3748;
+    font-weight: 400;
+    position: relative;
+    padding-left: 20px;
+    transition: all 0.3s ease;
+  }
+
+  p::before {
+    content: '💕';
+    position: absolute;
+    left: -5px;
+    top: 0;
+    font-size: 16px;
+    opacity: 0.7;
+    animation: heartBeat 2s ease-in-out infinite;
+  }
+
+  @keyframes heartBeat {
+    0%, 100% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.2); opacity: 1; }
+  }
+
+  p:hover {
+    transform: translateX(5px);
+    color: #1a202c;
+  }
+
+  /* Efectos de hover para el contenedor */
+  .container:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+      0 40px 80px rgba(0, 0, 0, 0.2),
+      0 0 0 1px rgba(255, 255, 255, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  }
+
+  /* Scrollbar personalizado */
+  .container::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+  }
+
+  .container::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #ff6b9d, #c44569);
+    border-radius: 4px;
+  }
+
+  .container::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, #ff5a8a, #b83a5e);
+  }
+
+  /* Responsive mejorado */
+  @media (max-width: 768px) {
     body {
-        margin: 0;
-        padding: 20px;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-        overflow-x: hidden;
-        color: #4a2c2a;
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .floating {
-        position: absolute;
-        animation: float 8s infinite ease-in-out;
-        opacity: 0.8;
-        font-size: 2rem;
-        pointer-events: none;
-    }
-    @keyframes float {
-        0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
-        50% { transform: translateY(-50px) rotate(20deg); opacity: 1; }
-        100% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
-    }
-    .container {
-        max-width: 800px;
-        width: 100%;
-        padding: 40px;
-        background: rgba(255, 255, 255, 0.95);
-        border-radius: 20px;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        position: relative;
-        z-index: 2;
-        margin: 20px;
-    }
-    h1 {
-        text-align: center;
-        color: #d6336c;
-        font-size: 2.2em;
-        margin-bottom: 30px;
-        font-weight: bold;
-    }
-    p {
-        font-size: 1.2em;
-        line-height: 1.8em;
-        margin-bottom: 20px;
-        text-align: justify;
-        color: #333;
+      padding: 10px;
     }
     
-    /* Responsive */
-    @media (max-width: 768px) {
-        body {
-            padding: 10px;
-        }
-        .container {
-            padding: 20px;
-            margin: 10px;
-        }
-        h1 {
-            font-size: 1.8em;
-        }
-        p {
-            font-size: 1.1em;
-        }
+    .container {
+      padding: 30px;
+      margin: 10px;
+      border-radius: 25px;
     }
+    
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 30px;
+    }
+    
+    p {
+      font-size: 1.1em;
+      line-height: 1.8em;
+      margin-bottom: 20px;
+      padding-left: 15px;
+    }
+    
+    .floating {
+      font-size: 2rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .container {
+      padding: 20px;
+      margin: 5px;
+    }
+    
+    h1 {
+      font-size: 2em;
+    }
+    
+    p {
+      font-size: 1em;
+      padding-left: 10px;
+    }
+    
+    .floating {
+      font-size: 1.5rem;
+    }
+  }
+
+  /* Animación de entrada */
+  .container {
+    animation: slideInUp 1s ease-out;
+  }
+
+  @keyframes slideInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Efectos de partículas adicionales */
+  .container::after {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    right: -50px;
+    bottom: -50px;
+    background: radial-gradient(circle at 20% 20%, rgba(255, 182, 193, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 192, 203, 0.1) 0%, transparent 50%);
+    border-radius: 50px;
+    pointer-events: none;
+    z-index: -1;
+    animation: particleFloat 15s ease-in-out infinite;
+  }
+
+  @keyframes particleFloat {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.1); }
+  }
 </style>
 </head>
 <body>
 
-<!-- Corazones y flores flotando usando emojis -->
-<div class="floating" style="top:10%; left:5%; animation-delay:0s;">💕</div>
-<div class="floating" style="top:50%; left:80%; animation-delay:2s;">💖</div>
-<div class="floating" style="top:20%; left:60%; animation-delay:4s;">🌹</div>
-<div class="floating" style="top:70%; left:15%; animation-delay:1s;">🌺</div>
-<div class="floating" style="top:30%; left:90%; animation-delay:3s;">💝</div>
-<div class="floating" style="top:80%; left:70%; animation-delay:5s;">🌸</div>
+<!-- Elementos flotantes mejorados con más variedad -->
+<div class="floating" style="top:8%; left:3%; animation-delay:0s;">💕</div>
+<div class="floating" style="top:45%; left:85%; animation-delay:2s;">💖</div>
+<div class="floating" style="top:15%; left:55%; animation-delay:4s;">🌹</div>
+<div class="floating" style="top:65%; left:10%; animation-delay:1s;">🌺</div>
+<div class="floating" style="top:25%; left:92%; animation-delay:3s;">💝</div>
+<div class="floating" style="top:75%; left:65%; animation-delay:5s;">🌸</div>
+<div class="floating" style="top:35%; left:25%; animation-delay:6s;">💗</div>
+<div class="floating" style="top:55%; left:45%; animation-delay:7s;">🌷</div>
+<div class="floating" style="top:85%; left:35%; animation-delay:8s;">💐</div>
+<div class="floating" style="top:5%; left:75%; animation-delay:9s;">🌻</div>
 
 <div class="container">
     <h1>Para ti ❤️</h1>
