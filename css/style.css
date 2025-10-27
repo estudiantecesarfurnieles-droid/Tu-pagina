@@ -851,7 +851,43 @@ button:hover:before {
   flex-direction: column;
 }
 
-/* Modal específico para cartas - Pantalla completa */
+/* Modal específico para cartas - Pantalla completa con diseño elegante */
+.modal-content {
+  width: 95vw;
+  height: 95vh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1));
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 60%, rgba(245, 158, 11, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
 .modal-content iframe {
   width: 100%;
   height: calc(100% - 60px);
@@ -862,15 +898,60 @@ button:hover:before {
 }
 
 .modal-content h3 {
-  font-family: var(--font-display);
-  font-size: 2rem;
-  color: var(--text-primary);
+  font-family: var(--font-elegant);
+  font-size: 2.5rem;
+  color: var(--primary-purple);
   text-align: center;
-  margin-bottom: 20px;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  margin: 0;
+  padding: 30px 20px 20px 20px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid rgba(139, 92, 246, 0.2);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 2;
+}
+
+.modal-content h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-purple), var(--primary-pink), var(--primary-gold));
+  border-radius: 2px;
+}
+
+/* Botón de cerrar mejorado */
+.modal-content .btn-cerrar {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, var(--primary-pink), var(--primary-purple));
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+  transition: all 0.3s ease;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content .btn-cerrar:hover {
+  transform: scale(1.1) rotate(90deg);
+  box-shadow: 0 12px 25px rgba(139, 92, 246, 0.4);
+}
+
+.modal-content .btn-cerrar:active {
+  transform: scale(0.95);
 }
 
 /* Estilos específicos para el contenido de las cartas */
@@ -878,11 +959,87 @@ button:hover:before {
   flex: 1;
   display: flex;
   flex-direction: column;
+  padding: 0;
+  background: transparent;
+  overflow: auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* Scrollbar personalizado para el modal */
+.modal-content #modal-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-content #modal-body::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.modal-content #modal-body::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--primary-purple), var(--primary-pink));
+  border-radius: 4px;
+}
+
+.modal-content #modal-body::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, var(--primary-pink), var(--primary-purple));
 }
 
 .modal-content #modal-body iframe {
   flex: 1;
   min-height: 0;
+}
+
+/* Contenedor de contenido de carta centrado */
+.carta-modal-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  padding: 20px;
+  position: relative;
+}
+
+/* Animación de entrada para las cartas */
+.carta-modal-content {
+  animation: cartaEntrada 0.8s ease-out;
+}
+
+@keyframes cartaEntrada {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Efectos de partículas flotantes en el modal */
+.modal-content::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, rgba(139, 92, 246, 0.3), transparent),
+    radial-gradient(2px 2px at 40px 70px, rgba(236, 72, 153, 0.3), transparent),
+    radial-gradient(1px 1px at 90px 40px, rgba(245, 158, 11, 0.3), transparent),
+    radial-gradient(1px 1px at 130px 80px, rgba(139, 92, 246, 0.3), transparent),
+    radial-gradient(2px 2px at 160px 30px, rgba(236, 72, 153, 0.3), transparent);
+  background-repeat: repeat;
+  background-size: 200px 100px;
+  animation: particulasFlotantes 20s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes particulasFlotantes {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-100px); }
 }
 
 /* Botón cerrar mejorado para pantalla completa */
