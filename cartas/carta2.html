@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Carta de Amor</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Caveat:wght@400;500;600;700&family=Kalam:wght@300;400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:wght@200;300;400;500;600;700&display=swap');
   
   * {
     margin: 0;
@@ -14,250 +14,226 @@
   }
 
   body {
-    font-family: 'Kalam', cursive;
-    background: #0a0a0a;
-    color: #ffffff;
+    font-family: 'Rajdhani', sans-serif;
+    background: linear-gradient(45deg, #0c0c0c, #1a1a2e, #16213e, #0f3460);
+    background-size: 400% 400%;
+    color: #00ffff;
     padding: 0;
     margin: 0;
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
-    cursor: crosshair;
+    animation: cyberBackground 10s ease-in-out infinite;
   }
 
-  /* Efecto de papel arrugado */
-  .paper-texture {
+  @keyframes cyberBackground {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  /* Efectos de partículas digitales */
+  .digital-particles {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: 
-      radial-gradient(circle at 20% 30%, rgba(139, 69, 19, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 80% 70%, rgba(160, 82, 45, 0.08) 0%, transparent 50%),
-      radial-gradient(circle at 40% 80%, rgba(101, 67, 33, 0.06) 0%, transparent 50%),
-      linear-gradient(45deg, rgba(0,0,0,0.02) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.02) 75%),
-      linear-gradient(-45deg, rgba(0,0,0,0.02) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.02) 75%);
-    background-size: 100% 100%, 100% 100%, 100% 100%, 20px 20px, 20px 20px;
     pointer-events: none;
     z-index: 1;
-    animation: paperRustle 8s ease-in-out infinite;
   }
 
-  @keyframes paperRustle {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.95; transform: scale(1.01); }
-  }
-
-  /* Contenedor principal con efecto de papel */
-  .carta-container {
-    position: relative;
-    max-width: 600px;
-    margin: 20px auto;
-    background: #1a1a1a;
-    border: 2px solid #8B4513;
-    border-radius: 0;
-    padding: 0;
-    box-shadow: 
-      0 0 0 1px #654321,
-      inset 0 0 0 1px #8B4513,
-      0 10px 30px rgba(0, 0, 0, 0.8);
-    z-index: 2;
-    transform: rotate(-1deg);
-    animation: paperFloat 6s ease-in-out infinite;
-  }
-
-  @keyframes paperFloat {
-    0%, 100% { transform: rotate(-1deg) translateY(0); }
-    50% { transform: rotate(1deg) translateY(-5px); }
-  }
-
-  /* Efecto de doblez en las esquinas */
-  .carta-container::before {
-    content: '';
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    width: 20px;
-    height: 20px;
-    background: linear-gradient(135deg, #654321 0%, #8B4513 50%, #654321 100%);
-    transform: rotate(45deg);
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-    z-index: 3;
-  }
-
-  .carta-container::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: -5px;
-    width: 20px;
-    height: 20px;
-    background: linear-gradient(135deg, #654321 0%, #8B4513 50%, #654321 100%);
-    transform: rotate(45deg);
-    box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.5);
-    z-index: 3;
-  }
-
-  /* Contenido interno */
-  .carta-content {
-    padding: 40px 30px;
-    background: 
-      linear-gradient(90deg, rgba(139, 69, 19, 0.1) 0%, transparent 2%, transparent 98%, rgba(139, 69, 19, 0.1) 100%),
-      linear-gradient(0deg, rgba(139, 69, 19, 0.1) 0%, transparent 2%, transparent 98%, rgba(139, 69, 19, 0.1) 100%);
-    background-size: 100% 100%, 100% 100%;
-    position: relative;
-  }
-
-  /* Líneas de escritura a mano */
-  .carta-content::before {
+  .digital-particles::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
+    width: 100%;
+    height: 100%;
     background-image: 
-      repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 24px,
-        rgba(139, 69, 19, 0.1) 24px,
-        rgba(139, 69, 19, 0.1) 25px
-      );
-    pointer-events: none;
-    z-index: 1;
+      radial-gradient(circle at 20% 20%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(0, 255, 255, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(0, 255, 255, 0.03) 0%, transparent 70%);
+    animation: particleGlow 8s ease-in-out infinite;
   }
 
-  /* Título con efecto de escritura a mano */
+  @keyframes particleGlow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  /* Contenedor principal con efecto holográfico */
+  .carta-container {
+    position: relative;
+    max-width: 800px;
+    margin: 30px auto;
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(0, 0, 255, 0.1));
+    border: 2px solid #00ffff;
+    border-radius: 20px;
+    padding: 0;
+    box-shadow: 
+      0 0 30px rgba(0, 255, 255, 0.5),
+      inset 0 0 30px rgba(0, 255, 255, 0.1);
+    z-index: 2;
+    backdrop-filter: blur(10px);
+    animation: hologramFloat 6s ease-in-out infinite;
+  }
+
+  @keyframes hologramFloat {
+    0%, 100% { transform: translateY(0) rotateX(0deg); }
+    50% { transform: translateY(-10px) rotateX(2deg); }
+  }
+
+  /* Efecto de escaneo holográfico */
+  .carta-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.3), transparent);
+    animation: scanLine 3s linear infinite;
+    z-index: 3;
+  }
+
+  @keyframes scanLine {
+    0% { left: -100%; }
+    100% { left: 100%; }
+  }
+
+  /* Contenido interno */
+  .carta-content {
+    padding: 50px 40px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Título con efecto de terminal */
   .carta-titulo {
-    font-family: 'Caveat', cursive;
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #FFD700;
+    font-family: 'Orbitron', monospace;
+    font-size: 3rem;
+    font-weight: 900;
+    color: #00ffff;
     text-align: center;
     margin-bottom: 30px;
     text-shadow: 
-      2px 2px 0px #8B4513,
-      4px 4px 8px rgba(0, 0, 0, 0.8);
-    transform: rotate(-0.5deg);
+      0 0 10px #00ffff,
+      0 0 20px #00ffff,
+      0 0 30px #00ffff;
+    animation: titleFlicker 2s ease-in-out infinite;
     position: relative;
-    z-index: 2;
-    animation: titleShake 4s ease-in-out infinite;
   }
 
-  @keyframes titleShake {
-    0%, 100% { transform: rotate(-0.5deg) translateX(0); }
-    25% { transform: rotate(0.5deg) translateX(1px); }
-    50% { transform: rotate(-0.3deg) translateX(-1px); }
-    75% { transform: rotate(0.3deg) translateX(0.5px); }
+  @keyframes titleFlicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+  }
+
+  /* Efecto de cursor parpadeante */
+  .carta-titulo::after {
+    content: '|';
+    animation: cursorBlink 1s infinite;
+    color: #00ffff;
+  }
+
+  @keyframes cursorBlink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
   }
 
   /* Subtítulo */
   .carta-subtitulo {
-    font-family: 'Amatic SC', cursive;
-    font-size: 1.8rem;
-    color: #DAA520;
+    font-family: 'Exo 2', sans-serif;
+    font-size: 1.5rem;
+    color: #00ff00;
     text-align: center;
     margin-bottom: 40px;
-    transform: rotate(0.3deg);
-    position: relative;
-    z-index: 2;
-    animation: subtitleFloat 5s ease-in-out infinite;
+    text-shadow: 0 0 10px #00ff00;
+    animation: subtitleGlow 3s ease-in-out infinite;
   }
 
-  @keyframes subtitleFloat {
-    0%, 100% { transform: rotate(0.3deg) translateY(0); }
-    50% { transform: rotate(-0.2deg) translateY(-2px); }
+  @keyframes subtitleGlow {
+    0%, 100% { text-shadow: 0 0 10px #00ff00; }
+    50% { text-shadow: 0 0 20px #00ff00, 0 0 30px #00ff00; }
   }
 
   /* Contenido de la carta */
   .carta-contenido {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: #F5F5DC;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #ffffff;
     position: relative;
-    z-index: 2;
   }
 
-  /* Párrafos con efecto de escritura irregular */
+  /* Párrafos con efecto de terminal */
   .carta-contenido p {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     position: relative;
-    transform: rotate(0deg);
-    animation: paragraphDrift 8s ease-in-out infinite;
+    padding-left: 20px;
+    animation: textReveal 0.5s ease-out;
   }
 
-  .carta-contenido p:nth-child(odd) {
-    transform: rotate(0.2deg);
-    margin-left: 5px;
-  }
-
-  .carta-contenido p:nth-child(even) {
-    transform: rotate(-0.1deg);
-    margin-right: 5px;
-  }
-
-  @keyframes paragraphDrift {
-    0%, 100% { transform: rotate(0deg) translateY(0); }
-    25% { transform: rotate(0.1deg) translateY(1px); }
-    50% { transform: rotate(-0.1deg) translateY(0); }
-    75% { transform: rotate(0.05deg) translateY(-1px); }
-  }
-
-  /* Efecto de tinta que se seca */
   .carta-contenido p::before {
-    content: '';
+    content: '> ';
+    color: #00ffff;
+    font-weight: bold;
     position: absolute;
+    left: 0;
     top: 0;
-    left: -10px;
-    width: 3px;
-    height: 100%;
-    background: linear-gradient(to bottom, #8B4513, transparent);
-    opacity: 0.3;
-    animation: inkDrip 3s ease-in-out infinite;
   }
 
-  @keyframes inkDrip {
-    0%, 100% { opacity: 0.3; transform: scaleY(1); }
-    50% { opacity: 0.1; transform: scaleY(0.8); }
+  @keyframes textReveal {
+    0% { opacity: 0; transform: translateX(-20px); }
+    100% { opacity: 1; transform: translateX(0); }
   }
 
   /* Efectos de hover únicos */
   .carta-container:hover {
-    transform: rotate(0deg) translateY(-10px);
+    transform: translateY(-15px) rotateX(5deg);
     box-shadow: 
-      0 0 0 1px #654321,
-      inset 0 0 0 1px #8B4513,
-      0 20px 50px rgba(0, 0, 0, 0.9);
+      0 0 50px rgba(0, 255, 255, 0.8),
+      inset 0 0 50px rgba(0, 255, 255, 0.2);
     transition: all 0.3s ease;
   }
 
   .carta-contenido p:hover {
-    color: #FFD700;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-    transform: rotate(0deg) translateX(5px);
+    color: #00ffff;
+    text-shadow: 0 0 10px #00ffff;
+    transform: translateX(10px);
     transition: all 0.3s ease;
+  }
+
+  /* Efectos de glitch */
+  .carta-container:hover .carta-titulo {
+    animation: glitch 0.3s ease-in-out;
+  }
+
+  @keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
   }
 
   /* Responsive design */
   @media (max-width: 768px) {
     .carta-container {
       max-width: 90%;
-      margin: 15px auto;
-      transform: rotate(-0.5deg);
+      margin: 20px auto;
     }
     
     .carta-content {
-      padding: 30px 20px;
+      padding: 30px 25px;
     }
     
     .carta-titulo {
-      font-size: 2rem;
+      font-size: 2.2rem;
     }
     
     .carta-subtitulo {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
     }
     
     .carta-contenido {
@@ -268,11 +244,10 @@
   @media (max-width: 480px) {
     .carta-container {
       max-width: 95%;
-      transform: rotate(-0.3deg);
     }
     
     .carta-content {
-      padding: 25px 15px;
+      padding: 25px 20px;
     }
     
     .carta-titulo {
@@ -286,26 +261,29 @@
 
   /* Animación de entrada única */
   .carta-container {
-    animation: paperSlideIn 1.2s ease-out;
+    animation: cyberSlideIn 1.5s ease-out;
   }
 
-  @keyframes paperSlideIn {
+  @keyframes cyberSlideIn {
     0% {
       opacity: 0;
-      transform: rotate(-45deg) translateY(100px) scale(0.5);
+      transform: translateY(100px) scale(0.8);
+      filter: blur(10px);
     }
     50% {
       opacity: 0.7;
-      transform: rotate(-10deg) translateY(20px) scale(0.8);
+      transform: translateY(20px) scale(0.9);
+      filter: blur(5px);
     }
     100% {
       opacity: 1;
-      transform: rotate(-1deg) translateY(0) scale(1);
+      transform: translateY(0) scale(1);
+      filter: blur(0);
     }
   }
 
-  /* Efecto de polvo de papel */
-  .paper-dust {
+  /* Efectos de ondas digitales */
+  .digital-waves {
     position: fixed;
     top: 0;
     left: 0;
@@ -315,57 +293,35 @@
     z-index: 0;
   }
 
-  .paper-dust::before {
+  .digital-waves::before {
     content: '';
     position: absolute;
-    top: 20%;
-    left: 10%;
-    width: 2px;
+    top: 50%;
+    left: 0;
+    width: 100%;
     height: 2px;
-    background: #8B4513;
-    border-radius: 50%;
-    animation: dustFloat1 12s linear infinite;
+    background: linear-gradient(90deg, transparent, #00ffff, transparent);
+    animation: waveMove 4s linear infinite;
   }
 
-  .paper-dust::after {
-    content: '';
-    position: absolute;
-    top: 60%;
-    right: 15%;
-    width: 1px;
-    height: 1px;
-    background: #654321;
-    border-radius: 50%;
-    animation: dustFloat2 15s linear infinite;
-  }
-
-  @keyframes dustFloat1 {
-    0% { transform: translateY(0) translateX(0); opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
-  }
-
-  @keyframes dustFloat2 {
-    0% { transform: translateY(0) translateX(0); opacity: 0; }
-    15% { opacity: 1; }
-    85% { opacity: 1; }
-    100% { transform: translateY(-100vh) translateX(-30px); opacity: 0; }
+  @keyframes waveMove {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
   }
 </style>
 </head>
 <body>
 
-<!-- Efecto de papel arrugado -->
-<div class="paper-texture"></div>
+<!-- Efectos de partículas digitales -->
+<div class="digital-particles"></div>
 
-<!-- Polvo de papel flotante -->
-<div class="paper-dust"></div>
+<!-- Ondas digitales -->
+<div class="digital-waves"></div>
 
 <div class="carta-container">
     <div class="carta-content">
-        <h1 class="carta-titulo">Carta de Amor</h1>
-        <p class="carta-subtitulo">Escrita a mano con el corazón</p>
+        <h1 class="carta-titulo">CARTA DE AMOR</h1>
+        <p class="carta-subtitulo">SISTEMA DE EMOCIONES ACTIVADO</p>
         
         <div class="carta-contenido">
             <p>A veces digo, ¿por qué me aferro tanto a ti nuevamente si ya te había soltado?</p>
