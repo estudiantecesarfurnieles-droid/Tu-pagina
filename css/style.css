@@ -694,8 +694,12 @@ button:hover:before {
 .contenedor-cartas {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 24px;
+  gap: 30px;
   margin: 40px 0;
+  padding: 20px;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Galería de fotos */
