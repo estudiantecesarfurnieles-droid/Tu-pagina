@@ -994,10 +994,11 @@ button:hover:before {
 .carta-modal-content {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   min-height: 100%;
   padding: 20px;
   position: relative;
+  overflow-y: auto;
 }
 
 /* Animación de entrada para las cartas */
