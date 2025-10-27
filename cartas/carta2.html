@@ -65,11 +65,15 @@
     width: 100%;
     height: 0;
     padding-bottom: 100%; /* cuadrado */
-    background: url('../img/camila1.jpg') no-repeat center/cover;
+    background: linear-gradient(135deg, #ffd1c1, #ffb3ba);
     border: 2px solid #ffd1c1;
     border-radius: 10px;
     cursor: pointer;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
   }
 
   .note-title {
@@ -113,7 +117,7 @@
 
   <div class="note-container">
     <div class="note-title">Notita 💌</div>
-    <div class="note-image" id="noteImage"></div>
+    <div class="note-image" id="noteImage">💕</div>
     <div class="note-popup" id="notePopup">
       <p>Como siempre te digo, no espero respuesta alguna; simplemente tus acciones serán más que respuesta para mí.</p>
     </div>
@@ -143,47 +147,60 @@
     "Me perdono a mí y te perdono a ti, porque todo lo que vivimos nos ha enseñado a entender el amor de verdad, no ese amor idealizado que muestran en películas o redes sociales."
   ];
 
-  const card = document.getElementById('card');
-  let i = 0;
+  function initCarta() {
+    const card = document.getElementById('card');
+    if (!card) return; // Si no existe el elemento, salir
+    
+    let i = 0;
 
-  function showNextLine() {
-    if (i < textLines.length) {
-      const lineDiv = document.createElement('div');
-      lineDiv.classList.add('line');
-      lineDiv.textContent = textLines[i];
-      card.appendChild(lineDiv);
+    function showNextLine() {
+      if (i < textLines.length) {
+        const lineDiv = document.createElement('div');
+        lineDiv.classList.add('line');
+        lineDiv.textContent = textLines[i];
+        card.appendChild(lineDiv);
 
-      setTimeout(() => {
-        lineDiv.classList.add('show');
-        i++;
-        setTimeout(showNextLine, 800); // Tiempo entre líneas
-      }, 50);
+        setTimeout(() => {
+          lineDiv.classList.add('show');
+          i++;
+          setTimeout(showNextLine, 800); // Tiempo entre líneas
+        }, 50);
+      }
+    }
+
+    showNextLine();
+  }
+
+  // Ejecutar cuando el DOM esté listo
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCarta);
+  } else {
+    initCarta();
+  }
+
+  // Notita click
+  function initNotita() {
+    const noteImage = document.getElementById('noteImage');
+    const notePopup = document.getElementById('notePopup');
+    
+    if (noteImage && notePopup) {
+      noteImage.addEventListener('click', () => {
+        if(notePopup.style.display === "block") {
+          notePopup.style.display = "none";
+        } else {
+          notePopup.style.display = "block";
+        }
+      });
     }
   }
 
-  showNextLine();
-
-  // Notita click
-  const noteImage = document.getElementById('noteImage');
-  const notePopup = document.getElementById('notePopup');
-
-  noteImage.addEventListener('click', () => {
-    if(notePopup.style.display === "block") {
-      notePopup.style.display = "none";
-    } else {
-      notePopup.style.display = "block";
-    }
-  });
-
+  // Ejecutar cuando el DOM esté listo
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initNotita);
+  } else {
+    initNotita();
+  }
 </script>
-
-<style>
-  .nav-fixed{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);display:flex;gap:12px;z-index:50}
-  .nav-btn{ text-decoration:none; padding:10px 16px; border-radius:12px; color:#fff }
-  .nav-btn.prev{ background:#d6336c }
-  .nav-btn.next{ background:#555 }
-</style>
-
 
 </body>
 </html>
