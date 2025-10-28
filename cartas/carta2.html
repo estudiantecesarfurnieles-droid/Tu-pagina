@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Carta de Amor</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:wght@200;300;400;500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Source+Serif+Pro:wght@200;300;400;600;700&display=swap');
   
   * {
     margin: 0;
@@ -14,350 +14,193 @@
   }
 
   body {
-    font-family: 'Rajdhani', sans-serif;
-    background: linear-gradient(45deg, #0c0c0c, #1a1a2e, #16213e, #0f3460);
-    background-size: 400% 400%;
-    color: #00ffff;
-    padding: 0;
+    font-family: 'Source Serif Pro', serif;
+    background: #f5f5f5;
+    color: #333;
+    padding: 40px 20px;
     margin: 0;
     min-height: 100vh;
     position: relative;
-    overflow-x: hidden;
-    animation: cyberBackground 10s ease-in-out infinite;
+    line-height: 1.7;
   }
 
-  @keyframes cyberBackground {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-  }
-
-  /* Efectos de partículas digitales */
-  .digital-particles {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  .digital-particles::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: 
-      radial-gradient(circle at 20% 20%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, rgba(0, 255, 255, 0.05) 0%, transparent 50%),
-      radial-gradient(circle at 50% 50%, rgba(0, 255, 255, 0.03) 0%, transparent 70%);
-    animation: particleGlow 8s ease-in-out infinite;
-  }
-
-  @keyframes particleGlow {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-  }
-
-  /* Contenedor principal con efecto holográfico */
+  /* Contenedor principal simple */
   .carta-container {
     position: relative;
-    max-width: 800px;
-    margin: 30px auto;
-    background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(0, 0, 255, 0.1));
-    border: 2px solid #00ffff;
-    border-radius: 20px;
-    padding: 0;
-    box-shadow: 
-      0 0 30px rgba(0, 255, 255, 0.5),
-      inset 0 0 30px rgba(0, 255, 255, 0.1);
-    z-index: 2;
-    backdrop-filter: blur(10px);
-    animation: hologramFloat 6s ease-in-out infinite;
-  }
-
-  @keyframes hologramFloat {
-    0%, 100% { transform: translateY(0) rotateX(0deg); }
-    50% { transform: translateY(-10px) rotateX(2deg); }
-  }
-
-  /* Efecto de escaneo holográfico */
-  .carta-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.3), transparent);
-    animation: scanLine 3s linear infinite;
-    z-index: 3;
-  }
-
-  @keyframes scanLine {
-    0% { left: -100%; }
-    100% { left: 100%; }
-  }
-
-  /* Contenido interno */
-  .carta-content {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
     padding: 50px 40px;
-    position: relative;
-    z-index: 2;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
   }
 
-  /* Título con efecto de terminal */
+  /* Título simple */
   .carta-titulo {
-    font-family: 'Orbitron', monospace;
-    font-size: 3rem;
-    font-weight: 900;
-    color: #00ffff;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: #2c3e50;
     text-align: center;
-    margin-bottom: 30px;
-    text-shadow: 
-      0 0 10px #00ffff,
-      0 0 20px #00ffff,
-      0 0 30px #00ffff;
-    animation: titleFlicker 2s ease-in-out infinite;
-    position: relative;
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
   }
 
-  @keyframes titleFlicker {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.8; }
-  }
-
-  /* Efecto de cursor parpadeante */
+  /* Línea decorativa simple */
   .carta-titulo::after {
-    content: '|';
-    animation: cursorBlink 1s infinite;
-    color: #00ffff;
-  }
-
-  @keyframes cursorBlink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0; }
+    content: '';
+    display: block;
+    width: 50px;
+    height: 2px;
+    background: #7f8c8d;
+    margin: 15px auto 0;
   }
 
   /* Subtítulo */
   .carta-subtitulo {
-    font-family: 'Exo 2', sans-serif;
-    font-size: 1.5rem;
-    color: #00ff00;
+    font-family: 'Crimson Text', serif;
+    font-size: 1.1rem;
+    color: #7f8c8d;
     text-align: center;
     margin-bottom: 40px;
-    text-shadow: 0 0 10px #00ff00;
-    animation: subtitleGlow 3s ease-in-out infinite;
-  }
-
-  @keyframes subtitleGlow {
-    0%, 100% { text-shadow: 0 0 10px #00ff00; }
-    50% { text-shadow: 0 0 20px #00ff00, 0 0 30px #00ff00; }
+    font-style: italic;
   }
 
   /* Contenido de la carta */
   .carta-contenido {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     line-height: 1.8;
-    color: #ffffff;
-    position: relative;
+    color: #2c3e50;
+    text-align: justify;
   }
 
-  /* Párrafos con efecto de terminal */
+  /* Párrafos simples */
   .carta-contenido p {
-    margin-bottom: 25px;
+    margin-bottom: 18px;
     position: relative;
-    padding-left: 20px;
-    animation: textReveal 0.5s ease-out;
+    padding-left: 15px;
   }
 
+  /* Viñeta simple */
   .carta-contenido p::before {
-    content: '> ';
-    color: #00ffff;
+    content: '•';
+    color: #7f8c8d;
     font-weight: bold;
     position: absolute;
     left: 0;
     top: 0;
   }
 
-  @keyframes textReveal {
-    0% { opacity: 0; transform: translateX(-20px); }
-    100% { opacity: 1; transform: translateX(0); }
-  }
-
-  /* Efectos de hover únicos */
+  /* Efectos de hover muy sutiles */
   .carta-container:hover {
-    transform: translateY(-15px) rotateX(5deg);
-    box-shadow: 
-      0 0 50px rgba(0, 255, 255, 0.8),
-      inset 0 0 50px rgba(0, 255, 255, 0.2);
-    transition: all 0.3s ease;
-  }
-
-  .carta-contenido p:hover {
-    color: #00ffff;
-    text-shadow: 0 0 10px #00ffff;
-    transform: translateX(10px);
-    transition: all 0.3s ease;
-  }
-
-  /* Efectos de glitch */
-  .carta-container:hover .carta-titulo {
-    animation: glitch 0.3s ease-in-out;
-  }
-
-  @keyframes glitch {
-    0% { transform: translate(0); }
-    20% { transform: translate(-2px, 2px); }
-    40% { transform: translate(-2px, -2px); }
-    60% { transform: translate(2px, 2px); }
-    80% { transform: translate(2px, -2px); }
-    100% { transform: translate(0); }
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 0.3s ease;
   }
 
   /* Responsive design */
   @media (max-width: 768px) {
-    .carta-container {
-      max-width: 90%;
-      margin: 20px auto;
+    body {
+      padding: 20px 15px;
     }
     
-    .carta-content {
-      padding: 30px 25px;
+    .carta-container {
+      padding: 35px 25px;
+      max-width: 95%;
     }
     
     .carta-titulo {
-      font-size: 2.2rem;
+      font-size: 2rem;
     }
     
     .carta-subtitulo {
-      font-size: 1.2rem;
+      font-size: 1rem;
     }
     
     .carta-contenido {
       font-size: 1rem;
     }
+    
+    .carta-contenido p {
+      padding-left: 12px;
+    }
   }
 
   @media (max-width: 480px) {
     .carta-container {
-      max-width: 95%;
-    }
-    
-    .carta-content {
       padding: 25px 20px;
     }
     
     .carta-titulo {
-      font-size: 1.8rem;
+      font-size: 1.7rem;
     }
     
     .carta-contenido {
       font-size: 0.95rem;
     }
+    
+    .carta-contenido p {
+      padding-left: 10px;
+    }
   }
 
-  /* Animación de entrada única */
+  /* Animación de entrada sutil */
   .carta-container {
-    animation: cyberSlideIn 1.5s ease-out;
+    animation: fadeIn 0.6s ease-out;
   }
 
-  @keyframes cyberSlideIn {
+  @keyframes fadeIn {
     0% {
       opacity: 0;
-      transform: translateY(100px) scale(0.8);
-      filter: blur(10px);
-    }
-    50% {
-      opacity: 0.7;
-      transform: translateY(20px) scale(0.9);
-      filter: blur(5px);
+      transform: translateY(15px);
     }
     100% {
       opacity: 1;
-      transform: translateY(0) scale(1);
-      filter: blur(0);
+      transform: translateY(0);
     }
-  }
-
-  /* Efectos de ondas digitales */
-  .digital-waves {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .digital-waves::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #00ffff, transparent);
-    animation: waveMove 4s linear infinite;
-  }
-
-  @keyframes waveMove {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
   }
 </style>
 </head>
 <body>
 
-<!-- Efectos de partículas digitales -->
-<div class="digital-particles"></div>
-
-<!-- Ondas digitales -->
-<div class="digital-waves"></div>
-
 <div class="carta-container">
-    <div class="carta-content">
-        <h1 class="carta-titulo">CARTA DE AMOR</h1>
-        <p class="carta-subtitulo">SISTEMA DE EMOCIONES ACTIVADO</p>
+    <h1 class="carta-titulo">Carta de Amor</h1>
+    <p class="carta-subtitulo">Para ti</p>
+    
+    <div class="carta-contenido">
+        <p>A veces digo, ¿por qué me aferro tanto a ti nuevamente si ya te había soltado?</p>
         
-        <div class="carta-contenido">
-            <p>A veces digo, ¿por qué me aferro tanto a ti nuevamente si ya te había soltado?</p>
-            
-            <p>Hay días en los que ni me entiendo, a veces simplemente no sé.</p>
-            
-            <p>Hay días en los que te extraño mucho y me gustaría escribirte y decirte tantas cosas bonitas en una carta y sacarte una sonrisa.</p>
-            
-            <p>Pero mi mente piensa: '¿Estoy siendo un pendejo haciendo esto? Tal vez ella está allá hablando con alguien más y tú aquí escribiéndole cartitas de amor'. Suena cruel, pero así es como pienso.</p>
-            
-            <p>Recuerdo con claridad el día en que te escuché hablar por primera vez. Siempre habíamos hablado por mensaje y aquel día nos encontramos frente al colegio, en los portones de la cancha.</p>
-            
-            <p>Yo estaba de copiloto en la moto, mi amigo Benjamin delante, y estábamos espalda con espalda.</p>
-            
-            <p>Cuando me hablaste, fue tu voz y tu forma de expresarte lo que me impactó: tan dulce, tan auténtica, con un timbre que me llegó directo al corazón.</p>
-            
-            <p>Sabes algo, a veces yo te digo que me llames no solo para hablar de lo que está pasando, lo hago solo por escuchar tu voz.</p>
-            
-            <p>Siempre he esperado una llamada tuya; eso me haría muy feliz: una videollamada, sábado de pelis… esos pequeños detalles hacen toda la diferencia.</p>
-            
-            <p>Sueno como un tonto escribiéndote todo esto, pero me gusta ser puntual con lo que siento.</p>
-            
-            <p>Me cuesta confiar en ti. Recuerdo el día que me dijiste que se te había apagado el teléfono; yo vi que te habían llegado mensajes, y lo primero que pensé fue que habías salido de clases y te habías ido con Alex.</p>
-            
-            <p>Luego me lo explicaste bien, y me pregunté por qué cuando llegaste no me habías dicho eso desde el principio. Solo quiero que seas sincera conmigo.</p>
-            
-            <p>Soy una persona muy explosiva con mis sentimientos, y creo que eso ha sido la base de muchas veces en las que te reclamé de mala manera.</p>
-            
-            <p>Pero algo que me gusta mucho de ti es que sabes lidiar conmigo; sabes calmarme en los momentos de ira o enojo, no solo cuando te reclamo, sino incluso cuando me enojo con mi familia o amigos.</p>
-            
-            <p>Siempre encuentras la manera de tranquilizarme, y eso te hace increíble.</p>
-            
-            <p>Lamento profundamente todas las cosas que te hice pasar y sé que también sufriste.</p>
-            
-            <p>Me perdono a mí y te perdono a ti, porque todo lo que vivimos nos ha enseñado a entender el amor de verdad, no ese amor idealizado que muestran en películas o redes sociales.</p>
-        </div>
+        <p>Hay días en los que ni me entiendo, a veces simplemente no sé.</p>
+        
+        <p>Hay días en los que te extraño mucho y me gustaría escribirte y decirte tantas cosas bonitas en una carta y sacarte una sonrisa.</p>
+        
+        <p>Pero mi mente piensa: '¿Estoy siendo un pendejo haciendo esto? Tal vez ella está allá hablando con alguien más y tú aquí escribiéndole cartitas de amor'. Suena cruel, pero así es como pienso.</p>
+        
+        <p>Recuerdo con claridad el día en que te escuché hablar por primera vez. Siempre habíamos hablado por mensaje y aquel día nos encontramos frente al colegio, en los portones de la cancha.</p>
+        
+        <p>Yo estaba de copiloto en la moto, mi amigo Benjamin delante, y estábamos espalda con espalda.</p>
+        
+        <p>Cuando me hablaste, fue tu voz y tu forma de expresarte lo que me impactó: tan dulce, tan auténtica, con un timbre que me llegó directo al corazón.</p>
+        
+        <p>Sabes algo, a veces yo te digo que me llames no solo para hablar de lo que está pasando, lo hago solo por escuchar tu voz.</p>
+        
+        <p>Siempre he esperado una llamada tuya; eso me haría muy feliz: una videollamada, sábado de pelis… esos pequeños detalles hacen toda la diferencia.</p>
+        
+        <p>Sueno como un tonto escribiéndote todo esto, pero me gusta ser puntual con lo que siento.</p>
+        
+        <p>Me cuesta confiar en ti. Recuerdo el día que me dijiste que se te había apagado el teléfono; yo vi que te habían llegado mensajes, y lo primero que pensé fue que habías salido de clases y te habías ido con Alex.</p>
+        
+        <p>Luego me lo explicaste bien, y me pregunté por qué cuando llegaste no me habías dicho eso desde el principio. Solo quiero que seas sincera conmigo.</p>
+        
+        <p>Soy una persona muy explosiva con mis sentimientos, y creo que eso ha sido la base de muchas veces en las que te reclamé de mala manera.</p>
+        
+        <p>Pero algo que me gusta mucho de ti es que sabes lidiar conmigo; sabes calmarme en los momentos de ira o enojo, no solo cuando te reclamo, sino incluso cuando me enojo con mi familia o amigos.</p>
+        
+        <p>Siempre encuentras la manera de tranquilizarme, y eso te hace increíble.</p>
+        
+        <p>Lamento profundamente todas las cosas que te hice pasar y sé que también sufriste.</p>
+        
+        <p>Me perdono a mí y te perdono a ti, porque todo lo que vivimos nos ha enseñado a entender el amor de verdad, no ese amor idealizado que muestran en películas o redes sociales.</p>
     </div>
 </div>
 

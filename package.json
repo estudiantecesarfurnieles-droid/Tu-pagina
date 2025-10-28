@@ -1,0 +1,16 @@
+{
+  "name": "tu-pagina-cumple",
+  "version": "1.0.0",
+  "description": "Página romántica con sistema de login",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python server.py",
+    "build": "echo 'No build step required'",
+    "start": "python server.py"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

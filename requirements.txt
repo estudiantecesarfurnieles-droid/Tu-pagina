@@ -1,0 +1,4 @@
+# No additional dependencies required for basic functionality
+# SQLite3 is included in Python standard library
+# hashlib and secrets are included in Python standard library
+# json is included in Python standard library

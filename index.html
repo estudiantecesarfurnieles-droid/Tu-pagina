@@ -56,6 +56,18 @@
         <div class="hero-greeting">
           <h1 id="saludo">Bienvenida a Nuestro Universo 💖</h1>
           <p class="hero-message" id="frase-romantica">Mi amor, cada día que pasas aquí es una nueva aventura llena de amor. Te amo más que las estrellas en el cielo ✨😍</p>
+          
+          <!-- Información del usuario y logout -->
+          <div class="user-info">
+            <div class="user-welcome">
+              <span class="user-icon">👤</span>
+              <span id="welcomeText">Bienvenido/a</span>
+            </div>
+            <button id="logoutBtn" class="logout-btn" onclick="LoginSystem.logout()">
+              <span class="logout-icon">🚪</span>
+              Cerrar Sesión
+            </button>
+          </div>
         </div>
         
         <!-- Peluches Centrados -->
@@ -513,6 +525,12 @@
 
   <!-- EmailJS para notificaciones de respaldo -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  
+  <!-- Sistema de autenticación -->
+  <script src="./js/login.js"></script>
+  <script src="./js/user-manager.js"></script>
+  
+  <!-- Scripts principales -->
   <script src="./js/contenido-libro.js"></script>
   <script src="./js/conversaciones.js"></script>
   <script src="./js/loading-epic.js"></script>
