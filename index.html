@@ -3,205 +3,475 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>💖 Acceso a Nuestro Universo 💖</title>
+  <title>💖 Nuestro Universo de Amor 💖</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css" />
-  <link rel="stylesheet" href="./css/login.css" />
+  <!-- Fallback para Google Drive -->
+  <link rel="stylesheet" href="css/style.css" onerror="console.error('Error cargando CSS principal')" />
   
-  <!-- REDIRECCIÓN INMEDIATA - SIN DELAY -->
-  <script>
-    // Función que se ejecuta INMEDIATAMENTE
-    (function() {
-      console.log('🔍 Verificando autenticación...');
-      
-      // Verificar si hay un usuario autenticado
-      const usuarioAutenticado = localStorage.getItem('usuarioAutenticado');
-      const esAutenticado = localStorage.getItem('esAutenticado');
-      
-      console.log('Usuario:', usuarioAutenticado);
-      console.log('Autenticado:', esAutenticado);
-      
-      // Si no está autenticado, redirigir al login INMEDIATAMENTE
-      if (!usuarioAutenticado || esAutenticado !== 'true') {
-        console.log('❌ Usuario no autenticado, redirigiendo al login...');
-        window.location.replace('/login.html');
-        return;
+  <!-- ESTILOS PARA EL LOGIN MODAL -->
+  <style>
+    /* Modal de Login */
+    .login-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(10px);
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .login-modal.hidden {
+      display: none;
+    }
+
+    .login-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .login-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+      border-radius: 20px;
+    }
+
+    .login-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .login-title {
+      font-size: 2rem;
+      color: white;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .login-subtitle {
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 30px;
+      font-size: 1rem;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .form-label {
+      display: block;
+      color: white;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 12px 15px;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.9);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .form-input:focus {
+      outline: none;
+      background: white;
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+    }
+
+    .login-btn, .register-btn {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+    }
+
+    .login-btn:hover, .register-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .register-section {
+      margin-top: 30px;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .divider-text {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+
+    .message {
+      padding: 10px;
+      border-radius: 8px;
+      margin: 15px 0;
+      font-weight: 500;
+    }
+
+    .message.success {
+      background: rgba(46, 204, 113, 0.2);
+      color: #2ecc71;
+      border: 1px solid rgba(46, 204, 113, 0.3);
+    }
+
+    .message.error {
+      background: rgba(231, 76, 60, 0.2);
+      color: #e74c3c;
+      border: 1px solid rgba(231, 76, 60, 0.3);
+    }
+
+    .message.info {
+      background: rgba(52, 152, 219, 0.2);
+      color: #3498db;
+      border: 1px solid rgba(52, 152, 219, 0.3);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* Animaciones */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .login-card {
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .login-card {
+        padding: 30px 20px;
+        margin: 20px;
       }
       
-      console.log('✅ Usuario autenticado:', usuarioAutenticado);
-    })();
-  </script>
+      .login-title {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <!-- Fondo animado con partículas -->
-  <div class="login-background">
-    <div class="floating-hearts">
-      <div class="heart">💖</div>
-      <div class="heart">💕</div>
-      <div class="heart">💝</div>
-      <div class="heart">💗</div>
-      <div class="heart">💘</div>
-      <div class="heart">💞</div>
-    </div>
-    <div class="floating-stars">
-      <div class="star">✨</div>
-      <div class="star">⭐</div>
-      <div class="star">🌟</div>
-      <div class="star">💫</div>
-    </div>
-  </div>
-
-  <!-- Contenedor principal del login -->
-  <div class="login-container">
+  <!-- MODAL DE LOGIN QUE APARECE INMEDIATAMENTE -->
+  <div id="loginModal" class="login-modal">
     <div class="login-card">
-      <!-- Header romántico -->
-      <div class="login-header">
-        <div class="login-hearts">
-          <span class="heart-pulse">💖</span>
-          <span class="heart-pulse">💕</span>
-          <span class="heart-pulse">💝</span>
-        </div>
-        <h1 class="login-title">Nuestro Universo de Amor</h1>
+      <div class="login-content">
+        <h1 class="login-title">💖 Acceso al Universo 💖</h1>
         <p class="login-subtitle">Ingresa para acceder a nuestro mundo especial</p>
-      </div>
-
-      <!-- Formulario de login -->
-      <div class="login-form-container">
-        <form id="loginForm" class="login-form">
+        
+        <!-- Formulario de Login -->
+        <form id="loginForm">
           <div class="form-group">
-            <label for="username" class="form-label">
-              <span class="label-icon">👤</span>
-              Usuario
-            </label>
-            <input 
-              type="text" 
-              id="username" 
-              name="username" 
-              class="form-input" 
-              placeholder="Ingresa tu nombre de usuario"
-              required
-              autocomplete="username"
-            />
-          </div>
-
-          <div class="form-group">
-            <label for="password" class="form-label">
-              <span class="label-icon">🔒</span>
-              Contraseña
-            </label>
-            <input 
-              type="password" 
-              id="password" 
-              name="password" 
-              class="form-input" 
-              placeholder="Ingresa tu contraseña"
-              required
-              autocomplete="current-password"
-            />
-          </div>
-
-          <button type="submit" class="login-btn" id="loginBtn">
-            <span class="btn-icon">💕</span>
-            <span class="btn-text">Ingresar al Universo</span>
-            <span class="btn-loading hidden">⏳</span>
-          </button>
-        </form>
-
-        <!-- Formulario de registro (solo aparece si no hay usuario creado) -->
-        <div id="registerSection" class="register-section">
-          <div class="divider">
-            <span class="divider-text">✨ Primera vez ✨</span>
+            <label for="username" class="form-label">👤 Usuario</label>
+            <input type="text" id="username" class="form-input" placeholder="Tu nombre de usuario" required>
           </div>
           
-          <form id="registerForm" class="register-form">
+          <div class="form-group">
+            <label for="password" class="form-label">🔒 Contraseña</label>
+            <input type="password" id="password" class="form-input" placeholder="Tu contraseña" required>
+          </div>
+          
+          <button type="submit" class="login-btn">💕 Ingresar</button>
+        </form>
+        
+        <!-- Formulario de Registro -->
+        <div id="registerSection" class="register-section">
+          <p class="divider-text">✨ Primera vez aquí ✨</p>
+          
+          <form id="registerForm">
             <div class="form-group">
-              <label for="newUsername" class="form-label">
-                <span class="label-icon">👤</span>
-                Crear Usuario
-              </label>
-              <input 
-                type="text" 
-                id="newUsername" 
-                name="newUsername" 
-                class="form-input" 
-                placeholder="Elige tu nombre de usuario"
-                required
-                autocomplete="username"
-              />
+              <label for="newUsername" class="form-label">👤 Crear Usuario</label>
+              <input type="text" id="newUsername" class="form-input" placeholder="Elige tu nombre" required>
             </div>
-
+            
             <div class="form-group">
-              <label for="newPassword" class="form-label">
-                <span class="label-icon">🔒</span>
-                Crear Contraseña
-              </label>
-              <input 
-                type="password" 
-                id="newPassword" 
-                name="newPassword" 
-                class="form-input" 
-                placeholder="Crea una contraseña segura"
-                required
-                autocomplete="new-password"
-              />
+              <label for="newPassword" class="form-label">🔒 Crear Contraseña</label>
+              <input type="password" id="newPassword" class="form-input" placeholder="Mínimo 6 caracteres" required>
             </div>
-
+            
             <div class="form-group">
-              <label for="confirmPassword" class="form-label">
-                <span class="label-icon">🔐</span>
-                Confirmar Contraseña
-              </label>
-              <input 
-                type="password" 
-                id="confirmPassword" 
-                name="confirmPassword" 
-                class="form-input" 
-                placeholder="Confirma tu contraseña"
-                required
-                autocomplete="new-password"
-              />
+              <label for="confirmPassword" class="form-label">🔐 Confirmar</label>
+              <input type="password" id="confirmPassword" class="form-input" placeholder="Repite tu contraseña" required>
             </div>
-
-            <button type="submit" class="register-btn" id="registerBtn">
-              <span class="btn-icon">💖</span>
-              <span class="btn-text">Crear Usuario</span>
-              <span class="btn-loading hidden">⏳</span>
-            </button>
+            
+            <button type="submit" class="register-btn">💖 Crear Usuario</button>
           </form>
         </div>
-      </div>
-
-      <!-- Mensajes de estado -->
-      <div id="messageContainer" class="message-container hidden">
-        <div id="messageContent" class="message-content"></div>
-      </div>
-
-      <!-- Footer romántico -->
-      <div class="login-footer">
-        <p class="footer-text">
-          <span class="emoji">💕</span>
-          Un lugar especial para nosotros dos
-          <span class="emoji">💕</span>
-        </p>
+        
+        <!-- Mensajes -->
+        <div id="messageContainer"></div>
       </div>
     </div>
   </div>
 
-  <!-- Scripts -->
+  <!-- Audios -->
+  <audio id="musicaFondo" loop muted></audio>
+  <audio id="musicaCarta"></audio>
+  <audio id="musicaDespegueCohete" preload="auto"></audio>
+
+  <!-- Modal carta (iframe) -->
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-content">
+      <span class="close" id="closeModal">&times;</span>
+      <iframe id="cartaIframe" src="" frameborder="0"></iframe>
+    </div>
+  </div>
+
+  <!-- Loading Screen -->
+  <div id="loadingScreen" class="loading-screen">
+    <div class="loading-content">
+      <div class="loading-hearts">
+        <div class="heart">💖</div>
+        <div class="heart">💕</div>
+        <div class="heart">💝</div>
+      </div>
+      <h2 class="loading-title">Cargando nuestro universo...</h2>
+      <div class="loading-bar">
+        <div class="loading-progress"></div>
+      </div>
+      <p class="loading-text">Preparando la magia del amor</p>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-background">
+      <div class="stars"></div>
+      <div class="planets">
+        <div class="planet planet-1"></div>
+        <div class="planet planet-2"></div>
+        <div class="planet planet-3"></div>
+      </div>
+    </div>
+    
+    <div class="hero-content">
+      <div class="hero-greeting">
+        <h1 class="hero-title">Buenas tardes mi amor</h1>
+        <div class="hero-heart">💖</div>
+        
+        <!-- Información del usuario autenticado -->
+        <div id="userInfo" class="user-info">
+          <div class="user-welcome">
+            <span class="user-icon">👤</span>
+            <span id="welcomeText">Bienvenido/a</span>
+          </div>
+          <button id="logoutBtn" class="logout-btn" title="Cerrar sesión">
+            <span class="logout-icon">🚪</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="hero-message">
+        <p class="message-text">Mi amor, Camilita, pienso bonitico. Qué ganas de besarte esa naricita linda 💖</p>
+      </div>
+      
+      <div class="hero-profiles">
+        <div class="profile-card">
+          <div class="profile-image">
+            <img src="./images/tich-profile.jpg" alt="Tich" />
+          </div>
+          <h3 class="profile-name">Tich</h3>
+        </div>
+        
+        <div class="profile-connection">
+          <div class="connection-line"></div>
+          <div class="connection-heart">💖</div>
+        </div>
+        
+        <div class="profile-card">
+          <div class="profile-image">
+            <img src="./images/camila-profile.jpg" alt="Camila" />
+          </div>
+          <h3 class="profile-name">Camila</h3>
+        </div>
+      </div>
+      
+      <div class="hero-action">
+        <button id="exploreBtn" class="explore-btn">
+          <span class="btn-star">✨</span>
+          <span class="btn-text">EXPLORAR UNIVERSO</span>
+          <span class="btn-star">⭐</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contenido del libro -->
+  <section id="bookContent" class="book-content hidden">
+    <div class="book-container">
+      <div class="book-header">
+        <h2 class="book-title">Nuestro Libro de Amor</h2>
+        <button id="closeBook" class="close-book-btn">✕</button>
+      </div>
+      
+      <div class="book-pages">
+        <div class="page active" data-page="1">
+          <div class="page-content">
+            <h3 class="page-title">Capítulo 1: El Primer Encuentro</h3>
+            <p class="page-text">
+              Todo comenzó en un día especial cuando nuestros caminos se cruzaron. 
+              Desde ese momento, supe que algo mágico estaba por comenzar...
+            </p>
+            <div class="page-image">
+              <img src="./images/encuentro.jpg" alt="Primer encuentro" />
+            </div>
+          </div>
+        </div>
+        
+        <div class="page" data-page="2">
+          <div class="page-content">
+            <h3 class="page-title">Capítulo 2: Los Primeros Pasos</h3>
+            <p class="page-text">
+              Cada conversación era una nueva aventura, cada mensaje una sonrisa, 
+              cada momento juntos un tesoro que guardamos en nuestros corazones.
+            </p>
+            <div class="page-image">
+              <img src="./images/primeros-pasos.jpg" alt="Primeros pasos" />
+            </div>
+          </div>
+        </div>
+        
+        <div class="page" data-page="3">
+          <div class="page-content">
+            <h3 class="page-title">Capítulo 3: El Amor Crece</h3>
+            <p class="page-text">
+              Con el tiempo, nuestro amor se fortaleció como las estrellas en el cielo. 
+              Cada día es una nueva oportunidad para demostrarnos nuestro cariño.
+            </p>
+            <div class="page-image">
+              <img src="./images/amor-crece.jpg" alt="El amor crece" />
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="book-navigation">
+        <button id="prevPage" class="nav-btn prev-btn">← Anterior</button>
+        <span id="pageIndicator" class="page-indicator">Página 1 de 3</span>
+        <button id="nextPage" class="nav-btn next-btn">Siguiente →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de conversaciones -->
+  <section id="conversationsSection" class="conversations-section hidden">
+    <div class="conversations-container">
+      <div class="conversations-header">
+        <h2 class="conversations-title">Nuestras Conversaciones</h2>
+        <button id="closeConversations" class="close-conversations-btn">✕</button>
+      </div>
+      
+      <div class="conversations-content">
+        <div class="conversation-item">
+          <div class="conversation-bubble">
+            <p class="conversation-text">"Eres la luz de mi vida"</p>
+            <span class="conversation-time">Hoy, 2:30 PM</span>
+          </div>
+        </div>
+        
+        <div class="conversation-item">
+          <div class="conversation-bubble">
+            <p class="conversation-text">"Te amo más que las palabras pueden expresar"</p>
+            <span class="conversation-time">Ayer, 8:45 PM</span>
+          </div>
+        </div>
+        
+        <div class="conversation-item">
+          <div class="conversation-bubble">
+            <p class="conversation-text">"Eres mi mejor amiga y mi gran amor"</p>
+            <span class="conversation-time">Hace 2 días, 6:20 PM</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EmailJS para notificaciones de respaldo -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  
+  <!-- Scripts principales -->
+  <script src="./js/contenido-libro.js"></script>
+  <script src="./js/conversaciones.js"></script>
+  <script src="./js/loading-epic.js"></script>
+  
+  <!-- SISTEMA DE LOGIN NUEVO -->
   <script>
-    // SISTEMA DE LOGIN SIMPLE SIN BASE DE DATOS
-    class SimpleLoginSystem {
+    // SISTEMA DE LOGIN CON MODAL
+    class ModalLoginSystem {
       constructor() {
         this.maxUsers = 2;
         this.init();
       }
 
       init() {
-        console.log('🚀 Inicializando sistema de login...');
+        console.log('🚀 Inicializando sistema de login modal...');
+        
+        // Verificar si ya está autenticado
+        if (this.isAuthenticated()) {
+          console.log('✅ Usuario ya autenticado, ocultando modal...');
+          this.hideLoginModal();
+          this.setupMainPage();
+        } else {
+          console.log('❌ Usuario no autenticado, mostrando modal...');
+          this.showLoginModal();
+        }
+        
         this.setupEventListeners();
         this.checkUserCount();
+      }
+
+      isAuthenticated() {
+        const user = localStorage.getItem('usuarioAutenticado');
+        const auth = localStorage.getItem('esAutenticado');
+        return user && auth === 'true';
+      }
+
+      showLoginModal() {
+        const modal = document.getElementById('loginModal');
+        if (modal) {
+          modal.classList.remove('hidden');
+        }
+      }
+
+      hideLoginModal() {
+        const modal = document.getElementById('loginModal');
+        if (modal) {
+          modal.classList.add('hidden');
+        }
       }
 
       setupEventListeners() {
@@ -215,6 +485,20 @@
         const registerForm = document.getElementById('registerForm');
         if (registerForm) {
           registerForm.addEventListener('submit', (e) => this.handleRegister(e));
+        }
+
+        // Botón de logout
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+          logoutBtn.addEventListener('click', () => this.logout());
+        }
+      }
+
+      setupMainPage() {
+        const welcomeText = document.getElementById('welcomeText');
+        const user = localStorage.getItem('usuarioAutenticado');
+        if (welcomeText && user) {
+          welcomeText.textContent = `Bienvenido/a, ${user} 💖`;
         }
       }
 
@@ -262,31 +546,20 @@
       }
 
       showMaxUsersMessage(count) {
-        const messageContainer = document.getElementById('messageContainer');
-        const messageContent = document.getElementById('messageContent');
-        
-        if (messageContainer && messageContent) {
-          messageContent.textContent = `Se han registrado ${count} usuarios (máximo ${this.maxUsers}). Solo puedes hacer login.`;
-          messageContent.className = 'message-content info';
-          messageContainer.classList.remove('hidden');
-        }
+        this.showMessage(`Se han registrado ${count} usuarios (máximo ${this.maxUsers}). Solo puedes hacer login.`, 'info');
       }
 
       async handleLogin(e) {
         e.preventDefault();
         console.log('🔐 Procesando login...');
         
-        const formData = new FormData(e.target);
-        const username = formData.get('username').trim();
-        const password = formData.get('password');
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value;
 
-        // Validación básica
         if (!username || !password) {
           this.showMessage('Por favor completa todos los campos', 'error');
           return;
         }
-
-        this.setLoading(true, 'loginBtn');
 
         try {
           const users = this.getStoredUsers();
@@ -300,9 +573,10 @@
             localStorage.setItem('usuarioAutenticado', username);
             localStorage.setItem('esAutenticado', 'true');
             
-            // Redirigir después de un breve delay
+            // Ocultar modal después de un breve delay
             setTimeout(() => {
-              window.location.href = '/';
+              this.hideLoginModal();
+              this.setupMainPage();
             }, 1500);
           } else {
             console.log('❌ Credenciales incorrectas');
@@ -311,8 +585,6 @@
         } catch (error) {
           console.error('Login error:', error);
           this.showMessage('Error de conexión. Intenta nuevamente.', 'error');
-        } finally {
-          this.setLoading(false, 'loginBtn');
         }
       }
 
@@ -320,12 +592,10 @@
         e.preventDefault();
         console.log('📝 Procesando registro...');
         
-        const formData = new FormData(e.target);
-        const username = formData.get('newUsername').trim();
-        const password = formData.get('newPassword');
-        const confirmPassword = formData.get('confirmPassword');
+        const username = document.getElementById('newUsername').value.trim();
+        const password = document.getElementById('newPassword').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
 
-        // Validaciones
         if (!username || !password || !confirmPassword) {
           this.showMessage('Por favor completa todos los campos', 'error');
           return;
@@ -346,24 +616,19 @@
           return;
         }
 
-        this.setLoading(true, 'registerBtn');
-
         try {
           const users = this.getStoredUsers();
           
-          // Verificar si ya existen 2 usuarios
           if (users.length >= this.maxUsers) {
             this.showMessage('Ya se han registrado el máximo de usuarios permitidos (2)', 'error');
             return;
           }
 
-          // Verificar si el usuario ya existe
           if (users.find(u => u.username === username)) {
             this.showMessage('Este usuario ya existe', 'error');
             return;
           }
 
-          // Crear nuevo usuario
           const newUser = {
             username: username,
             password: password,
@@ -380,57 +645,39 @@
           localStorage.setItem('usuarioAutenticado', username);
           localStorage.setItem('esAutenticado', 'true');
             
-          // Ocultar sección de registro si se alcanzó el máximo
           if (users.length >= this.maxUsers) {
             this.hideRegisterSection();
           }
             
-          // Redirigir después de un breve delay
+          // Ocultar modal después de un breve delay
           setTimeout(() => {
-            window.location.href = '/';
+            this.hideLoginModal();
+            this.setupMainPage();
           }, 1500);
             
         } catch (error) {
           console.error('Register error:', error);
           this.showMessage('Error al crear usuario', 'error');
-        } finally {
-          this.setLoading(false, 'registerBtn');
         }
       }
 
-      setLoading(loading, buttonId) {
-        const button = document.getElementById(buttonId);
-        
-        if (button) {
-          const btnText = button.querySelector('.btn-text');
-          const btnLoading = button.querySelector('.btn-loading');
-          
-          if (loading) {
-            button.disabled = true;
-            button.classList.add('loading');
-            if (btnText) btnText.style.opacity = '0.7';
-            if (btnLoading) btnLoading.classList.remove('hidden');
-          } else {
-            button.disabled = false;
-            button.classList.remove('loading');
-            if (btnText) btnText.style.opacity = '1';
-            if (btnLoading) btnLoading.classList.add('hidden');
-          }
-        }
+      logout() {
+        localStorage.removeItem('usuarioAutenticado');
+        localStorage.removeItem('esAutenticado');
+        this.showMessage('Sesión cerrada. Redirigiendo...', 'info');
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       }
 
       showMessage(message, type = 'info') {
-        const messageContainer = document.getElementById('messageContainer');
-        const messageContent = document.getElementById('messageContent');
-        
-        if (messageContainer && messageContent) {
-          messageContent.textContent = message;
-          messageContent.className = `message-content ${type}`;
-          messageContainer.classList.remove('hidden');
+        const container = document.getElementById('messageContainer');
+        if (container) {
+          container.innerHTML = `<div class="message ${type}">${message}</div>`;
           
           // Auto-ocultar después de 5 segundos
           setTimeout(() => {
-            messageContainer.classList.add('hidden');
+            container.innerHTML = '';
           }, 5000);
         }
       }
@@ -438,8 +685,8 @@
 
     // Inicializar el sistema cuando se carga la página
     document.addEventListener('DOMContentLoaded', () => {
-      console.log('📄 Página cargada, inicializando sistema de login...');
-      new SimpleLoginSystem();
+      console.log('📄 Página cargada, inicializando sistema de login modal...');
+      new ModalLoginSystem();
     });
   </script>
 </body>
