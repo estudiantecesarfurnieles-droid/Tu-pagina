@@ -2529,7 +2529,7 @@ button:hover:before {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 70vh;
+  min-height: 75vh;
   padding: 20px;
   perspective: 1000px;
 }
@@ -2546,7 +2546,7 @@ button:hover:before {
 
 .vintage-cover {
   width: 420px;
-  height: 520px;
+  height: 600px;
   background: var(--gradient-primary);
   border-radius: var(--border-radius-lg);
   position: relative;
@@ -2635,7 +2635,7 @@ button:hover:before {
 
 .vintage-page {
   width: 480px;
-  height: 580px;
+  height: 680px;
   background: rgba(248, 246, 240, 0.95);
   backdrop-filter: blur(20px);
   border: 2px solid rgba(139, 92, 246, 0.2);
@@ -2988,12 +2988,12 @@ button:hover:before {
 @media (max-width: 768px) {
   .vintage-cover {
     width: 360px;
-    height: 440px;
+    height: 500px;
   }
   
   .vintage-page {
     width: 400px;
-    height: 500px;
+    height: 580px;
     padding: 30px;
   }
   
@@ -3034,12 +3034,12 @@ button:hover:before {
 @media (max-width: 480px) {
   .vintage-cover {
     width: 320px;
-    height: 380px;
+    height: 440px;
   }
   
   .vintage-page {
     width: 350px;
-    height: 420px;
+    height: 480px;
     padding: 25px;
   }
   
