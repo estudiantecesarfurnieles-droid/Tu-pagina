@@ -2544,17 +2544,44 @@ button:hover:before {
   transform: translateY(-10px) rotateY(-5deg);
 }
 
+.vintage-cover::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.vintage-cover::after {
+  content: '💕';
+  position: absolute;
+  top: 50px;
+  right: 30px;
+  font-size: 1.5rem;
+  opacity: 0.3;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
 .vintage-cover {
   width: 460px;
   height: 600px;
-  background: linear-gradient(145deg, #2c2c2c, #1a1a1a);
+  background: linear-gradient(145deg, #8B4513, #A0522D);
   border-radius: var(--border-radius-lg);
   position: relative;
   box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.3);
-  border: 2px solid #444;
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  border: 3px solid #654321;
   overflow: hidden;
 }
 
@@ -2564,9 +2591,9 @@ button:hover:before {
   top: 0;
   width: 20px;
   height: 100%;
-  background: linear-gradient(180deg, #1a1a1a, #0f0f0f);
+  background: linear-gradient(180deg, #654321, #4A2C17);
   border-radius: var(--border-radius-sm) 0 0 var(--border-radius-sm);
-  box-shadow: inset -2px 0 4px rgba(0, 0, 0, 0.5);
+  box-shadow: inset -2px 0 4px rgba(0, 0, 0, 0.3);
 }
 
 .vintage-pages-stack {
@@ -2590,41 +2617,41 @@ button:hover:before {
 }
 
 .vintage-main-title {
-  font-family: 'Cinzel', serif;
+  font-family: 'Playfair Display', serif;
   font-size: 2rem;
   font-weight: 700;
-  color: #d4af37;
+  color: #D2691E;
   margin-bottom: 10px;
   text-shadow: 
-    0 0 10px rgba(212, 175, 55, 0.5),
-    0 2px 4px rgba(0, 0, 0, 0.8);
-  letter-spacing: 2px;
+    0 0 8px rgba(210, 105, 30, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.5);
+  letter-spacing: 1px;
 }
 
 .vintage-subtitle {
   font-family: 'Crimson Text', serif;
   font-size: 1rem;
-  color: #b8860b;
+  color: #CD853F;
   margin-bottom: 15px;
   font-style: italic;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 
 .vintage-authors {
   font-family: 'Crimson Text', serif;
   font-size: 0.9rem;
-  color: #cd853f;
+  color: #8B4513;
   margin-bottom: 10px;
   font-weight: 500;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .vintage-year {
-  font-family: 'Cinzel', serif;
+  font-family: 'Playfair Display', serif;
   font-size: 1.2rem;
   font-weight: 600;
-  color: var(--primary-gold);
-  text-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
+  color: #D2691E;
+  text-shadow: 0 0 6px rgba(210, 105, 30, 0.3);
 }
 
 /* Libro abierto */
