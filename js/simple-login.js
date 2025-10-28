@@ -1,18 +1,17 @@
 /**
- * 💖 SISTEMA DE LOGIN ROMÁNTICO 💖
- * Maneja la autenticación y registro de usuario único
+ * 💖 SISTEMA DE LOGIN SIMPLE PARA VERCEL 💖
+ * Versión simplificada que funciona sin backend
  */
 
-class LoginSystem {
+class SimpleLoginSystem {
     constructor() {
-        this.apiUrl = window.location.origin + '/api';
-        this.isLoading = false;
+        this.maxUsers = 2;
         this.init();
     }
 
     init() {
         this.setupEventListeners();
-        this.checkUserExists();
+        this.checkAuthStatus();
         this.setupFormValidation();
     }
 
@@ -71,55 +70,26 @@ class LoginSystem {
         });
     }
 
-    async checkUserExists() {
-        try {
-            // Intentar múltiples veces si falla
-            let attempts = 0;
-            const maxAttempts = 3;
-            
-            while (attempts < maxAttempts) {
-                try {
-                    const response = await fetch(`${this.apiUrl}/check-user`, {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        timeout: 5000
-                    });
-                    
-                    if (response.ok) {
-                        const data = await response.json();
-                        
-                        if (data.can_register) {
-                            // Se pueden registrar más usuarios, mostrar sección de registro
-                            this.showRegisterSection();
-                            this.updateRegisterMessage(data);
-                        } else {
-                            // Ya se alcanzó el máximo de usuarios, ocultar sección de registro
-                            this.hideRegisterSection();
-                            this.showMaxUsersMessage(data);
-                        }
-                        return; // Salir si fue exitoso
-                    }
-                } catch (fetchError) {
-                    console.log(`Intento ${attempts + 1} falló:`, fetchError);
-                }
-                
-                attempts++;
-                if (attempts < maxAttempts) {
-                    await new Promise(resolve => setTimeout(resolve, 1000)); // Esperar 1 segundo
-                }
-            }
-            
-            // Si todos los intentos fallaron, mostrar sección de registro por defecto
-            console.log('No se pudo conectar con el servidor, mostrando registro por defecto');
+    checkAuthStatus() {
+        const users = this.getStoredUsers();
+        const currentUser = localStorage.getItem('currentUser');
+        
+        if (users.length >= this.maxUsers) {
+            this.hideRegisterSection();
+            this.showMaxUsersMessage(users.length);
+        } else {
             this.showRegisterSection();
-            
-        } catch (error) {
-            console.error('Error checking user:', error);
-            // En caso de error, mostrar sección de registro por defecto
-            this.showRegisterSection();
+            this.updateRegisterMessage(users.length);
         }
+    }
+
+    getStoredUsers() {
+        const users = localStorage.getItem('registeredUsers');
+        return users ? JSON.parse(users) : [];
+    }
+
+    storeUsers(users) {
+        localStorage.setItem('registeredUsers', JSON.stringify(users));
     }
 
     showRegisterSection() {
@@ -136,20 +106,19 @@ class LoginSystem {
         }
     }
 
-    updateRegisterMessage(data) {
+    updateRegisterMessage(count) {
         const dividerText = document.querySelector('.divider-text');
-        if (dividerText && data.count > 0) {
-            dividerText.textContent = `✨ Registro disponible (${data.count}/${data.max_users} usuarios) ✨`;
+        if (dividerText && count > 0) {
+            dividerText.textContent = `✨ Registro disponible (${count}/${this.maxUsers} usuarios) ✨`;
         }
     }
 
-    showMaxUsersMessage(data) {
-        // Mostrar mensaje informativo cuando se alcance el máximo
+    showMaxUsersMessage(count) {
         const messageContainer = document.getElementById('messageContainer');
         const messageContent = document.getElementById('messageContent');
         
         if (messageContainer && messageContent) {
-            messageContent.textContent = `Se han registrado ${data.count} usuarios (máximo ${data.max_users}). Solo puedes hacer login.`;
+            messageContent.textContent = `Se han registrado ${count} usuarios (máximo ${this.maxUsers}). Solo puedes hacer login.`;
             messageContent.className = 'message-content info';
             messageContainer.classList.remove('hidden');
         }
@@ -173,29 +142,22 @@ class LoginSystem {
         this.setLoading(true, 'loginBtn');
 
         try {
-            const response = await fetch(`${this.apiUrl}/login`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ username, password })
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
+            const users = this.getStoredUsers();
+            const user = users.find(u => u.username === username && u.password === password);
+            
+            if (user) {
                 this.showMessage('¡Bienvenido al universo! 💕', 'success');
                 
-                // Guardar token de sesión
-                localStorage.setItem('authToken', data.token);
-                localStorage.setItem('username', username);
+                // Guardar sesión
+                localStorage.setItem('currentUser', username);
+                localStorage.setItem('isAuthenticated', 'true');
                 
                 // Redirigir después de un breve delay
                 setTimeout(() => {
                     window.location.href = '/';
                 }, 1500);
             } else {
-                this.showMessage(data.message || 'Credenciales incorrectas', 'error');
+                this.showMessage('Credenciales incorrectas', 'error');
             }
         } catch (error) {
             console.error('Login error:', error);
@@ -239,36 +201,49 @@ class LoginSystem {
         this.setLoading(true, 'registerBtn');
 
         try {
-            const response = await fetch(`${this.apiUrl}/register`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ username, password })
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                this.showMessage('¡Usuario creado exitosamente! 💖', 'success');
-                
-                // Guardar token de sesión
-                localStorage.setItem('authToken', data.token);
-                localStorage.setItem('username', username);
-                
-                // Ocultar sección de registro
-                this.hideRegisterSection();
-                
-                // Redirigir después de un breve delay
-                setTimeout(() => {
-                    window.location.href = '/';
-                }, 1500);
-            } else {
-                this.showMessage(data.message || 'Error al crear usuario', 'error');
+            const users = this.getStoredUsers();
+            
+            // Verificar si ya existen 2 usuarios
+            if (users.length >= this.maxUsers) {
+                this.showMessage('Ya se han registrado el máximo de usuarios permitidos (2)', 'error');
+                return;
             }
+
+            // Verificar si el usuario ya existe
+            if (users.find(u => u.username === username)) {
+                this.showMessage('Este usuario ya existe', 'error');
+                return;
+            }
+
+            // Crear nuevo usuario
+            const newUser = {
+                username: username,
+                password: password,
+                createdAt: new Date().toISOString()
+            };
+
+            users.push(newUser);
+            this.storeUsers(users);
+
+            this.showMessage('¡Usuario creado exitosamente! 💖', 'success');
+            
+            // Guardar sesión
+            localStorage.setItem('currentUser', username);
+            localStorage.setItem('isAuthenticated', 'true');
+            
+            // Ocultar sección de registro si se alcanzó el máximo
+            if (users.length >= this.maxUsers) {
+                this.hideRegisterSection();
+            }
+            
+            // Redirigir después de un breve delay
+            setTimeout(() => {
+                window.location.href = '/';
+            }, 1500);
+            
         } catch (error) {
             console.error('Register error:', error);
-            this.showMessage('Error de conexión. Intenta nuevamente.', 'error');
+            this.showMessage('Error al crear usuario', 'error');
         } finally {
             this.setLoading(false, 'registerBtn');
         }
@@ -379,41 +354,37 @@ class LoginSystem {
 
     // Método para verificar si el usuario está autenticado
     static isAuthenticated() {
-        return localStorage.getItem('authToken') !== null;
-    }
-
-    // Método para obtener el token de autenticación
-    static getAuthToken() {
-        return localStorage.getItem('authToken');
+        return localStorage.getItem('isAuthenticated') === 'true';
     }
 
     // Método para obtener el nombre de usuario
     static getUsername() {
-        return localStorage.getItem('username');
+        return localStorage.getItem('currentUser');
     }
 
     // Método para cerrar sesión
     static logout() {
         localStorage.removeItem('authToken');
-        localStorage.removeItem('username');
+        localStorage.removeItem('currentUser');
+        localStorage.removeItem('isAuthenticated');
         window.location.href = '/login.html';
     }
 }
 
 // Inicializar el sistema de login cuando se carga la página
 document.addEventListener('DOMContentLoaded', () => {
-    new LoginSystem();
+    new SimpleLoginSystem();
 });
 
 // Verificar autenticación al cargar cualquier página
 document.addEventListener('DOMContentLoaded', () => {
     // Solo verificar si no estamos en la página de login
     if (!window.location.pathname.includes('login.html')) {
-        if (!LoginSystem.isAuthenticated()) {
+        if (!SimpleLoginSystem.isAuthenticated()) {
             window.location.href = '/login.html';
         }
     }
 });
 
 // Exportar para uso global
-window.LoginSystem = LoginSystem;
+window.LoginSystem = SimpleLoginSystem;
