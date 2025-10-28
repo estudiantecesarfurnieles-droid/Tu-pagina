@@ -11,26 +11,65 @@
   <!-- Fallback para Google Drive -->
   <link rel="stylesheet" href="css/style.css" onerror="console.error('Error cargando CSS principal')" />
   
-  <!-- ESTILOS PARA EL LOGIN MODAL -->
+  <!-- SCRIPT QUE SE EJECUTA INMEDIATAMENTE -->
+  <script>
+    // Verificación inmediata - ANTES DE CUALQUIER COSA
+    (function() {
+      console.log('🔍 VERIFICACIÓN INMEDIATA DE AUTENTICACIÓN...');
+      
+      const user = localStorage.getItem('usuarioAutenticado');
+      const auth = localStorage.getItem('esAutenticado');
+      
+      console.log('Usuario:', user);
+      console.log('Autenticado:', auth);
+      
+      if (!user || auth !== 'true') {
+        console.log('❌ NO AUTENTICADO - FORZANDO PANTALLA DE LOGIN');
+        
+        // Forzar que la pantalla de login sea visible
+        document.addEventListener('DOMContentLoaded', function() {
+          const loginScreen = document.getElementById('loginScreen');
+          if (loginScreen) {
+            loginScreen.style.display = 'flex';
+            loginScreen.classList.remove('hidden');
+            console.log('✅ Pantalla de login forzada a ser visible');
+          }
+        });
+      } else {
+        console.log('✅ AUTENTICADO - OCULTANDO PANTALLA DE LOGIN');
+        
+        // Forzar que la pantalla de login esté oculta
+        document.addEventListener('DOMContentLoaded', function() {
+          const loginScreen = document.getElementById('loginScreen');
+          if (loginScreen) {
+            loginScreen.style.display = 'none';
+            loginScreen.classList.add('hidden');
+            console.log('✅ Pantalla de login forzada a estar oculta');
+          }
+        });
+      }
+    })();
+  </script>
+  
+  <!-- ESTILOS PARA LA PANTALLA DE LOGIN -->
   <style>
-    /* Modal de Login */
-    .login-modal {
+    /* Pantalla de Login que cubre TODO */
+    .login-screen {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.9);
-      backdrop-filter: blur(10px);
-      z-index: 9999;
+      width: 100vw;
+      height: 100vh;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      z-index: 99999;
       display: flex;
       justify-content: center;
       align-items: center;
       font-family: 'Poppins', sans-serif;
     }
 
-    .login-modal.hidden {
-      display: none;
+    .login-screen.hidden {
+      display: none !important;
     }
 
     .login-card {
@@ -186,11 +225,11 @@
   </style>
 </head>
 <body>
-  <!-- MODAL DE LOGIN QUE APARECE INMEDIATAMENTE -->
-  <div id="loginModal" class="login-modal">
-    <div class="login-card">
-      <div class="login-content">
-        <h1 class="login-title">💖 Acceso al Universo 💖</h1>
+  <!-- PANTALLA DE LOGIN QUE CUBRE TODO -->
+  <div id="loginScreen" class="login-screen">
+    <div class="login-container">
+      <div class="login-card">
+        <h1 class="login-title">💖 ACCESO AL UNIVERSO 💖</h1>
         <p class="login-subtitle">Ingresa para acceder a nuestro mundo especial</p>
         
         <!-- Formulario de Login -->
@@ -205,7 +244,7 @@
             <input type="password" id="password" class="form-input" placeholder="Tu contraseña" required>
           </div>
           
-          <button type="submit" class="login-btn">💕 Ingresar</button>
+          <button type="submit" class="login-btn">💕 INGRESAR</button>
         </form>
         
         <!-- Formulario de Registro -->
@@ -228,7 +267,7 @@
               <input type="password" id="confirmPassword" class="form-input" placeholder="Repite tu contraseña" required>
             </div>
             
-            <button type="submit" class="register-btn">💖 Crear Usuario</button>
+            <button type="submit" class="register-btn">💖 CREAR USUARIO</button>
           </form>
         </div>
         
@@ -430,24 +469,24 @@
   
   <!-- SISTEMA DE LOGIN NUEVO -->
   <script>
-    // SISTEMA DE LOGIN CON MODAL
-    class ModalLoginSystem {
+    // SISTEMA DE LOGIN CON PANTALLA COMPLETA
+    class FullScreenLoginSystem {
       constructor() {
         this.maxUsers = 2;
         this.init();
       }
 
       init() {
-        console.log('🚀 Inicializando sistema de login modal...');
+        console.log('🚀 Inicializando sistema de login pantalla completa...');
         
         // Verificar si ya está autenticado
         if (this.isAuthenticated()) {
-          console.log('✅ Usuario ya autenticado, ocultando modal...');
-          this.hideLoginModal();
+          console.log('✅ Usuario ya autenticado, ocultando pantalla de login...');
+          this.hideLoginScreen();
           this.setupMainPage();
         } else {
-          console.log('❌ Usuario no autenticado, mostrando modal...');
-          this.showLoginModal();
+          console.log('❌ Usuario no autenticado, mostrando pantalla de login...');
+          this.showLoginScreen();
         }
         
         this.setupEventListeners();
@@ -460,17 +499,17 @@
         return user && auth === 'true';
       }
 
-      showLoginModal() {
-        const modal = document.getElementById('loginModal');
-        if (modal) {
-          modal.classList.remove('hidden');
+      showLoginScreen() {
+        const screen = document.getElementById('loginScreen');
+        if (screen) {
+          screen.classList.remove('hidden');
         }
       }
 
-      hideLoginModal() {
-        const modal = document.getElementById('loginModal');
-        if (modal) {
-          modal.classList.add('hidden');
+      hideLoginScreen() {
+        const screen = document.getElementById('loginScreen');
+        if (screen) {
+          screen.classList.add('hidden');
         }
       }
 
@@ -573,9 +612,9 @@
             localStorage.setItem('usuarioAutenticado', username);
             localStorage.setItem('esAutenticado', 'true');
             
-            // Ocultar modal después de un breve delay
+            // Ocultar pantalla de login después de un breve delay
             setTimeout(() => {
-              this.hideLoginModal();
+              this.hideLoginScreen();
               this.setupMainPage();
             }, 1500);
           } else {
@@ -649,9 +688,9 @@
             this.hideRegisterSection();
           }
             
-          // Ocultar modal después de un breve delay
+          // Ocultar pantalla de login después de un breve delay
           setTimeout(() => {
-            this.hideLoginModal();
+            this.hideLoginScreen();
             this.setupMainPage();
           }, 1500);
             
@@ -685,8 +724,8 @@
 
     // Inicializar el sistema cuando se carga la página
     document.addEventListener('DOMContentLoaded', () => {
-      console.log('📄 Página cargada, inicializando sistema de login modal...');
-      new ModalLoginSystem();
+      console.log('📄 Página cargada, inicializando sistema de login pantalla completa...');
+      new FullScreenLoginSystem();
     });
   </script>
 </body>
