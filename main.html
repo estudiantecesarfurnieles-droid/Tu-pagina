@@ -9,30 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css" />
   <link rel="stylesheet" href="./css/login.css" />
-  
-  <!-- REDIRECCIÓN INMEDIATA - SIN DELAY -->
-  <script>
-    // Función que se ejecuta INMEDIATAMENTE
-    (function() {
-      console.log('🔍 Verificando autenticación...');
-      
-      // Verificar si hay un usuario autenticado
-      const usuarioAutenticado = localStorage.getItem('usuarioAutenticado');
-      const esAutenticado = localStorage.getItem('esAutenticado');
-      
-      console.log('Usuario:', usuarioAutenticado);
-      console.log('Autenticado:', esAutenticado);
-      
-      // Si no está autenticado, redirigir al login INMEDIATAMENTE
-      if (!usuarioAutenticado || esAutenticado !== 'true') {
-        console.log('❌ Usuario no autenticado, redirigiendo al login...');
-        window.location.replace('/login.html');
-        return;
-      }
-      
-      console.log('✅ Usuario autenticado:', usuarioAutenticado);
-    })();
-  </script>
 </head>
 <body>
   <!-- Fondo animado con partículas -->
@@ -302,7 +278,7 @@
             
             // Redirigir después de un breve delay
             setTimeout(() => {
-              window.location.href = '/';
+              window.location.href = '/main.html';
             }, 1500);
           } else {
             console.log('❌ Credenciales incorrectas');
@@ -387,7 +363,7 @@
             
           // Redirigir después de un breve delay
           setTimeout(() => {
-            window.location.href = '/';
+            window.location.href = '/main.html';
           }, 1500);
             
         } catch (error) {
