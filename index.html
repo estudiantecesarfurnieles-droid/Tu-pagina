@@ -1,4 +1,5 @@
-  <html lang="es">
+<!DOCTYPE html>
+<html lang="es">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -9,6 +10,16 @@
   <link rel="stylesheet" href="./css/style.css" />
   <!-- Fallback para Google Drive -->
   <link rel="stylesheet" href="css/style.css" onerror="console.error('Error cargando CSS principal')" />
+  <script>
+    // Verificación inmediata de autenticación - EJECUTAR ANTES QUE CUALQUIER OTRA COSA
+    (function() {
+      const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+      if (!isAuthenticated) {
+        console.log('🔒 Usuario no autenticado, redirigiendo al login...');
+        window.location.replace('/login.html');
+      }
+    })();
+  </script>
 </head>
 <body>
   <!-- Audios -->
@@ -527,7 +538,7 @@
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   
   <!-- Sistema de autenticación -->
-  <script src="./js/simple-login.js"></script>
+  <script src="./js/immediate-login.js"></script>
   <script src="./js/user-manager.js"></script>
   
   <!-- Scripts principales -->
