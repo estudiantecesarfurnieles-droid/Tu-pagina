@@ -8,33 +8,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css" />
-  <!-- Fallback para Google Drive -->
-  <link rel="stylesheet" href="css/style.css" onerror="console.error('Error cargando CSS principal')" />
+  <!-- Sistema de Login Simple -->
+  <script src="./login-config.js"></script>
   
-  <!-- SCRIPT QUE SE EJECUTA INMEDIATAMENTE -->
   <script>
-    // Verificación inmediata de autenticación con el nuevo sistema
-    (function() {
-      console.log('🔍 VERIFICACIÓN DE AUTENTICACIÓN (SISTEMA API)...');
-      
-      const token = localStorage.getItem('authToken');
-      const username = localStorage.getItem('username');
-      
-      console.log('Token:', token ? 'Presente' : 'No existe');
-      console.log('Username:', username);
-      
-      // Mostrar login por defecto
-      document.addEventListener('DOMContentLoaded', function() {
-        const loginScreen = document.getElementById('loginScreen');
-        if (loginScreen && !token) {
-          loginScreen.style.display = 'flex';
-          loginScreen.style.visibility = 'visible';
-          loginScreen.style.opacity = '1';
-          loginScreen.classList.remove('hidden');
-          console.log('✅ Pantalla de login visible');
-        }
-      });
-    })();
+    // Verificar autenticación inmediatamente
+    if (!estaAutenticado()) {
+      console.log('🔒 Usuario no autenticado - Mostrando login');
+    } else {
+      console.log('✅ Usuario autenticado:', localStorage.getItem('username'));
+    }
   </script>
   
   <!-- ESTILOS PARA LA PANTALLA DE LOGIN -->
@@ -233,28 +216,11 @@
           <button type="submit" class="login-btn">💕 INGRESAR</button>
         </form>
         
-        <!-- Formulario de Registro -->
-        <div id="registerSection" class="register-section">
-          <p class="divider-text">✨ Primera vez aquí ✨</p>
-          
-          <form id="registerForm">
-            <div class="form-group">
-              <label for="newUsername" class="form-label">👤 Crear Usuario</label>
-              <input type="text" id="newUsername" class="form-input" placeholder="Elige tu nombre" required>
-            </div>
-            
-            <div class="form-group">
-              <label for="newPassword" class="form-label">🔒 Crear Contraseña</label>
-              <input type="password" id="newPassword" class="form-input" placeholder="Mínimo 6 caracteres" required>
-            </div>
-            
-            <div class="form-group">
-              <label for="confirmPassword" class="form-label">🔐 Confirmar</label>
-              <input type="password" id="confirmPassword" class="form-input" placeholder="Repite tu contraseña" required>
-            </div>
-            
-            <button type="submit" class="register-btn">💖 CREAR USUARIO</button>
-          </form>
+        <!-- Mensaje informativo -->
+        <div class="register-section" style="display: none;">
+          <p class="divider-text" style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem;">
+            Solo usuarios autorizados pueden acceder 💖
+          </p>
         </div>
         
         <!-- Mensajes -->
@@ -453,282 +419,85 @@
   <script src="./js/conversaciones.js"></script>
   <script src="./js/loading-epic.js"></script>
   
-  <!-- SISTEMA DE LOGIN CON BACKEND API -->
+  <!-- SISTEMA DE LOGIN SIMPLE (SIN BACKEND) -->
   <script>
-    // SISTEMA DE LOGIN CON PANTALLA COMPLETA Y BACKEND API
-    class FullScreenLoginSystem {
-      constructor() {
-        this.apiUrl = window.location.origin + '/api';
-        this.maxUsers = 2;
-        this.init();
+    // Sistema de login simple y directo
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('🚀 Inicializando sistema de login simple...');
+      
+      const loginScreen = document.getElementById('loginScreen');
+      const loginForm = document.getElementById('loginForm');
+      const logoutBtn = document.getElementById('logoutBtn');
+      const welcomeText = document.getElementById('welcomeText');
+      const messageContainer = document.getElementById('messageContainer');
+      
+      // Función para mostrar mensajes
+      function showMessage(message, type = 'info') {
+        if (messageContainer) {
+          messageContainer.innerHTML = `<div class="message ${type}">${message}</div>`;
+          setTimeout(() => {
+            messageContainer.innerHTML = '';
+          }, 5000);
+        }
       }
-
-      init() {
-        console.log('🚀 Inicializando sistema de login con backend API...');
+      
+      // Verificar si está autenticado
+      if (estaAutenticado()) {
+        console.log('✅ Usuario autenticado');
+        loginScreen.classList.add('hidden');
+        document.body.style.overflow = '';
         
-        // Verificar si ya está autenticado
-        if (this.isAuthenticated()) {
-          console.log('✅ Usuario ya autenticado, ocultando pantalla de login...');
-          this.hideLoginScreen();
-          this.setupMainPage();
-        } else {
-          console.log('❌ Usuario no autenticado, mostrando pantalla de login...');
-          this.showLoginScreen();
-        }
-        
-        this.setupEventListeners();
-        this.checkUserCount();
-      }
-
-      isAuthenticated() {
-        const token = localStorage.getItem('authToken');
-        const username = localStorage.getItem('username');
-        return token && username;
-      }
-
-      showLoginScreen() {
-        const screen = document.getElementById('loginScreen');
-        if (screen) {
-          screen.classList.remove('hidden');
-        }
-      }
-
-      hideLoginScreen() {
-        const screen = document.getElementById('loginScreen');
-        if (screen) {
-          screen.classList.add('hidden');
-          document.body.style.overflow = '';
-        }
-      }
-
-      setupEventListeners() {
-        // Formulario de login
-        const loginForm = document.getElementById('loginForm');
-        if (loginForm) {
-          loginForm.addEventListener('submit', (e) => this.handleLogin(e));
-        }
-
-        // Formulario de registro
-        const registerForm = document.getElementById('registerForm');
-        if (registerForm) {
-          registerForm.addEventListener('submit', (e) => this.handleRegister(e));
-        }
-
-        // Botón de logout
-        const logoutBtn = document.getElementById('logoutBtn');
-        if (logoutBtn) {
-          logoutBtn.addEventListener('click', () => this.logout());
-        }
-      }
-
-      setupMainPage() {
-        const welcomeText = document.getElementById('welcomeText');
         const username = localStorage.getItem('username');
         if (welcomeText && username) {
           welcomeText.textContent = `Bienvenido/a, ${username} 💖`;
         }
+      } else {
+        console.log('❌ Usuario no autenticado - Mostrando login');
+        loginScreen.classList.remove('hidden');
       }
-
-      async checkUserCount() {
-        try {
-          const response = await fetch(`${this.apiUrl}/check-user`, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            }
-          });
+      
+      // Manejar formulario de login
+      if (loginForm) {
+        loginForm.addEventListener('submit', (e) => {
+          e.preventDefault();
           
-          if (response.ok) {
-            const data = await response.json();
-            console.log('👥 Usuarios registrados:', data.count, '/', data.max_users);
-            
-            if (data.can_register) {
-              this.showRegisterSection();
-              this.updateRegisterMessage(data.count, data.max_users);
-            } else {
-              this.hideRegisterSection();
-              this.showMaxUsersMessage(data.count, data.max_users);
-            }
-          } else {
-            console.log('Error al verificar usuarios, mostrando registro por defecto');
-            this.showRegisterSection();
+          const username = document.getElementById('username').value.trim();
+          const password = document.getElementById('password').value;
+          
+          if (!username || !password) {
+            showMessage('Por favor completa todos los campos', 'error');
+            return;
           }
-        } catch (error) {
-          console.error('Error checking user count:', error);
-          // En caso de error, mostrar registro por defecto
-          this.showRegisterSection();
-        }
-      }
-
-      showRegisterSection() {
-        const registerSection = document.getElementById('registerSection');
-        if (registerSection) {
-          registerSection.classList.remove('hidden');
-        }
-      }
-
-      hideRegisterSection() {
-        const registerSection = document.getElementById('registerSection');
-        if (registerSection) {
-          registerSection.classList.add('hidden');
-        }
-      }
-
-      updateRegisterMessage(count, maxUsers) {
-        const dividerText = document.querySelector('.divider-text');
-        if (dividerText) {
-          if (count > 0) {
-            dividerText.textContent = `✨ Registro disponible (${count}/${maxUsers} usuarios) ✨`;
-          } else {
-            dividerText.textContent = `✨ Primera vez aquí ✨`;
-          }
-        }
-      }
-
-      showMaxUsersMessage(count, maxUsers) {
-        this.showMessage(`Se han registrado ${count} usuarios (máximo ${maxUsers}). Solo puedes hacer login.`, 'info');
-      }
-
-      async handleLogin(e) {
-        e.preventDefault();
-        console.log('🔐 Procesando login...');
-        
-        const username = document.getElementById('username').value.trim();
-        const password = document.getElementById('password').value;
-
-        if (!username || !password) {
-          this.showMessage('Por favor completa todos los campos', 'error');
-          return;
-        }
-
-        try {
-          const response = await fetch(`${this.apiUrl}/login`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username, password })
-          });
-
-          const data = await response.json();
-
-          if (response.ok) {
-            console.log('✅ Login exitoso para:', username);
-            this.showMessage('¡Bienvenido al universo! 💕', 'success');
+          
+          console.log('🔐 Intentando login:', username);
+          const resultado = iniciarSesion(username, password);
+          
+          if (resultado.success) {
+            console.log('✅ Login exitoso');
+            showMessage(resultado.mensaje, 'success');
             
-            // Guardar sesión
-            localStorage.setItem('authToken', data.token);
-            localStorage.setItem('username', username);
-            
-            // Ocultar pantalla de login después de un breve delay
             setTimeout(() => {
-              this.hideLoginScreen();
-              this.setupMainPage();
+              loginScreen.classList.add('hidden');
+              document.body.style.overflow = '';
+              
+              if (welcomeText) {
+                welcomeText.textContent = `Bienvenido/a, ${username} 💖`;
+              }
             }, 1500);
           } else {
-            console.log('❌ Login fallido:', data.message);
-            this.showMessage(data.message || 'Credenciales incorrectas', 'error');
+            console.log('❌ Login fallido');
+            showMessage(resultado.mensaje, 'error');
           }
-        } catch (error) {
-          console.error('Login error:', error);
-          this.showMessage('Error de conexión. Intenta nuevamente.', 'error');
-        }
+        });
       }
-
-      async handleRegister(e) {
-        e.preventDefault();
-        console.log('📝 Procesando registro...');
-        
-        const username = document.getElementById('newUsername').value.trim();
-        const password = document.getElementById('newPassword').value;
-        const confirmPassword = document.getElementById('confirmPassword').value;
-
-        if (!username || !password || !confirmPassword) {
-          this.showMessage('Por favor completa todos los campos', 'error');
-          return;
-        }
-
-        if (username.length < 3) {
-          this.showMessage('El usuario debe tener al menos 3 caracteres', 'error');
-          return;
-        }
-
-        if (password.length < 6) {
-          this.showMessage('La contraseña debe tener al menos 6 caracteres', 'error');
-          return;
-        }
-
-        if (password !== confirmPassword) {
-          this.showMessage('Las contraseñas no coinciden', 'error');
-          return;
-        }
-
-        try {
-          const response = await fetch(`${this.apiUrl}/register`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username, password })
-          });
-
-          const data = await response.json();
-
-          if (response.ok) {
-            console.log('✅ Usuario creado exitosamente:', username);
-            this.showMessage('¡Usuario creado exitosamente! 💖', 'success');
-            
-            // Guardar sesión
-            localStorage.setItem('authToken', data.token);
-            localStorage.setItem('username', username);
-            
-            // Ocultar sección de registro si se alcanzó el límite
-            this.hideRegisterSection();
-            
-            // Ocultar pantalla de login después de un breve delay
-            setTimeout(() => {
-              this.hideLoginScreen();
-              this.setupMainPage();
-            }, 1500);
-          } else {
-            console.log('❌ Registro fallido:', data.message);
-            this.showMessage(data.message || 'Error al crear usuario', 'error');
-          }
-        } catch (error) {
-          console.error('Register error:', error);
-          this.showMessage('Error de conexión. Intenta nuevamente.', 'error');
-        }
+      
+      // Manejar logout
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+          console.log('🚪 Cerrando sesión...');
+          cerrarSesion();
+        });
       }
-
-      logout() {
-        localStorage.removeItem('authToken');
-        localStorage.removeItem('username');
-        // Limpiar también variables antiguas si existen
-        localStorage.removeItem('usuarioAutenticado');
-        localStorage.removeItem('esAutenticado');
-        this.showMessage('Sesión cerrada. Redirigiendo...', 'info');
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
-      }
-
-      showMessage(message, type = 'info') {
-        const container = document.getElementById('messageContainer');
-        if (container) {
-          container.innerHTML = `<div class="message ${type}">${message}</div>`;
-          
-          // Auto-ocultar después de 5 segundos
-          setTimeout(() => {
-            container.innerHTML = '';
-          }, 5000);
-        }
-      }
-    }
-
-    // Inicializar el sistema cuando se carga la página
-    document.addEventListener('DOMContentLoaded', () => {
-      console.log('📄 Página cargada, inicializando sistema de login con backend API...');
-      new FullScreenLoginSystem();
     });
   </script>
 </body>
