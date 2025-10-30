@@ -62,3 +62,9 @@ echo "   - Los usuarios serán redirigidos automáticamente al login"
 echo "   - Solo se pueden crear hasta 2 usuarios"
 echo "   - La primera vez verás el formulario de registro"
 echo ""
+
+
+
+
+
+

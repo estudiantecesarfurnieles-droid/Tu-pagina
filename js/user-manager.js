@@ -129,3 +129,9 @@ document.head.appendChild(style);
 
 // Exportar para uso global
 window.UserManager = UserManager;
+
+
+
+
+
+

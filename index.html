@@ -23,30 +23,34 @@
       console.log('Usuario:', user);
       console.log('Autenticado:', auth);
       
-      if (!user || auth !== 'true') {
-        console.log('❌ NO AUTENTICADO - FORZANDO PANTALLA DE LOGIN');
+      // FORZAR que la pantalla de login sea visible SIEMPRE al cargar
+      console.log('🔒 FORZANDO PANTALLA DE LOGIN VISIBLE...');
+      
+      // Ejecutar inmediatamente
+      setTimeout(function() {
+        const loginScreen = document.getElementById('loginScreen');
+        if (loginScreen) {
+          loginScreen.style.display = 'flex';
+          loginScreen.style.visibility = 'visible';
+          loginScreen.style.opacity = '1';
+          loginScreen.classList.remove('hidden');
+          console.log('✅ Pantalla de login FORZADA a ser visible');
+        }
+      }, 100);
+      
+      // Solo ocultar si está autenticado
+      if (user && auth === 'true') {
+        console.log('✅ AUTENTICADO - Programando ocultación...');
         
-        // Forzar que la pantalla de login sea visible
-        document.addEventListener('DOMContentLoaded', function() {
-          const loginScreen = document.getElementById('loginScreen');
-          if (loginScreen) {
-            loginScreen.style.display = 'flex';
-            loginScreen.classList.remove('hidden');
-            console.log('✅ Pantalla de login forzada a ser visible');
-          }
-        });
-      } else {
-        console.log('✅ AUTENTICADO - OCULTANDO PANTALLA DE LOGIN');
-        
-        // Forzar que la pantalla de login esté oculta
-        document.addEventListener('DOMContentLoaded', function() {
+        // Ocultar después de un delay para asegurar que se vea primero
+        setTimeout(function() {
           const loginScreen = document.getElementById('loginScreen');
           if (loginScreen) {
             loginScreen.style.display = 'none';
             loginScreen.classList.add('hidden');
-            console.log('✅ Pantalla de login forzada a estar oculta');
+            console.log('✅ Pantalla de login ocultada para usuario autenticado');
           }
-        });
+        }, 2000);
       }
     })();
   </script>
@@ -225,8 +229,17 @@
   </style>
 </head>
 <body>
-  <!-- PANTALLA DE LOGIN QUE CUBRE TODO -->
-  <div id="loginScreen" class="login-screen">
+  <!-- SCRIPT INMEDIATO EN BODY -->
+  <script>
+    // FORZAR VISIBILIDAD INMEDIATA
+    (function() {
+      console.log('🚨 FORZANDO LOGIN VISIBLE INMEDIATAMENTE...');
+      document.body.style.overflow = 'hidden'; // Evitar scroll
+    })();
+  </script>
+  
+  <!-- PANTALLA DE LOGIN QUE CUBRE TODO - VISIBLE POR DEFECTO -->
+  <div id="loginScreen" class="login-screen" style="display: flex !important; visibility: visible !important; opacity: 1 !important;">
     <div class="login-container">
       <div class="login-card">
         <h1 class="login-title">💖 ACCESO AL UNIVERSO 💖</h1>
@@ -467,17 +480,18 @@
   <script src="./js/conversaciones.js"></script>
   <script src="./js/loading-epic.js"></script>
   
-  <!-- SISTEMA DE LOGIN NUEVO -->
+  <!-- SISTEMA DE LOGIN CON BACKEND API -->
   <script>
-    // SISTEMA DE LOGIN CON PANTALLA COMPLETA
+    // SISTEMA DE LOGIN CON PANTALLA COMPLETA Y BACKEND API
     class FullScreenLoginSystem {
       constructor() {
+        this.apiUrl = window.location.origin + '/api';
         this.maxUsers = 2;
         this.init();
       }
 
       init() {
-        console.log('🚀 Inicializando sistema de login pantalla completa...');
+        console.log('🚀 Inicializando sistema de login con backend API...');
         
         // Verificar si ya está autenticado
         if (this.isAuthenticated()) {
@@ -494,9 +508,9 @@
       }
 
       isAuthenticated() {
-        const user = localStorage.getItem('usuarioAutenticado');
-        const auth = localStorage.getItem('esAutenticado');
-        return user && auth === 'true';
+        const token = localStorage.getItem('authToken');
+        const username = localStorage.getItem('username');
+        return token && username;
       }
 
       showLoginScreen() {
@@ -510,6 +524,7 @@
         const screen = document.getElementById('loginScreen');
         if (screen) {
           screen.classList.add('hidden');
+          document.body.style.overflow = '';
         }
       }
 
@@ -535,32 +550,41 @@
 
       setupMainPage() {
         const welcomeText = document.getElementById('welcomeText');
-        const user = localStorage.getItem('usuarioAutenticado');
-        if (welcomeText && user) {
-          welcomeText.textContent = `Bienvenido/a, ${user} 💖`;
+        const username = localStorage.getItem('username');
+        if (welcomeText && username) {
+          welcomeText.textContent = `Bienvenido/a, ${username} 💖`;
         }
       }
 
-      checkUserCount() {
-        const users = this.getStoredUsers();
-        console.log('👥 Usuarios registrados:', users.length);
-        
-        if (users.length >= this.maxUsers) {
-          this.hideRegisterSection();
-          this.showMaxUsersMessage(users.length);
-        } else {
+      async checkUserCount() {
+        try {
+          const response = await fetch(`${this.apiUrl}/check-user`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            }
+          });
+          
+          if (response.ok) {
+            const data = await response.json();
+            console.log('👥 Usuarios registrados:', data.count, '/', data.max_users);
+            
+            if (data.can_register) {
+              this.showRegisterSection();
+              this.updateRegisterMessage(data.count, data.max_users);
+            } else {
+              this.hideRegisterSection();
+              this.showMaxUsersMessage(data.count, data.max_users);
+            }
+          } else {
+            console.log('Error al verificar usuarios, mostrando registro por defecto');
+            this.showRegisterSection();
+          }
+        } catch (error) {
+          console.error('Error checking user count:', error);
+          // En caso de error, mostrar registro por defecto
           this.showRegisterSection();
-          this.updateRegisterMessage(users.length);
         }
-      }
-
-      getStoredUsers() {
-        const users = localStorage.getItem('usuariosRegistrados');
-        return users ? JSON.parse(users) : [];
-      }
-
-      storeUsers(users) {
-        localStorage.setItem('usuariosRegistrados', JSON.stringify(users));
       }
 
       showRegisterSection() {
@@ -577,15 +601,19 @@
         }
       }
 
-      updateRegisterMessage(count) {
+      updateRegisterMessage(count, maxUsers) {
         const dividerText = document.querySelector('.divider-text');
-        if (dividerText && count > 0) {
-          dividerText.textContent = `✨ Registro disponible (${count}/${this.maxUsers} usuarios) ✨`;
+        if (dividerText) {
+          if (count > 0) {
+            dividerText.textContent = `✨ Registro disponible (${count}/${maxUsers} usuarios) ✨`;
+          } else {
+            dividerText.textContent = `✨ Primera vez aquí ✨`;
+          }
         }
       }
 
-      showMaxUsersMessage(count) {
-        this.showMessage(`Se han registrado ${count} usuarios (máximo ${this.maxUsers}). Solo puedes hacer login.`, 'info');
+      showMaxUsersMessage(count, maxUsers) {
+        this.showMessage(`Se han registrado ${count} usuarios (máximo ${maxUsers}). Solo puedes hacer login.`, 'info');
       }
 
       async handleLogin(e) {
@@ -601,16 +629,23 @@
         }
 
         try {
-          const users = this.getStoredUsers();
-          const user = users.find(u => u.username === username && u.password === password);
-          
-          if (user) {
+          const response = await fetch(`${this.apiUrl}/login`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password })
+          });
+
+          const data = await response.json();
+
+          if (response.ok) {
             console.log('✅ Login exitoso para:', username);
             this.showMessage('¡Bienvenido al universo! 💕', 'success');
             
             // Guardar sesión
-            localStorage.setItem('usuarioAutenticado', username);
-            localStorage.setItem('esAutenticado', 'true');
+            localStorage.setItem('authToken', data.token);
+            localStorage.setItem('username', username);
             
             // Ocultar pantalla de login después de un breve delay
             setTimeout(() => {
@@ -618,8 +653,8 @@
               this.setupMainPage();
             }, 1500);
           } else {
-            console.log('❌ Credenciales incorrectas');
-            this.showMessage('Credenciales incorrectas', 'error');
+            console.log('❌ Login fallido:', data.message);
+            this.showMessage(data.message || 'Credenciales incorrectas', 'error');
           }
         } catch (error) {
           console.error('Login error:', error);
@@ -656,51 +691,46 @@
         }
 
         try {
-          const users = this.getStoredUsers();
-          
-          if (users.length >= this.maxUsers) {
-            this.showMessage('Ya se han registrado el máximo de usuarios permitidos (2)', 'error');
-            return;
-          }
+          const response = await fetch(`${this.apiUrl}/register`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password })
+          });
 
-          if (users.find(u => u.username === username)) {
-            this.showMessage('Este usuario ya existe', 'error');
-            return;
-          }
+          const data = await response.json();
 
-          const newUser = {
-            username: username,
-            password: password,
-            createdAt: new Date().toISOString()
-          };
-
-          users.push(newUser);
-          this.storeUsers(users);
-
-          console.log('✅ Usuario creado exitosamente:', username);
-          this.showMessage('¡Usuario creado exitosamente! 💖', 'success');
+          if (response.ok) {
+            console.log('✅ Usuario creado exitosamente:', username);
+            this.showMessage('¡Usuario creado exitosamente! 💖', 'success');
             
-          // Guardar sesión
-          localStorage.setItem('usuarioAutenticado', username);
-          localStorage.setItem('esAutenticado', 'true');
+            // Guardar sesión
+            localStorage.setItem('authToken', data.token);
+            localStorage.setItem('username', username);
             
-          if (users.length >= this.maxUsers) {
+            // Ocultar sección de registro si se alcanzó el límite
             this.hideRegisterSection();
+            
+            // Ocultar pantalla de login después de un breve delay
+            setTimeout(() => {
+              this.hideLoginScreen();
+              this.setupMainPage();
+            }, 1500);
+          } else {
+            console.log('❌ Registro fallido:', data.message);
+            this.showMessage(data.message || 'Error al crear usuario', 'error');
           }
-            
-          // Ocultar pantalla de login después de un breve delay
-          setTimeout(() => {
-            this.hideLoginScreen();
-            this.setupMainPage();
-          }, 1500);
-            
         } catch (error) {
           console.error('Register error:', error);
-          this.showMessage('Error al crear usuario', 'error');
+          this.showMessage('Error de conexión. Intenta nuevamente.', 'error');
         }
       }
 
       logout() {
+        localStorage.removeItem('authToken');
+        localStorage.removeItem('username');
+        // Limpiar también variables antiguas si existen
         localStorage.removeItem('usuarioAutenticado');
         localStorage.removeItem('esAutenticado');
         this.showMessage('Sesión cerrada. Redirigiendo...', 'info');
@@ -724,9 +754,46 @@
 
     // Inicializar el sistema cuando se carga la página
     document.addEventListener('DOMContentLoaded', () => {
-      console.log('📄 Página cargada, inicializando sistema de login pantalla completa...');
+      console.log('📄 Página cargada, inicializando sistema de login con backend API...');
       new FullScreenLoginSystem();
     });
+  </script>
+  
+  <!-- SCRIPT FINAL PARA GARANTIZAR VISIBILIDAD -->
+  <script>
+    // GARANTIZAR que la pantalla de login sea visible
+    (function() {
+      console.log('🔒 GARANTIZANDO VISIBILIDAD DE LOGIN...');
+      
+      const loginScreen = document.getElementById('loginScreen');
+      if (loginScreen) {
+        loginScreen.style.display = 'flex';
+        loginScreen.style.visibility = 'visible';
+        loginScreen.style.opacity = '1';
+        loginScreen.style.zIndex = '99999';
+        loginScreen.classList.remove('hidden');
+        console.log('✅ Login GARANTIZADO como visible');
+      } else {
+        console.error('❌ No se encontró el elemento loginScreen');
+      }
+      
+      // Verificar autenticación después de 1 segundo
+      setTimeout(function() {
+        const user = localStorage.getItem('usuarioAutenticado');
+        const auth = localStorage.getItem('esAutenticado');
+        
+        if (user && auth === 'true') {
+          console.log('✅ Usuario autenticado, ocultando login...');
+          if (loginScreen) {
+            loginScreen.style.display = 'none';
+            loginScreen.classList.add('hidden');
+            document.body.style.overflow = '';
+          }
+        } else {
+          console.log('❌ Usuario no autenticado, manteniendo login visible');
+        }
+      }, 1000);
+    })();
   </script>
 </body>
 </html>

@@ -1,4 +1,9 @@
-# No additional dependencies required for basic functionality
+# Dependencies for Vercel deployment with Python serverless functions
 # SQLite3 is included in Python standard library
-# hashlib and secrets are included in Python standard library
-# json is included in Python standard library
+# hashlib, secrets, json are included in Python standard library
+
+
+
+
+
+

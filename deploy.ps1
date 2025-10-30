@@ -65,3 +65,9 @@ Write-Host "   - Los usuarios serán redirigidos automáticamente al login" -For
 Write-Host "   - Solo se pueden crear hasta 2 usuarios" -ForegroundColor White
 Write-Host "   - La primera vez verás el formulario de registro" -ForegroundColor White
 Write-Host ""
+
+
+
+
+
+

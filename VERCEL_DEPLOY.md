@@ -104,3 +104,9 @@ Si tienes problemas:
 1. Revisa los logs en el dashboard de Vercel
 2. Verifica que todos los archivos estén subidos
 3. Asegúrate de que `vercel.json` esté en la raíz del proyecto
+
+
+
+
+
+
