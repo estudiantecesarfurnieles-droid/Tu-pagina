@@ -13,45 +13,27 @@
   
   <!-- SCRIPT QUE SE EJECUTA INMEDIATAMENTE -->
   <script>
-    // Verificación inmediata - ANTES DE CUALQUIER COSA
+    // Verificación inmediata de autenticación con el nuevo sistema
     (function() {
-      console.log('🔍 VERIFICACIÓN INMEDIATA DE AUTENTICACIÓN...');
+      console.log('🔍 VERIFICACIÓN DE AUTENTICACIÓN (SISTEMA API)...');
       
-      const user = localStorage.getItem('usuarioAutenticado');
-      const auth = localStorage.getItem('esAutenticado');
+      const token = localStorage.getItem('authToken');
+      const username = localStorage.getItem('username');
       
-      console.log('Usuario:', user);
-      console.log('Autenticado:', auth);
+      console.log('Token:', token ? 'Presente' : 'No existe');
+      console.log('Username:', username);
       
-      // FORZAR que la pantalla de login sea visible SIEMPRE al cargar
-      console.log('🔒 FORZANDO PANTALLA DE LOGIN VISIBLE...');
-      
-      // Ejecutar inmediatamente
-      setTimeout(function() {
+      // Mostrar login por defecto
+      document.addEventListener('DOMContentLoaded', function() {
         const loginScreen = document.getElementById('loginScreen');
-        if (loginScreen) {
+        if (loginScreen && !token) {
           loginScreen.style.display = 'flex';
           loginScreen.style.visibility = 'visible';
           loginScreen.style.opacity = '1';
           loginScreen.classList.remove('hidden');
-          console.log('✅ Pantalla de login FORZADA a ser visible');
+          console.log('✅ Pantalla de login visible');
         }
-      }, 100);
-      
-      // Solo ocultar si está autenticado
-      if (user && auth === 'true') {
-        console.log('✅ AUTENTICADO - Programando ocultación...');
-        
-        // Ocultar después de un delay para asegurar que se vea primero
-        setTimeout(function() {
-          const loginScreen = document.getElementById('loginScreen');
-          if (loginScreen) {
-            loginScreen.style.display = 'none';
-            loginScreen.classList.add('hidden');
-            console.log('✅ Pantalla de login ocultada para usuario autenticado');
-          }
-        }, 2000);
-      }
+      });
     })();
   </script>
   
@@ -229,15 +211,6 @@
   </style>
 </head>
 <body>
-  <!-- SCRIPT INMEDIATO EN BODY -->
-  <script>
-    // FORZAR VISIBILIDAD INMEDIATA
-    (function() {
-      console.log('🚨 FORZANDO LOGIN VISIBLE INMEDIATAMENTE...');
-      document.body.style.overflow = 'hidden'; // Evitar scroll
-    })();
-  </script>
-  
   <!-- PANTALLA DE LOGIN QUE CUBRE TODO - VISIBLE POR DEFECTO -->
   <div id="loginScreen" class="login-screen" style="display: flex !important; visibility: visible !important; opacity: 1 !important;">
     <div class="login-container">
@@ -757,43 +730,6 @@
       console.log('📄 Página cargada, inicializando sistema de login con backend API...');
       new FullScreenLoginSystem();
     });
-  </script>
-  
-  <!-- SCRIPT FINAL PARA GARANTIZAR VISIBILIDAD -->
-  <script>
-    // GARANTIZAR que la pantalla de login sea visible
-    (function() {
-      console.log('🔒 GARANTIZANDO VISIBILIDAD DE LOGIN...');
-      
-      const loginScreen = document.getElementById('loginScreen');
-      if (loginScreen) {
-        loginScreen.style.display = 'flex';
-        loginScreen.style.visibility = 'visible';
-        loginScreen.style.opacity = '1';
-        loginScreen.style.zIndex = '99999';
-        loginScreen.classList.remove('hidden');
-        console.log('✅ Login GARANTIZADO como visible');
-      } else {
-        console.error('❌ No se encontró el elemento loginScreen');
-      }
-      
-      // Verificar autenticación después de 1 segundo
-      setTimeout(function() {
-        const user = localStorage.getItem('usuarioAutenticado');
-        const auth = localStorage.getItem('esAutenticado');
-        
-        if (user && auth === 'true') {
-          console.log('✅ Usuario autenticado, ocultando login...');
-          if (loginScreen) {
-            loginScreen.style.display = 'none';
-            loginScreen.classList.add('hidden');
-            document.body.style.overflow = '';
-          }
-        } else {
-          console.log('❌ Usuario no autenticado, manteniendo login visible');
-        }
-      }, 1000);
-    })();
   </script>
 </body>
 </html>
