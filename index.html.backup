@@ -7,9 +7,33 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- SCRIPT DE LOGIN ANTES DE TODO - BLOQUEA LA PÁGINA COMPLETAMENTE -->
+  <script>
+    // BLOQUEAR TODO HASTA AUTENTICAR - EJECUTAR INMEDIATAMENTE
+    (function() {
+      // VERIFICAR AUTENTICACIÓN ANTES DE QUE CUALQUIER COSA CARGUE
+      // LIMPIAR SESIÓN PARA PROBAR EL LOGIN (TEMPORAL - QUITAR DESPUÉS)
+      // localStorage.removeItem('auth');
+      
+      const isAuth = localStorage.getItem('auth') === 'true';
+      
+      // Si NO está autenticado, BLOQUEAR COMPLETAMENTE
+      if (!isAuth) {
+        // Escribir estilos que bloqueen TODO excepto el login
+        document.write('<style>' +
+          'html, body { margin: 0; padding: 0; overflow: hidden !important; } ' +
+          'body > *:not(#loginOverlay) { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; } ' +
+          '#loginOverlay { display: flex !important; position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important; z-index: 2147483647 !important; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important; } ' +
+          '</style>');
+      } else {
+        // Si está autenticado, permitir que todo cargue
+        document.body.classList.add('authenticated');
+      }
+    })();
+  </script>
   <link rel="stylesheet" href="./css/style.css" />
   <style>
-    /* LOGIN OVERLAY */
+    /* FORZAR LOGIN VISIBLE - SOBREESCRIBIR TODO */
     #loginOverlay {
       position: fixed !important;
       top: 0 !important;
@@ -17,25 +41,42 @@
       width: 100vw !important;
       height: 100vh !important;
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-      z-index: 2147483647 !important;
+      z-index: 2147483647 !important; /* z-index máximo posible */
       display: flex !important;
       justify-content: center !important;
       align-items: center !important;
       font-family: 'Poppins', sans-serif !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
     }
     
-    /* OCULTAR CONTENIDO SI NO ESTÁ AUTENTICADO */
-    body:not(.authenticated) > *:not(#loginOverlay) {
+    /* OCULTAR ABSOLUTAMENTE TODO EXCEPTO EL LOGIN */
+    body:not(.authenticated) > *:not(#loginOverlay),
+    body:not(.authenticated) audio,
+    body:not(.authenticated) section,
+    body:not(.authenticated) div:not(#loginOverlay):not(#loginBox),
+    body:not(.authenticated) modal {
       display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      position: absolute !important;
+      left: -9999px !important;
     }
     
-    /* MOSTRAR CONTENIDO SI ESTÁ AUTENTICADO */
+    /* CUANDO ESTÁ AUTENTICADO - OCULTAR LOGIN Y MOSTRAR CONTENIDO */
     body.authenticated #loginOverlay {
       display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
     }
     
     body.authenticated > *:not(#loginOverlay) {
       display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
     }
     
     body.authenticated section {
@@ -118,13 +159,10 @@
       }
 
       function login(username, password) {
-        console.log('Función login llamada con:', username, password);
-        console.log('USUARIOS:', USUARIOS);
         const user = USUARIOS.find(u => 
           u.username.toLowerCase() === username.toLowerCase() && 
           u.password === password
         );
-        console.log('Usuario encontrado:', user);
         
         if (user) {
           localStorage.setItem('auth', 'true');
@@ -146,8 +184,32 @@
           return;
         }
         
-        // Si NO está autenticado, asegurar que login esté visible
+        // Si NO está autenticado, FORZAR login visible y OCULTAR TODO
         document.body.classList.remove('authenticated');
+        if (overlay) {
+          overlay.style.display = 'flex';
+          overlay.style.visibility = 'visible';
+          overlay.style.opacity = '1';
+          overlay.style.zIndex = '2147483647';
+          overlay.style.position = 'fixed';
+          overlay.style.top = '0';
+          overlay.style.left = '0';
+          overlay.style.width = '100vw';
+          overlay.style.height = '100vh';
+        }
+        
+        // OCULTAR TODOS LOS ELEMENTOS excepto el login
+        const allElements = document.querySelectorAll('*');
+        allElements.forEach(function(el) {
+          if (el.id !== 'loginOverlay' && el.id !== 'loginBox' && el.id !== 'loginForm' && 
+              el.id !== 'username' && el.id !== 'password' && el.id !== 'loginError' &&
+              !el.closest('#loginOverlay') && el.tagName !== 'SCRIPT' && el.tagName !== 'STYLE') {
+            el.style.display = 'none';
+            el.style.visibility = 'hidden';
+            el.style.opacity = '0';
+            el.style.pointerEvents = 'none';
+          }
+        });
 
         // Manejar el formulario
         if (loginForm) {
@@ -165,16 +227,26 @@
               return;
             }
 
-            console.log('Intentando login con:', username, password);
             if (login(username, password)) {
-              console.log('Login exitoso, recargando página...');
-              if (overlay) overlay.style.display = 'none';
+              document.body.classList.add('authenticated');
+              // Ocultar login
+              if (overlay) {
+                overlay.style.display = 'none';
+                overlay.style.visibility = 'hidden';
+                overlay.style.opacity = '0';
+              }
+              // Mostrar TODO el contenido
+              const allElements = document.querySelectorAll('*');
+              allElements.forEach(function(el) {
+                if (el.id !== 'loginOverlay' && !el.closest('#loginOverlay')) {
+                  el.style.display = '';
+                  el.style.visibility = '';
+                }
+              });
               if (errorMsg) errorMsg.style.display = 'none';
-              
-              // Recargar la página para que todo funcione correctamente
-              window.location.href = window.location.href;
+              // Recargar para asegurar que todo funcione
+              window.location.reload();
             } else {
-              console.log('Login falló, credenciales incorrectas');
               if (errorMsg) {
                 errorMsg.textContent = 'Usuario o contraseña incorrectos';
                 errorMsg.style.display = 'block';
@@ -208,8 +280,44 @@
     </div>
   </div>
 
+  <!-- Script para OCULTAR TODO excepto login ANTES de que cargue -->
+  <script>
+    (function() {
+      // Verificar autenticación
+      const isAuth = localStorage.getItem('auth') === 'true';
+      
+      if (!isAuth) {
+        // Si NO está autenticado, OCULTAR TODO excepto login
+        document.addEventListener('DOMContentLoaded', function() {
+          const allElements = document.querySelectorAll('*');
+          allElements.forEach(function(el) {
+            if (el.id !== 'loginOverlay' && el.id !== 'loginBox' && el.id !== 'loginForm' && 
+                el.id !== 'username' && el.id !== 'password' && el.id !== 'loginError' &&
+                !el.closest('#loginOverlay')) {
+              el.style.display = 'none';
+              el.style.visibility = 'hidden';
+            }
+          });
+        });
+        
+        // También ejecutar inmediatamente
+        setTimeout(function() {
+          const allElements = document.querySelectorAll('*');
+          allElements.forEach(function(el) {
+            if (el.id !== 'loginOverlay' && el.id !== 'loginBox' && el.id !== 'loginForm' && 
+                el.id !== 'username' && el.id !== 'password' && el.id !== 'loginError' &&
+                !el.closest('#loginOverlay')) {
+              el.style.display = 'none';
+              el.style.visibility = 'hidden';
+            }
+          });
+        }, 0);
+      }
+    })();
+  </script>
+
   <!-- Audios -->
-  <audio id="musicaFondo" loop muted></audio>
+  <audio id="musicaFondo" loop muted style="display: none;"></audio>
   <audio id="musicaCarta" style="display: none;"></audio>
   <audio id="musicaDespegueCohete" preload="auto" style="display: none;"></audio>
 

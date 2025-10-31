@@ -4,19 +4,9 @@
   "description": "Página romántica con sistema de login",
   "main": "index.html",
   "scripts": {
-    "dev": "python server.py",
-    "build": "echo 'No build step required'",
-    "start": "python server.py"
+    "build": "echo 'No build step required'"
   },
   "engines": {
     "node": ">=18.0.0"
-  },
-  "dependencies": {},
-  "devDependencies": {}
+  }
 }
-
-
-
-
-
-
