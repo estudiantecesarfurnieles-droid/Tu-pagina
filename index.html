@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>💖 Nuestro Universo de Amor 💖</title>
-  <!-- v5.0 sistema dual usuarios y preguntas -->
+  <!-- v7.0 nueva carta 02 de noviembre -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
@@ -107,21 +107,18 @@
   
   <!-- Login JavaScript -->
   <script>
-    // Credenciales de acceso - Múltiples usuarios
-    const USUARIOS = {
-      'tich': 'febrero13',
-      'camila': 'Camilo27'
+    // Credenciales de acceso
+    const CREDENCIALES = {
+      usuario: 'tich',
+      contraseña: 'febrero13'
     };
     
     // Verificar autenticación
     function checkAuth() {
-      const usuario = sessionStorage.getItem('userAuthenticated');
-      if (usuario && USUARIOS.hasOwnProperty(usuario)) {
+      if (sessionStorage.getItem('authenticated') === 'true') {
         document.body.classList.add('authenticated');
-        document.body.setAttribute('data-user', usuario);
       } else {
         document.body.classList.remove('authenticated');
-        document.body.removeAttribute('data-user');
       }
     }
     
@@ -133,12 +130,9 @@
       const contraseña = document.getElementById('loginPassword').value;
       const errorMsg = document.getElementById('loginError');
       
-      // Verificar credenciales
-      if (USUARIOS.hasOwnProperty(usuario) && contraseña === USUARIOS[usuario]) {
+      if (usuario === CREDENCIALES.usuario && contraseña === CREDENCIALES.contraseña) {
         sessionStorage.setItem('authenticated', 'true');
-        sessionStorage.setItem('userAuthenticated', usuario);
         document.body.classList.add('authenticated');
-        document.body.setAttribute('data-user', usuario);
         errorMsg.style.display = 'none';
       } else {
         errorMsg.style.display = 'block';
@@ -539,11 +533,6 @@
           ¡Comenzar Juego!
           <span class="corazon-animado">💕</span>
         </button>
-        <button id="btn-crear-preguntas" class="btn-juego-iniciar" onclick="iniciarJuegoCamila()" style="margin-top: 20px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); display: none;">
-          <span class="corazon-animado">💖</span>
-          Crear preguntas para Camila
-          <span class="corazon-animado">💖</span>
-        </button>
       </div>
 
       <!-- Pantalla del juego -->
@@ -610,118 +599,6 @@
               Saltar Mensaje
             </button>
           </div>
-        </div>
-      </div>
-
-      <!-- Pantalla de creación de preguntas de Camila -->
-      <div id="juego-crear-preguntas" class="juego-pantalla hidden">
-        <div class="mensaje-especial-contenido">
-          <div class="mensaje-especial-titulo">
-            <h3>💖 Crea preguntas para Tich 💖</h3>
-            <p>Escribe hasta 5 preguntas para que Tich te demuestre cuánto te conoce</p>
-          </div>
-          
-          <div id="preguntas-creadas" style="max-width: 800px; margin: 20px auto; display: flex; flex-direction: column; gap: 15px;">
-            <!-- Se llenará dinámicamente -->
-          </div>
-          
-          <div style="max-width: 800px; margin: 20px auto;">
-            <button class="btn-juego-iniciar" onclick="agregarNuevaPregunta()" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-              <span class="corazon-animado">➕</span>
-              Agregar Pregunta
-              <span class="corazon-animado">➕</span>
-            </button>
-          </div>
-          
-          <div class="mensaje-especial-botones">
-            <button class="btn-enviar-whatsapp" onclick="iniciarJuegoConMisPreguntas()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-              <span class="whatsapp-icon">🎮</span>
-              ¡Iniciar Juego!
-              <span class="corazon-animado">💕</span>
-            </button>
-            <button class="btn-saltar-mensaje" onclick="reiniciarJuego()">
-              Volver al Menú
-            </button>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Modal para agregar pregunta -->
-      <div id="modal-pregunta" class="modal hidden" style="z-index: 10001;">
-        <div class="modal-content" style="max-width: 700px; max-height: 90vh; overflow-y: auto;">
-          <button class="cerrar" onclick="cerrarModalPregunta()">✕ Cerrar</button>
-          <h3 style="color: var(--text-primary); margin-bottom: 20px;">💕 Nueva Pregunta</h3>
-          
-          <div style="display: flex; flex-direction: column; gap: 15px;">
-            <div>
-              <label style="color: var(--text-secondary); font-weight: 600; margin-bottom: 5px; display: block;">Pregunta</label>
-              <textarea 
-                id="nueva-pregunta-texto" 
-                placeholder="Escribe tu pregunta aquí..."
-                rows="3"
-                style="width: 100%; padding: 15px; border: 2px solid var(--border-color); border-radius: var(--border-radius-md); background: var(--bg-secondary); color: var(--text-primary); font-family: inherit; box-sizing: border-box;"
-              ></textarea>
-            </div>
-            
-            <div>
-              <label style="color: var(--text-secondary); font-weight: 600; margin-bottom: 5px; display: block;">Opción A</label>
-              <input 
-                type="text" 
-                id="opcion-a" 
-                placeholder="Primera opción..."
-                style="width: 100%; padding: 15px; border: 2px solid var(--border-color); border-radius: var(--border-radius-md); background: var(--bg-secondary); color: var(--text-primary); font-family: inherit; box-sizing: border-box;"
-              />
-            </div>
-            
-            <div>
-              <label style="color: var(--text-secondary); font-weight: 600; margin-bottom: 5px; display: block;">Opción B</label>
-              <input 
-                type="text" 
-                id="opcion-b" 
-                placeholder="Segunda opción..."
-                style="width: 100%; padding: 15px; border: 2px solid var(--border-color); border-radius: var(--border-radius-md); background: var(--bg-secondary); color: var(--text-primary); font-family: inherit; box-sizing: border-box;"
-              />
-            </div>
-            
-            <div>
-              <label style="color: var(--text-secondary); font-weight: 600; margin-bottom: 5px; display: block;">Opción C</label>
-              <input 
-                type="text" 
-                id="opcion-c" 
-                placeholder="Tercera opción..."
-                style="width: 100%; padding: 15px; border: 2px solid var(--border-color); border-radius: var(--border-radius-md); background: var(--bg-secondary); color: var(--text-primary); font-family: inherit; box-sizing: border-box;"
-              />
-            </div>
-            
-            <div>
-              <label style="color: var(--text-secondary); font-weight: 600; margin-bottom: 5px; display: block;">Opción D</label>
-              <input 
-                type="text" 
-                id="opcion-d" 
-                placeholder="Cuarta opción..."
-                style="width: 100%; padding: 15px; border: 2px solid var(--border-color); border-radius: var(--border-radius-md); background: var(--bg-secondary); color: var(--text-primary); font-family: inherit; box-sizing: border-box;"
-              />
-            </div>
-            
-            <div>
-              <label style="color: var(--text-secondary); font-weight: 600; margin-bottom: 5px; display: block;">¿Cuál es la respuesta correcta?</label>
-              <select 
-                id="respuesta-correcta" 
-                style="width: 100%; padding: 15px; border: 2px solid var(--border-color); border-radius: var(--border-radius-md); background: var(--bg-secondary); color: var(--text-primary); font-family: inherit; box-sizing: border-box;"
-              >
-                <option value="0">Opción A</option>
-                <option value="1">Opción B</option>
-                <option value="2">Opción C</option>
-                <option value="3">Opción D</option>
-              </select>
-            </div>
-          </div>
-          
-          <button class="btn-juego-iniciar" onclick="guardarNuevaPregunta()" style="margin-top: 20px; width: 100%;">
-            <span class="corazon-animado">💾</span>
-            Guardar Pregunta
-            <span class="corazon-animado">💾</span>
-          </button>
         </div>
       </div>
 
@@ -812,7 +689,7 @@
   <script src="./js/contenido-libro.js"></script>
   <script src="./js/conversaciones.js"></script>
   <script src="./js/loading-epic.js"></script>
-  <script src="./js/juego-te-extraño.js?v=4"></script>
-  <script src="./js/script.js"></script>
+  <script src="./js/juego-te-extraño.js?v=5"></script>
+  <script src="./js/script.js?v=3"></script>
 </body>
 </html>

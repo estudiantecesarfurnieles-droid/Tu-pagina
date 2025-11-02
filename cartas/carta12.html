@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carta de Cachetes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Source+Serif+Pro:wght@200;300;400;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap');
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Source Serif Pro', serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: #333;
+    padding: 40px 20px;
+    margin: 0;
+    min-height: 100vh;
+    position: relative;
+    line-height: 1.8;
+  }
+
+  /* Contenedor principal con estilo único */
+  .carta-container {
+    position: relative;
+    max-width: 650px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border: 3px solid #8b5cf6;
+    border-radius: 25px;
+    padding: 60px 50px;
+    box-shadow: 0 20px 60px rgba(139, 92, 246, 0.2);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Decoraciones de fondo */
+  .carta-container::before {
+    content: '💙';
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-size: 4rem;
+    opacity: 0.1;
+    z-index: 0;
+  }
+
+  .carta-container::after {
+    content: '💜';
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    font-size: 4rem;
+    opacity: 0.1;
+    z-index: 0;
+  }
+
+  /* Fecha decorativa */
+  .carta-fecha {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    color: #8b5cf6;
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Título único */
+  .carta-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 600;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .carta-titulo::before,
+  .carta-titulo::after {
+    content: '✨';
+    font-size: 1.5rem;
+    margin: 0 15px;
+  }
+
+  /* Subtítulo */
+  .carta-subtitulo {
+    font-family: 'Crimson Text', serif;
+    font-size: 1.3rem;
+    color: #8b5cf6;
+    text-align: center;
+    margin-bottom: 50px;
+    font-style: italic;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Contenido */
+  .carta-contenido {
+    font-size: 1.15rem;
+    line-height: 2.2;
+    color: #2c3e50;
+    text-align: justify;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Párrafos con decoración especial */
+  .carta-contenido p {
+    margin-bottom: 25px;
+    position: relative;
+    padding-left: 25px;
+  }
+
+  /* Decoración en lugar de viñeta */
+  .carta-contenido p::before {
+    content: '💙';
+    position: absolute;
+    left: 0;
+    top: 5px;
+    font-size: 1rem;
+  }
+
+  /* Primera línea especial */
+  .carta-contenido p:first-of-type {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #8b5cf6;
+    padding-left: 0;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .carta-contenido p:first-of-type::before {
+    display: none;
+  }
+
+  /* Efecto hover */
+  .carta-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 70px rgba(139, 92, 246, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  /* Firma especial */
+  .carta-firma {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 2px dashed #8b5cf6;
+    position: relative;
+    z-index: 1;
+  }
+
+  .firma-nombre {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+    color: #8b5cf6;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .firma-emoji {
+    font-size: 1.5rem;
+  }
+
+  /* Animación sutil */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .carta-container::before,
+  .carta-container::after {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .carta-container {
+      padding: 40px 30px;
+      border-radius: 20px;
+    }
+    
+    .carta-titulo {
+      font-size: 2.2rem;
+    }
+    
+    .carta-contenido {
+      font-size: 1.05rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="carta-container">
+    <div class="carta-fecha">02 de noviembre de 2025</div>
+    <h1 class="carta-titulo">Para Mi Cachetitos</h1>
+    <p class="carta-subtitulo">Palabras desde mi corazón</p>
+    
+    <div class="carta-contenido">
+        <p>Esta semana ha sido algo pesada. He estado bastante cansado, aunque trato de no demostrarlo. Simplemente sigo, ya sabes, sin quejarme mucho. Pero sí, el cuerpo me está pasando factura. No pensé que estuviera tan enfermo, pero parece que sí. Aun así intento mantenerme firme, no dejarme caer por el malestar.</p>
+        
+        <p>Ayer me gustó mucho ver la peli contigo. Fue un momento tranquilo, bonito, de esos que se sienten bien sin necesidad de muchas palabras. Me gusta verte sonreír cuando hablamos, cuando cantas, cuando te diviertes. Esas cosas, aunque parezcan simples, me hacen sentir bien.</p>
+        
+        <p>También me gusta ver a Tich. Me alegra saber que lo cuidas tanto, como si fuera una parte de nosotros. Es una tontería, pero me da algo de paz verlo contigo.</p>
+        
+        <p>Hoy me siento cansado, la verdad. Pero bueno, no importa. Dios es bueno todo el tiempo, y todo el tiempo, Dios es bueno. Esa idea me sostiene, incluso en días como este.</p>
+        
+        <p>Te espero esta noche a las 7 pm para ver "Enredados". Besito para los cachetitos.</p>
+    </div>
+    
+    <div class="carta-firma">
+        <div class="firma-nombre">Tu Cachetes</div>
+        <div class="firma-emoji">💙💜✨</div>
+    </div>
+</div>
+
+</body>
+</html>
+

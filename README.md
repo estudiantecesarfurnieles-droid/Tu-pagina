@@ -4,10 +4,9 @@ Página romántica personalizada con sistema de login seguro.
 
 ## 🔐 Sistema de Login
 
-La página está protegida con un login simple y seguro con dos cuentas de acceso:
+La página está protegida con un login simple y seguro con una cuenta de acceso:
 
-- **Usuario Tich:** tich (Contraseña: febrero13)
-- **Usuario Camila:** camila (Contraseña: Camilo27)
+- **Usuario:** tich (Contraseña: febrero13)
 
 ## 🚀 Despliegue en Vercel
 
@@ -39,10 +38,8 @@ proyecto-cumple/
 
 ## 🎯 Características
 
-- ✅ Sistema de login seguro con dos usuarios y localStorage
-- ✅ Juego interactivo "Te Extraño" con preguntas personalizadas
-  - Tich: juega con las 6 preguntas originales sobre Camila
-  - Camila: crea sus propias preguntas para que Tich demuestre cuánto la conoce
+- ✅ Sistema de login seguro con localStorage
+- ✅ Juego interactivo "Te Extraño" con 6 preguntas especiales
 - ✅ Interfaz romántica y elegante
 - ✅ Responsive design (móvil y desktop)
 - ✅ Galería de fotos y videos
