@@ -511,3 +511,158 @@ function cerrarModalWhatsApp() {
     document.body.removeChild(modal);
   }
 }
+
+// ============================================
+// NUEVO: Funciones para creación de preguntas de Camila
+// ============================================
+
+// Array para guardar preguntas creadas por Camila
+let preguntasDeCamila = [];
+
+// Iniciar juego de creación de preguntas
+function iniciarJuegoCamila() {
+  preguntasDeCamila = [];
+  document.getElementById('juego-inicio').classList.add('hidden');
+  document.getElementById('juego-crear-preguntas').classList.remove('hidden');
+  actualizarVistaPreguntasCreadas();
+  playButtonSound();
+}
+
+// Agregar nueva pregunta (abrir modal)
+function agregarNuevaPregunta() {
+  if (preguntasDeCamila.length >= 5) {
+    alert('Solo puedes crear máximo 5 preguntas 💕');
+    return;
+  }
+  
+  // Limpiar campos
+  document.getElementById('nueva-pregunta-texto').value = '';
+  document.getElementById('opcion-a').value = '';
+  document.getElementById('opcion-b').value = '';
+  document.getElementById('opcion-c').value = '';
+  document.getElementById('opcion-d').value = '';
+  document.getElementById('respuesta-correcta').value = '0';
+  
+  // Mostrar modal
+  document.getElementById('modal-pregunta').classList.remove('hidden');
+  playButtonSound();
+}
+
+// Cerrar modal de pregunta
+function cerrarModalPregunta() {
+  document.getElementById('modal-pregunta').classList.add('hidden');
+  playButtonSound();
+}
+
+// Guardar nueva pregunta
+function guardarNuevaPregunta() {
+  const preguntaTexto = document.getElementById('nueva-pregunta-texto').value.trim();
+  const opcionA = document.getElementById('opcion-a').value.trim();
+  const opcionB = document.getElementById('opcion-b').value.trim();
+  const opcionC = document.getElementById('opcion-c').value.trim();
+  const opcionD = document.getElementById('opcion-d').value.trim();
+  const respuestaCorrecta = parseInt(document.getElementById('respuesta-correcta').value);
+  
+  // Validar que todos los campos estén llenos
+  if (!preguntaTexto || !opcionA || !opcionB || !opcionC || !opcionD) {
+    alert('Por favor completa todos los campos 💕');
+    return;
+  }
+  
+  // Crear objeto de pregunta
+  const nuevaPregunta = {
+    pregunta: preguntaTexto,
+    opciones: [opcionA, opcionB, opcionC, opcionD],
+    correcta: respuestaCorrecta,
+    mensajeCorrecto: "¡Correcto! Me conoces muy bien 💕",
+    mensajeIncorrecto: "No es correcto, pero te amo igual 💕"
+  };
+  
+  // Agregar a la lista
+  preguntasDeCamila.push(nuevaPregunta);
+  
+  // Cerrar modal
+  cerrarModalPregunta();
+  
+  // Actualizar vista
+  actualizarVistaPreguntasCreadas();
+  
+  playButtonSound();
+}
+
+// Actualizar vista de preguntas creadas
+function actualizarVistaPreguntasCreadas() {
+  const container = document.getElementById('preguntas-creadas');
+  container.innerHTML = '';
+  
+  if (preguntasDeCamila.length === 0) {
+    container.innerHTML = '<p style="text-align: center; color: var(--text-muted); padding: 20px;">No has creado ninguna pregunta aún. ¡Agrega tu primera pregunta! 💕</p>';
+    return;
+  }
+  
+  preguntasDeCamila.forEach((pregunta, index) => {
+    const preguntaCard = document.createElement('div');
+    preguntaCard.style.cssText = `
+      background: var(--bg-glass);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--border-radius-md);
+      padding: 20px;
+      position: relative;
+    `;
+    
+    preguntaCard.innerHTML = `
+      <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px;">
+        <h4 style="color: var(--text-primary); margin: 0; font-family: var(--font-elegant);">Pregunta ${index + 1}</h4>
+        <button onclick="eliminarPregunta(${index})" style="background: #ef4444; color: white; border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; font-size: 16px;">✕</button>
+      </div>
+      <p style="color: var(--text-primary); margin-bottom: 15px; font-weight: 600;">${pregunta.pregunta}</p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.9rem;">
+        ${pregunta.opciones.map((opcion, i) => `
+          <div style="color: ${i === pregunta.correcta ? '#10b981' : 'var(--text-secondary)'};">
+            ${String.fromCharCode(65 + i)}. ${opcion}
+            ${i === pregunta.correcta ? ' ✓' : ''}
+          </div>
+        `).join('')}
+      </div>
+    `;
+    
+    container.appendChild(preguntaCard);
+  });
+}
+
+// Eliminar pregunta
+function eliminarPregunta(index) {
+  preguntasDeCamila.splice(index, 1);
+  actualizarVistaPreguntasCreadas();
+  playButtonSound();
+}
+
+// Iniciar juego con preguntas de Camila
+function iniciarJuegoConMisPreguntas() {
+  if (preguntasDeCamila.length === 0) {
+    alert('Debes crear al menos una pregunta para iniciar el juego 💕');
+    return;
+  }
+  
+  // Configurar las preguntas
+  preguntas = [...preguntasDeCamila];
+  
+  // Iniciar juego normal
+  juegoActivo = true;
+  preguntaActual = 0;
+  puntuacion = 0;
+  
+  // Ocultar pantalla de creación y mostrar pantalla de preguntas
+  document.getElementById('juego-crear-preguntas').classList.add('hidden');
+  document.getElementById('juego-preguntas').classList.remove('hidden');
+  
+  // Actualizar puntuación inicial
+  actualizarPuntuacion();
+  actualizarProgreso();
+  
+  // Mostrar primera pregunta
+  mostrarPregunta();
+  
+  // Reproducir sonido de inicio
+  playButtonSound();
+}
