@@ -4,10 +4,9 @@ Página romántica personalizada con sistema de login seguro.
 
 ## 🔐 Sistema de Login
 
-La página está protegida con un login simple y seguro que permite acceso solo a 2 usuarios:
+La página está protegida con un login simple y seguro con una cuenta de acceso:
 
-- **Usuario 1:** Camilo (Contraseña: Camilo27)
-- **Usuario 2:** Tish (Contraseña: tish225)
+- **Usuario:** tich (Contraseña: febrero13)
 
 ## 🚀 Despliegue en Vercel
 
