@@ -4,207 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>💖 Nuestro Universo de Amor 💖</title>
-  <!-- Login v2 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css" />
-  <style>
-    /* LOGIN OVERLAY */
-    #loginOverlay {
-      position: fixed !important;
-      top: 0 !important;
-      left: 0 !important;
-      width: 100vw !important;
-      height: 100vh !important;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-      z-index: 2147483647 !important;
-      display: flex !important;
-      justify-content: center !important;
-      align-items: center !important;
-      font-family: 'Poppins', sans-serif !important;
-    }
-    
-    /* OCULTAR CONTENIDO SI NO ESTÁ AUTENTICADO */
-    body:not(.authenticated) > *:not(#loginOverlay) {
-      display: none !important;
-    }
-    
-    /* MOSTRAR CONTENIDO SI ESTÁ AUTENTICADO */
-    body.authenticated #loginOverlay {
-      display: none !important;
-    }
-    
-    body.authenticated > *:not(#loginOverlay) {
-      display: block !important;
-    }
-    
-    body.authenticated .pantalla {
-      display: block !important;
-    }
-    
-    #loginBox {
-      background: rgba(255, 255, 255, 0.95) !important;
-      border-radius: 20px !important;
-      padding: 40px !important;
-      max-width: 400px !important;
-      width: 90% !important;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3) !important;
-      text-align: center !important;
-    }
-    
-    #loginBox h2 {
-      color: #667eea !important;
-      margin-bottom: 10px !important;
-      font-size: 2rem !important;
-    }
-    
-    #loginBox p {
-      color: #666 !important;
-      margin-bottom: 30px !important;
-    }
-    
-    #loginBox input {
-      width: 100% !important;
-      padding: 15px !important;
-      margin-bottom: 15px !important;
-      border: 2px solid #ddd !important;
-      border-radius: 10px !important;
-      font-size: 1rem !important;
-      box-sizing: border-box !important;
-    }
-    
-    #loginBox input:focus {
-      outline: none !important;
-      border-color: #667eea !important;
-    }
-    
-    #loginBox button {
-      width: 100% !important;
-      padding: 15px !important;
-      background: linear-gradient(45deg, #667eea, #764ba2) !important;
-      color: white !important;
-      border: none !important;
-      border-radius: 10px !important;
-      font-size: 1.1rem !important;
-      font-weight: 600 !important;
-      cursor: pointer !important;
-      transition: transform 0.2s !important;
-    }
-    
-    #loginBox button:hover {
-      transform: translateY(-2px) !important;
-    }
-    
-    #loginError {
-      color: #e74c3c !important;
-      margin-top: 10px !important;
-      font-size: 0.9rem !important;
-      display: none !important;
-    }
-  </style>
-  <script>
-    // SCRIPT DE LOGIN - EJECUTAR INMEDIATAMENTE
-    (function() {
-      const USUARIOS = [
-        { username: "TICH", password: "TICH225" }
-      ];
-
-      function checkAuth() {
-        return localStorage.getItem('auth') === 'true';
-      }
-
-      function login(username, password) {
-        console.log('Función login llamada con:', username, password);
-        console.log('USUARIOS:', USUARIOS);
-        const user = USUARIOS.find(u => 
-          u.username.toLowerCase() === username.toLowerCase() && 
-          u.password === password
-        );
-        console.log('Usuario encontrado:', user);
-        
-        if (user) {
-          localStorage.setItem('auth', 'true');
-          localStorage.setItem('username', user.username);
-          return true;
-        }
-        return false;
-      }
-
-      // EJECUTAR CUANDO EL DOM ESTÉ LISTO
-      function initLogin() {
-        const overlay = document.getElementById('loginOverlay');
-        const loginForm = document.getElementById('loginForm');
-        const errorMsg = document.getElementById('loginError');
-        
-        // Si ya está autenticado, mostrar contenido y ocultar login
-        if (checkAuth()) {
-          document.body.classList.add('authenticated');
-          return;
-        }
-        
-        // Si NO está autenticado, asegurar que login esté visible
-        document.body.classList.remove('authenticated');
-
-        // Manejar el formulario
-        if (loginForm) {
-          loginForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const username = document.getElementById('username').value.trim();
-            const password = document.getElementById('password').value;
-
-            if (!username || !password) {
-              if (errorMsg) {
-                errorMsg.textContent = 'Por favor completa todos los campos';
-                errorMsg.style.display = 'block';
-              }
-              return;
-            }
-
-            console.log('Intentando login con:', username, password);
-            if (login(username, password)) {
-              console.log('Login exitoso, recargando página...');
-              if (overlay) overlay.style.display = 'none';
-              if (errorMsg) errorMsg.style.display = 'none';
-              
-              // Recargar la página para que todo funcione correctamente
-              window.location.href = window.location.href;
-            } else {
-              console.log('Login falló, credenciales incorrectas');
-              if (errorMsg) {
-                errorMsg.textContent = 'Usuario o contraseña incorrectos';
-                errorMsg.style.display = 'block';
-              }
-            }
-          });
-        }
-      }
-
-      // Ejecutar cuando DOM esté listo
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initLogin);
-      } else {
-        initLogin();
-      }
-    })();
-  </script>
+  <!-- Fallback para Google Drive -->
+  <link rel="stylesheet" href="css/style.css" onerror="console.error('Error cargando CSS principal')" />
 </head>
 <body>
-  <!-- LOGIN OVERLAY - PRIMERO QUE TODO -->
-  <div id="loginOverlay">
-    <div id="loginBox">
-      <h2>💖 Acceso al Universo 💖</h2>
-      <p>Ingresa tus credenciales para continuar</p>
-      <form id="loginForm">
-        <input type="text" id="username" placeholder="Usuario" required autocomplete="off">
-        <input type="password" id="password" placeholder="Contraseña" required autocomplete="off">
-        <button type="submit">Ingresar 💕</button>
-        <div id="loginError"></div>
-      </form>
-    </div>
-  </div>
-
   <!-- Audios -->
   <audio id="musicaFondo" loop muted></audio>
   <audio id="musicaCarta"></audio>
@@ -234,71 +41,6 @@
       <button class="cerrar" onclick="cerrarModalImagen()">⬅️ Regresar</button>
       <div id="media-container">
         <img id="imagen-ampliada" src="" alt="Media ampliada" />
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal Te Extraño -->
-  <div id="modal-te-extrano" class="modal hidden">
-    <div class="modal-content">
-      <button class="cerrar" onclick="cerrarModalExtraño()">⬅️ Volver</button>
-      <h3>Te Extraño</h3>
-      <p>Escoge una opción</p>
-    </div>
-  </div>
-
-  <!-- Loading Screen -->
-  <div id="screenShatterContainer" class="loading-screen hidden">
-    <div class="loading-content">
-      <div class="cosmic-title">
-        <div class="title-glow"></div>
-        <h1 class="title-text">💖 Nuestro Universo de Amor 💖</h1>
-      </div>
-      
-      <!-- Floating peluches -->
-      <div class="floating-peluches">
-        <div class="peluche-float tich-float">
-          <img src="img/tich1.jpg" alt="Tich" class="peluche-img-float">
-        </div>
-        <div class="peluche-trail"></div>
-        <div class="peluche-float camila-float">
-          <img src="img/camila1.jpg" alt="Camila" class="peluche-img-float">
-        </div>
-      </div>
-      
-      <!-- Progress bar -->
-      <div class="cosmic-progress-container">
-        <div class="progress-track">
-          <div id="cosmicProgressFill" class="progress-fill"></div>
-        </div>
-        <div id="loadingPercentage" class="loading-percentage">0%</div>
-      </div>
-      
-      <div id="loadingStatus" class="loading-status">Preparando el universo...</div>
-      <div id="loadingSubstatus" class="loading-substatus">Cargando estrellas de amor...</div>
-      
-      <!-- Cosmic hearts -->
-      <div class="cosmic-hearts">
-        <div class="cosmic-heart">💖</div>
-        <div class="cosmic-heart">💕</div>
-        <div class="cosmic-heart">💝</div>
-        <div class="cosmic-heart">💗</div>
-        <div class="cosmic-heart">💘</div>
-        <div class="cosmic-heart">💞</div>
-      </div>
-      
-      <!-- Stellar particles -->
-      <div class="stellar-particles">
-        <div class="star-particle"></div>
-        <div class="star-particle"></div>
-        <div class="star-particle"></div>
-        <div class="star-particle"></div>
-        <div class="star-particle"></div>
-        <div class="star-particle"></div>
-        <div class="star-particle"></div>
-        <div class="star-particle"></div>
-        <div class="star-particle"></div>
-        <div class="star-particle"></div>
       </div>
     </div>
   </div>
@@ -361,13 +103,109 @@
         <div class="floating-emoji">🌹</div>
         <div class="floating-emoji">🌼</div>
       </div>
+      
+      <!-- Partículas de fondo -->
+      <div class="background-particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+      </div>
+      
+    </div>
+
+    <!-- Botón de contexto -->
+    <div id="boton-contexto-container" class="boton-contexto-container hidden">
+      <button id="boton-contexto" class="boton-contexto" onclick="mostrarContextoConversacion()">
+        💡 Contexto de la conversación
+      </button>
+    </div>
+
+    <!-- Botón "Explorar Universo" -->
+    <button id="btnIniciarAventura" class="btn-iniciar-aventura hidden">✨ Explorar Universo ✨</button>
+  </section>
+
+  <!-- 🌟 PANTALLA DE CARGA ÉPICA Y CREATIVA -->
+  <div id="screenShatterContainer" class="screen-shatter-container hidden">
+    <!-- ✨ Fondo cósmico con galaxias -->
+    <div class="cosmic-background">
+      <div class="galaxy"></div>
+      <div class="nebula"></div>
+      <div class="cosmic-dust"></div>
     </div>
     
-    <!-- Botón para iniciar aventura -->
-    <button id="btnIniciarAventura" class="btn-iniciar-aventura visible">
-      ✨ Explorar Universo ✨
-    </button>
-  </section>
+    <!-- 🌟 Partículas estelares -->
+    <div class="stellar-particles">
+      <div class="star-particle"></div>
+      <div class="star-particle"></div>
+      <div class="star-particle"></div>
+      <div class="star-particle"></div>
+      <div class="star-particle"></div>
+      <div class="star-particle"></div>
+      <div class="star-particle"></div>
+      <div class="star-particle"></div>
+      <div class="star-particle"></div>
+      <div class="star-particle"></div>
+    </div>
+    
+    <!-- 💖 Corazones cósmicos -->
+    <div class="cosmic-hearts">
+      <div class="cosmic-heart">💖</div>
+      <div class="cosmic-heart">💕</div>
+      <div class="cosmic-heart">💝</div>
+      <div class="cosmic-heart">💗</div>
+      <div class="cosmic-heart">💘</div>
+      <div class="cosmic-heart">💞</div>
+    </div>
+    
+    <!-- 🎯 Contenedor principal -->
+    <div class="loading-container">
+      <!-- 🌟 Título cósmico -->
+      <div class="cosmic-title">
+        <div class="title-text">Nuestro Universo de Amor</div>
+        <div class="title-glow"></div>
+      </div>
+      
+      <!-- 💫 Peluches flotantes -->
+      <div class="floating-peluches">
+        <div class="peluche-float tich-float">
+          <img src="img/tich1.jpg" alt="Tich" class="peluche-img-float">
+          <div class="peluche-trail"></div>
+        </div>
+        <div class="peluche-float camila-float">
+          <img src="img/camila1.jpg" alt="Camila" class="peluche-img-float">
+          <div class="peluche-trail"></div>
+        </div>
+      </div>
+      
+      <!-- 🌟 Barra de progreso cósmica -->
+      <div class="cosmic-progress-container">
+        <div class="progress-track">
+          <div class="progress-fill" id="cosmicProgressFill"></div>
+          <div class="progress-particles"></div>
+        </div>
+        <div class="progress-glow"></div>
+      </div>
+      
+      <!-- 📊 Información de carga -->
+      <div class="loading-info">
+        <div class="loading-percentage" id="loadingPercentage">0%</div>
+        <div class="loading-status" id="loadingStatus">Preparando el universo...</div>
+        <div class="loading-substatus" id="loadingSubstatus">Cargando estrellas de amor...</div>
+      </div>
+      
+      <!-- ✨ Efectos adicionales -->
+      <div class="loading-effects">
+        <div class="pulse-ring"></div>
+        <div class="pulse-ring"></div>
+        <div class="pulse-ring"></div>
+      </div>
+    </div>
+  </div>
 
   <!-- MENÚ -->
   <section id="menu" class="pantalla hidden">
@@ -379,40 +217,41 @@
       </div>
       
       <div class="sections-grid">
-        <div class="section-card">
+        <div class="section-card featured" onclick="playButtonSound(); mostrarSeccion('historia')">
           <div class="section-icon">📖</div>
           <div class="section-content">
             <h3>Nuestra Historia</h3>
             <p>El libro de nuestro amor</p>
           </div>
-          <button class="btn-sec" onclick="playButtonSound(); mostrarSeccion('historia')">✨</button>
+          <div class="section-hover"></div>
+          <div class="featured-badge">✨</div>
         </div>
         
-        <div class="section-card">
+        <div class="section-card" onclick="playButtonSound(); mostrarSeccion('cartas')">
           <div class="section-icon">💌</div>
           <div class="section-content">
             <h3>Cartas de Amor</h3>
             <p>Mensajes del corazón</p>
           </div>
-          <button class="btn-sec" onclick="playButtonSound(); mostrarSeccion('cartas')">✨</button>
+          <div class="section-hover"></div>
         </div>
         
-        <div class="section-card">
+        <div class="section-card" onclick="playButtonSound(); mostrarSeccion('fotos')">
           <div class="section-icon">📸</div>
           <div class="section-content">
             <h3>Nuestros Momentos</h3>
             <p>Recuerdos eternos</p>
           </div>
-          <button class="btn-sec" onclick="playButtonSound(); mostrarSeccion('fotos')">❤️</button>
+          <div class="section-hover"></div>
         </div>
         
-        <div class="section-card">
+        <div class="section-card" onclick="playButtonSound(); mostrarSeccion('extraño')" style="grid-column: 2; grid-row: 2;">
           <div class="section-icon">❤️</div>
           <div class="section-content">
             <h3>Te Extraño</h3>
             <p>Un abrazo virtual</p>
           </div>
-          <button class="btn-sec" onclick="playButtonSound(); mostrarSeccion('extraño')">⬅️ Volver al menú</button>
+          <div class="section-hover"></div>
         </div>
       </div>
     </div>
@@ -422,19 +261,27 @@
   <section id="cartas" class="pantalla hidden">
     <button class="btn-sec" onclick="volverASeccionAnterior()" style="position: absolute; top: 20px; left: 20px; z-index: 1000;">⬅️ Volver al menú</button>
     <div class="cartas-hero">
+      <div class="corazones-fondo" aria-hidden="true"></div>
       <h2>💌 Cartas de Amor</h2>
-      <p>Mensajes que te abrazan incluso cuando estamos lejos. 📅 Nueva carta cada sábado a las 7:00 PM</p>
-      <div id="listaCartas"></div>
+      <p class="cartas-sub">Mensajes que te abrazan incluso cuando estamos lejos. 📅 Nueva carta cada sábado a las 7:00 PM</p>
     </div>
+
+    <div id="listaCartas" class="contenedor-cartas" role="list"></div>
   </section>
 
   <!-- FOTOS -->
   <section id="fotos" class="pantalla hidden">
     <button class="btn-sec btn-volver" onclick="playButtonSound(); volverASeccionAnterior()" style="position: absolute; top: 20px; left: 20px; z-index: 1000;">⬅️ Volver al menú</button>
     <div class="fotos-hero">
+      <div class="fotos-particles" aria-hidden="true"></div>
       <h2>📸 Nuestros Momentos</h2>
-      <p>Cada imagen guarda un pedacito de nuestro corazón 💕</p>
-      <div class="galeria-fotos"></div>
+      <p class="fotos-sub">Cada imagen guarda un pedacito de nuestro corazón 💕</p>
+    </div>
+
+    <div class="contenedor-galeria">
+      <div class="galeria-fotos">
+        <!-- Se llena dinámicamente con JavaScript -->
+      </div>
     </div>
   </section>
 
@@ -442,89 +289,172 @@
   <section id="peli" class="pantalla hidden">
     <button class="btn-sec btn-volver" onclick="playButtonSound(); volverASeccionAnterior()" style="position: absolute; top: 20px; left: 20px; z-index: 1000;">⬅️ Volver al menú</button>
     <div class="peli-hero">
+      <div class="peli-stars" aria-hidden="true"></div>
       <h2>🎬 Nuestra Cita Virtual</h2>
-      <p>Mantita, palomitas y mucho amor a distancia 💕 📅 Link habilitado todos los sábados a las 7:00 PM</p>
-      
-      <div class="peli-content">
-        <h3>Nuestra película del corazón</h3>
-        <p>Cada película es una excusa para estar juntos, aunque sea a través de la pantalla.</p>
-        <input type="text" id="linkPelicula" value="https://example.com" readonly>
-        <button class="btn-sec" onclick="copiarLinkPelicula()">🔗 Copiar link</button>
-        <p class="tip-peli">💡 Tip: Prepara las palomitas y tu mantita favorita</p>
+      <p class="peli-sub">Mantita, palomitas y mucho amor a distancia 💕 📅 Link habilitado todos los sábados a las 7:00 PM</p>
+    </div>
+
+    <div class="caja-pelicula pelicula-romantica">
+      <div class="pelicula-header">
+        <h3 id="tituloPelicula">Nuestra película del corazón</h3>
+        <p id="descripcionPelicula">Cada película es una excusa para estar juntos, aunque sea a través de la pantalla.</p>
+      </div>
+      <div class="link-container">
+        <input type="text" id="linkPelicula" readonly value="https://meet.google.com/..." aria-label="Enlace de la película">
+        <button id="copiarLink" class="btn-copiar">🔗 Copiar link</button>
+      </div>
+      <div class="pelicula-tips">
+        <p>💡 Tip: Prepara las palomitas y tu mantita favorita</p>
       </div>
     </div>
   </section>
 
   <!-- ORACIÓN -->
   <section id="oracion" class="pantalla hidden">
-    <button class="btn-sec btn-volver" onclick="playButtonSound(); volverASeccionAnterior()" style="position: absolute; top: 20px; left: 20px; z-index: 1000;">⬅️ Volver</button>
+    <button class="btn-sec btn-volver" onclick="playButtonSound(); volverASeccionAnterior()" style="position: absolute; top: 20px; left: 20px; z-index: 1000;">⬅️ Volver al menú</button>
     <div class="oracion-hero">
+      <div class="oracion-light" aria-hidden="true"></div>
       <h2>🙏 Nuestro Momento Sagrado</h2>
-      <p>Cuando nuestras almas se encuentran en oración ✨ 📅 Nuevo link cada madrugada a las 3:00 AM</p>
-      
-      <div class="oracion-content">
-        <h3>Hora de oración — 03:00 a.m.</h3>
-        <p>Cada madrugada, nuestros corazones se unen en una sola plegaria. El enlace aparecerá aquí cuando sea la hora.</p>
-        <input type="text" id="linkOracion" value="https://meet.google.com/link-aqui" readonly>
-        <div class="oracion-buttons">
-          <button class="btn-sec" onclick="navigator.clipboard.writeText(document.getElementById('linkOracion').value); alert('Link copiado')">💾 Guardar</button>
-          <button class="btn-sec" onclick="navigator.clipboard.writeText(document.getElementById('linkOracion').value); alert('Link copiado')">🔗 Copiar link</button>
-        </div>
-        <p class="versiculo">"Donde dos o tres se reúnen en mi nombre, allí estoy yo en medio de ellos" - Mateo 18:20</p>
+      <p class="oracion-sub">Cuando nuestras almas se encuentran en oración ✨ 📅 Nuevo link cada madrugada a las 3:00 AM</p>
+    </div>
+
+    <div class="caja-oracion oracion-romantica">
+      <div class="oracion-header">
+        <h3 id="tituloOracion">Hora de oración — 03:00 a.m.</h3>
+        <p id="descripcionOracion">Cada madrugada, nuestros corazones se unen en una sola plegaria. El enlace aparecerá aquí cuando sea la hora.</p>
+      </div>
+
+      <div class="link-container-oracion">
+        <input type="text" id="linkOracion" readonly placeholder="El link se mostrará diariamente a las 3:00 a.m." aria-label="Enlace de oracion" />
+        <button id="guardarLinkOracion" class="btn-copiar hidden">💾 Guardar</button>
+        <button id="copiarLinkOracion" class="btn-copiar" disabled>🔗 Copiar link</button>
+      </div>
+
+      <div class="oracion-versiculo">
+        <p>"Donde dos o tres se reúnen en mi nombre, allí estoy yo en medio de ellos" - Mateo 18:20</p>
       </div>
     </div>
   </section>
 
   <!-- TE EXTRAÑO -->
   <section id="extraño" class="pantalla hidden">
-    <button class="btn-sec btn-volver" onclick="playButtonSound(); volverASeccionAnterior()" style="position: absolute; top: 20px; left: 20px; z-index: 1000;">⬅️ Volver al menú</button>
+    <button class="btn-sec btn-volver" onclick="playButtonSound(); volverASeccionAnterior()" style="position: absolute; top: 20px; left: 20px; z-index: 1000;">⬅️ Volver</button>
     <div class="extraño-hero">
+      <div class="extraño-hearts" aria-hidden="true"></div>
       <h2>❤️ Te Extraño Mucho</h2>
-      <p>El rincón donde mis abrazos viajan hasta ti 💕</p>
-      
-      <div class="juego-container">
-        <div id="juego-inicio" class="juego-pantalla">
-          <div class="juego-titulo">
-            <h3>🎮 Juego del Amor 💕</h3>
-            <p>¡Demuestra cuánto me conoces, mi amor!</p>
-          </div>
-          <div class="juego-descripcion">
-            <p>Responde las preguntas correctamente y gana corazones. ¡Cada respuesta correcta te acerca más a mí! 💖</p>
-          </div>
-          <button class="btn-juego-iniciar" onclick="iniciarJuego()">💕 ¡Comenzar Juego!💕</button>
+      <p class="extraño-sub">El rincón donde mis abrazos viajan hasta ti 💕</p>
+    </div>
+
+    <!-- 🎮 JUEGO DE PREGUNTAS DIVERTIDO -->
+    <div class="juego-container">
+      <!-- Pantalla de inicio del juego -->
+      <div id="juego-inicio" class="juego-pantalla">
+        <div class="juego-titulo">
+          <h3>🎮 Juego del Amor 💕</h3>
+          <p>¡Demuestra cuánto me conoces, mi amor!</p>
+        </div>
+        <div class="juego-descripcion">
+          <p>Responde las preguntas correctamente y gana corazones. ¡Cada respuesta correcta te acerca más a mí! 💖</p>
+        </div>
+        <button class="btn-juego-iniciar" onclick="iniciarJuego()">
+          <span class="corazon-animado">💕</span>
+          ¡Comenzar Juego!
+          <span class="corazon-animado">💕</span>
+        </button>
+      </div>
+
+      <!-- Pantalla del juego -->
+      <div id="juego-preguntas" class="juego-pantalla hidden">
+        <div class="juego-header">
           <div class="juego-puntuacion">
-            <div class="corazones-container">
-              💖💖💖💖💖
-            </div>
-            <p>Puntuación: <span id="puntuacion">0</span></p>
+            <span class="corazones-puntuacion" id="corazones-puntuacion">💖💖💖💖💖</span>
+            <span class="puntuacion-texto" id="puntuacion-texto">Puntuación: 0</span>
+          </div>
+          <div class="juego-progreso">
+            <div class="progreso-bar" id="progreso-bar"></div>
+            <span class="progreso-texto" id="progreso-texto">Pregunta 1 de 5</span>
           </div>
         </div>
-        
-        <div id="juego-preguntas" class="juego-pantalla hidden">
-          <p class="pregunta-numero">Pregunta <span id="pregunta-actual">1</span> de 5</p>
-          <h3 id="pregunta-texto"></h3>
-          <div id="opciones-container"></div>
+
+        <div class="juego-pregunta">
+          <h3 id="pregunta-texto">¿Cuál es mi color favorito?</h3>
+          <div class="opciones-container" id="opciones-container">
+            <!-- Se llena dinámicamente -->
+          </div>
         </div>
-        
-        <div id="juego-mensaje-especial" class="juego-pantalla hidden">
-          <h3>💕 Pregunta Especial 💕</h3>
-          <p>¡Una última pregunta muy importante!</p>
-          <h4>¿Me extrañas?</h4>
-          <p>Escribe un mensaje especial para mí y lo recibiré en mi WhatsApp 💙</p>
-          <textarea id="mensaje-textarea" placeholder="Escribe tu mensaje aquí..."></textarea>
-          <p id="contador-caracteres">0/500</p>
-          <button class="btn-juego-iniciar" onclick="enviarMensajeWhatsApp()">📱 Enviar a WhatsApp💕</button>
-          <button class="btn-juego-saltar" onclick="mostrarResultado()">Saltar Mensaje</button>
+
+        <div class="juego-feedback hidden" id="juego-feedback">
+          <div class="feedback-contenido">
+            <div class="feedback-icono" id="feedback-icono">🎉</div>
+            <div class="feedback-mensaje" id="feedback-mensaje">¡Correcto! Te amo mucho 💕</div>
+            <button class="btn-siguiente" onclick="siguientePregunta()">Siguiente Pregunta</button>
+          </div>
         </div>
-        
-        <div id="juego-resultado" class="juego-pantalla hidden">
-          <h3>¡Increíble! 🎉</h3>
-          <p>¡Sabes todo sobre mí!</p>
-          <p id="puntuacion-final">5/5</p>
-          <div class="corazones-finales">💖💖💖💖💖</div>
-          <p id="mensaje-final">¡Eres la persona más especial del mundo! Cada respuesta correcta me recuerda por qué te amo tanto. 💕</p>
-          <p>Te extraño mucho, mi amor. Este juego es solo una pequeña forma de decirte que siempre estás en mi corazón. ❤️</p>
-          <button class="btn-juego-iniciar" onclick="iniciarJuego()">💕 Jugar Nuevamente💕</button>
+      </div>
+
+      <!-- Pantalla de mensaje especial -->
+      <div id="juego-mensaje-especial" class="juego-pantalla hidden">
+        <div class="mensaje-especial-contenido">
+          <div class="mensaje-especial-titulo">
+            <h3>💕 Pregunta Especial 💕</h3>
+            <p>¡Una última pregunta muy importante!</p>
+          </div>
+          
+          <div class="mensaje-especial-pregunta">
+            <h4>¿Me extrañas?</h4>
+            <p>Escribe un mensaje especial para mí y lo recibiré en mi WhatsApp 💙</p>
+          </div>
+          
+          <div class="mensaje-especial-formulario">
+            <textarea 
+              id="mensaje-textarea" 
+              placeholder="Escribe aquí tu mensaje especial... 💕"
+              maxlength="500"
+              rows="4"
+            ></textarea>
+            <div class="mensaje-contador">
+              <span id="contador-caracteres">0/500</span>
+            </div>
+          </div>
+          
+          <div class="mensaje-especial-botones">
+            <button class="btn-enviar-whatsapp" onclick="enviarMensajeWhatsApp()">
+              <span class="whatsapp-icon">📱</span>
+              Enviar a WhatsApp
+              <span class="corazon-animado">💕</span>
+            </button>
+            <button class="btn-saltar-mensaje" onclick="saltarMensaje()">
+              Saltar Mensaje
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pantalla de resultados -->
+      <div id="juego-resultados" class="juego-pantalla hidden">
+        <div class="resultados-contenido">
+          <div class="resultados-titulo">
+            <h3 id="resultados-titulo">¡Increíble! 🎉</h3>
+            <p id="resultados-subtitulo">¡Sabes todo sobre mí!</p>
+          </div>
+          <div class="resultados-puntuacion">
+            <div class="puntuacion-final" id="puntuacion-final">5/5</div>
+            <div class="corazones-finales" id="corazones-finales">💖💖💖💖💖</div>
+          </div>
+          <div class="resultados-mensaje" id="resultados-mensaje">
+            <p>¡Eres la persona más especial del mundo! Cada respuesta correcta me recuerda por qué te amo tanto. 💕</p>
+            <p>Te extraño mucho, mi amor. Este juego es solo una pequeña forma de decirte que siempre estás en mi corazón. ❤️</p>
+          </div>
+          <div class="resultados-botones">
+            <button class="btn-jugar-nuevamente" onclick="reiniciarJuego()">
+              <span class="corazon-animado">💕</span>
+              Jugar Nuevamente
+              <span class="corazon-animado">💕</span>
+            </button>
+            <button class="btn-volver-menu" onclick="volverASeccionAnterior()">
+              ⬅️ Volver al Menú
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -534,11 +464,11 @@
   <section id="historia" class="pantalla hidden">
     <button class="btn-sec btn-volver" onclick="playButtonSound(); volverASeccionAnterior()" style="position: absolute; top: 20px; left: 20px; z-index: 1000;">⬅️ Volver al menú</button>
     
-    <div class="vintage-container">
+    <!-- 📚 Contenedor del libro vintage -->
+    <div class="vintage-book-container">
       <!-- 📖 Libro cerrado vintage -->
-      <div id="vintage-book-closed" style="display: block;">
-        <div class="vintage-book-cover">
-          <div class="vintage-bg-pattern"></div>
+      <div id="vintage-book-closed" class="vintage-book-closed" onclick="abrirLibroVintage()">
+        <div class="vintage-cover">
           <div class="vintage-spine"></div>
           <div class="vintage-pages-stack"></div>
           <div class="vintage-title-section">
