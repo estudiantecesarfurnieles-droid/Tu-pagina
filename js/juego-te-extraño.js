@@ -8,39 +8,46 @@ let preguntas = [];
 // Preguntas del juego
 const PREGUNTAS_JUEGO = [
   {
-    pregunta: "¿Cuál es mi color favorito?",
-    opciones: ["Rosa", "Azul", "Púrpura", "Verde"],
-    correcta: 1,
-    mensajeCorrecto: "¡Exacto! El azul es mi color favorito 💙",
-    mensajeIncorrecto: "No es correcto, mi color favorito es el azul 💙"
+    pregunta: "¿Cuál dirías que es mi mayor miedo personal o preocupación subyacente?",
+    opciones: ["El miedo al fracaso o a no cumplir mis propias expectativas", "El miedo a las serpientes o insectos grandes", "El miedo a la vejez o a la enfermedad", "El miedo a las alturas o a los lugares cerrados"],
+    correcta: 0,
+    mensajeCorrecto: "¡Exacto! Siempre tengo miedo de no estar a la altura de lo que espero de mí 💙",
+    mensajeIncorrecto: "No es correcto, mi mayor miedo es no cumplir mis propias expectativas 💙"
   },
   {
-    pregunta: "¿Qué me gusta más hacer contigo?",
-    opciones: ["Ver películas", "Besar tus cachetes", "Abrazarte", "Cocinar juntos"],
-    correcta: 1,
-    mensajeCorrecto: "¡Sí! Besar tus cachetes es lo que más me gusta 💕",
-    mensajeIncorrecto: "Me gusta todo contigo, pero besar tus cachetes es especial 💕"
-  },
-  {
-    pregunta: "¿Qué me gustaría hacer contigo?",
-    opciones: ["Ir de viaje", "Ver películas", "Cocinar", "Bailar"],
-    correcta: 1,
-    mensajeCorrecto: "¡Correcto! Me encantaría ver películas contigo 🎬",
-    mensajeIncorrecto: "Me gustaría mucho ver películas contigo 🎬"
-  },
-  {
-    pregunta: "¿Cuál es mi comida favorita?",
-    opciones: ["Pizza", "Chicharrón de cerdo", "Pasta", "Sushi"],
-    correcta: 1,
-    mensajeCorrecto: "¡Exacto! El chicharrón de cerdo es mi debilidad 🥓",
-    mensajeIncorrecto: "Mi comida favorita es el chicharrón de cerdo 🥓"
-  },
-  {
-    pregunta: "¿Qué me hace más feliz?",
-    opciones: ["Recibir regalos", "Ver tu sonrisa", "Jugar videojuegos", "Dormir"],
+    pregunta: "¿Qué pequeño detalle o gesto de las personas o del ambiente me molesta o me fascina más de lo normal (es algo en lo que siempre me fijo)?",
+    opciones: ["Si la gente mastica con la boca abierta", "Si la decoración de un lugar está desequilibrada", "La forma en que la gente usa su tono de voz, no lo que dice", "Cuando alguien llega tarde a un compromiso"],
     correcta: 2,
-    mensajeCorrecto: "¡Correcto! Jugar videojuegos me hace muy feliz 🎮",
-    mensajeIncorrecto: "Jugar videojuegos es lo que más me hace feliz 🎮"
+    mensajeCorrecto: "¡Sí! Siempre me fijo en el TONO de voz, me encanta 💕",
+    mensajeIncorrecto: "Me fijo en el tono de voz de las personas, no tanto en lo que dicen 💕"
+  },
+  {
+    pregunta: "¿Cuál de estos es un objetivo de vida a largo plazo que he mencionado con más emoción?",
+    opciones: ["Abrir mi propio negocio o proyecto personal innovador", "Escribir un libro sobre mis experiencias", "Viajar por todo el país en una casa rodante", "Hablar inglés fluidamente y conocer las diferentes culturas de los países europeos"],
+    correcta: 3,
+    mensajeCorrecto: "¡Correcto! Quiero hablar inglés perfecto y viajar por Europa 🎬",
+    mensajeIncorrecto: "Mi sueño es hablar inglés fluidamente y conocer culturas europeas 🎬"
+  },
+  {
+    pregunta: "¿De qué color era el suéter que tenía puesto el día que nos dimos nuestro primer beso?",
+    opciones: ["Azul marino", "Verde oscuro", "Gris", "Negro"],
+    correcta: 2,
+    mensajeCorrecto: "¡Exacto! Era gris, lo recuerdo perfecto 💕",
+    mensajeIncorrecto: "Era gris, ese día inolvidable 💕"
+  },
+  {
+    pregunta: "¿Qué es lo que hago antes de irme a dormir, casi sin falta?",
+    opciones: ["Reviso todas mis redes sociales por última vez", "Escucho música relajante o un podcast", "Leo durante al menos 10 minutos", "Hablar con Dios / Rezar"],
+    correcta: 3,
+    mensajeCorrecto: "¡Correcto! Siempre rezo antes de dormir, es mi momento sagrado 🙏",
+    mensajeIncorrecto: "Siempre rezo antes de dormir, es parte esencial de mi rutina 🙏"
+  },
+  {
+    pregunta: "Si tuvieras que definir mi mayor motivación personal o propósito de vida, ¿cuál de estas opciones crees que encaja mejor?",
+    opciones: ["Lograr la independencia financiera y construir una vida sin preocupaciones materiales", "Convertirme en una referencia en mi campo profesional o en un experto reconocido", "Viajar por todos los continentes para coleccionar experiencias y culturas", "Hacer reír a las personas y estar para ellas cuando sienten que su mundo se derrumba, porque sé lo difícil que es la vida para algunos"],
+    correcta: 3,
+    mensajeCorrecto: "¡Exacto! Mi propósito es hacer feliz a la gente, ayudar cuando más lo necesitan 💖",
+    mensajeIncorrecto: "Mi mayor propósito es estar para los demás y hacerlos felices 💖"
   }
 ];
 
