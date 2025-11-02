@@ -39,12 +39,14 @@ proyecto-cumple/
 
 ## 🎯 Características
 
-- ✅ Sistema de login seguro con localStorage
+- ✅ Sistema de login seguro con dos usuarios y localStorage
+- ✅ Juego interactivo "Te Extraño" con preguntas personalizadas
+  - Tich: juega con las 6 preguntas originales sobre Camila
+  - Camila: crea sus propias preguntas para que Tich demuestre cuánto la conoce
 - ✅ Interfaz romántica y elegante
 - ✅ Responsive design (móvil y desktop)
 - ✅ Galería de fotos y videos
 - ✅ Cartas de amor personalizadas
-- ✅ Juego interactivo "Te Extraño"
 - ✅ Nuestra historia en formato libro
 - ✅ Música de fondo
 - ✅ Efectos visuales y animaciones
