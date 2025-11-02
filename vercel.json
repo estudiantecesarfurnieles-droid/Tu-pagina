@@ -1,11 +1,4 @@
 {
-  "version": 2,
-  "buildCommand": "echo 'No build step required'",
-  "outputDirectory": ".",
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
-  ]
+  "cleanUrls": true,
+  "trailingSlash": false
 }
