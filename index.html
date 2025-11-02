@@ -115,7 +115,7 @@
     
     // Verificar autenticación
     function checkAuth() {
-      if (localStorage.getItem('authenticated') === 'true') {
+      if (sessionStorage.getItem('authenticated') === 'true') {
         document.body.classList.add('authenticated');
       } else {
         document.body.classList.remove('authenticated');
@@ -131,7 +131,7 @@
       const errorMsg = document.getElementById('loginError');
       
       if (usuario === CREDENCIALES.usuario && contraseña === CREDENCIALES.contraseña) {
-        localStorage.setItem('authenticated', 'true');
+        sessionStorage.setItem('authenticated', 'true');
         document.body.classList.add('authenticated');
         errorMsg.style.display = 'none';
       } else {
