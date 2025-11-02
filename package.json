@@ -1,7 +1,7 @@
 {
   "name": "tu-pagina-cumple",
   "version": "1.0.0",
-  "description": "Página romántica con sistema de login",
+  "description": "Página romántica",
   "main": "index.html",
   "scripts": {
     "build": "echo 'No build step required'"
