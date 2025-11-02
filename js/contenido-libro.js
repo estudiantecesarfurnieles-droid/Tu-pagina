@@ -249,6 +249,17 @@ const contenidoLibro = [
     titulo: "Capítulo 10: Momentos Inolvidables (cont.)",
     autor: "Yulianis - Cachetitos",
     contenido: "El primer regalo que me diste fue una manilla, que aún conservo con mucho cariño. Ese día me fui tan feliz. Y ni hablar de nuestro lugar secreto de encuentros, donde siempre alguien tenía que vigilar para que no nos descubrieran. ¡Qué susticos pasábamos! JAJAJA."
+  },
+  // Páginas 51-52: Capítulo 11 - Volviendo a Hablar
+  {
+    titulo: "Capítulo 11: Volviendo a Hablar",
+    autor: "Camilo - Bebé Koalita",
+    contenido: "Después de un mes y medio sin hablarnos, volvimos a comunicarnos. Empezamos a mandarnos mensajes de nuevo por WhatsApp, poco a poco, sin forzar nada. Hemos tenido video llamadas, nos hemos visto en Meet, hemos visto películas juntos y hemos hablado de muchas cosas."
+  },
+  {
+    titulo: "Capítulo 11: Volviendo a Hablar (cont.)",
+    autor: "Camilo - Bebé Koalita",
+    contenido: "Honestamente, me siento bien. No estamos poniéndole nombre a lo que tenemos ahora, no somos novios, no somos amigos, simplemente nada. Solo estamos pasando un buen rato, disfrutando de la compañía del otro a distancia, compartiendo momentos en llamadas y diálogos sinceros. Y eso me hace sentir tranquilo."
   }
 ];
 
