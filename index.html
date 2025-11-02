@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>💖 Nuestro Universo de Amor 💖</title>
-  <!-- v4.0 modo creación preguntas -->
+  <!-- v5.0 sistema dual usuarios y preguntas -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
@@ -107,18 +107,21 @@
   
   <!-- Login JavaScript -->
   <script>
-    // Credenciales de acceso
-    const CREDENCIALES = {
-      usuario: 'tich',
-      contraseña: 'febrero13'
+    // Credenciales de acceso - Múltiples usuarios
+    const USUARIOS = {
+      'tich': 'febrero13',
+      'camila': 'Camilo27'
     };
     
     // Verificar autenticación
     function checkAuth() {
-      if (sessionStorage.getItem('authenticated') === 'true') {
+      const usuario = sessionStorage.getItem('userAuthenticated');
+      if (usuario && USUARIOS.hasOwnProperty(usuario)) {
         document.body.classList.add('authenticated');
+        document.body.setAttribute('data-user', usuario);
       } else {
         document.body.classList.remove('authenticated');
+        document.body.removeAttribute('data-user');
       }
     }
     
@@ -130,9 +133,12 @@
       const contraseña = document.getElementById('loginPassword').value;
       const errorMsg = document.getElementById('loginError');
       
-      if (usuario === CREDENCIALES.usuario && contraseña === CREDENCIALES.contraseña) {
+      // Verificar credenciales
+      if (USUARIOS.hasOwnProperty(usuario) && contraseña === USUARIOS[usuario]) {
         sessionStorage.setItem('authenticated', 'true');
+        sessionStorage.setItem('userAuthenticated', usuario);
         document.body.classList.add('authenticated');
+        document.body.setAttribute('data-user', usuario);
         errorMsg.style.display = 'none';
       } else {
         errorMsg.style.display = 'block';
@@ -523,23 +529,21 @@
       <div id="juego-inicio" class="juego-pantalla">
         <div class="juego-titulo">
           <h3>🎮 Juego del Amor 💕</h3>
-          <p>¡Elige el modo de juego!</p>
+          <p>¡Demuestra cuánto me conoces, mi amor!</p>
         </div>
         <div class="juego-descripcion">
-          <p>Demuestra cuánto nos conocemos con estos juegos especiales 💖</p>
+          <p>Responde las preguntas correctamente y gana corazones. ¡Cada respuesta correcta te acerca más a mí! 💖</p>
         </div>
-        <div style="display: flex; flex-direction: column; gap: 20px; width: 100%; max-width: 500px; margin: 0 auto;">
-          <button class="btn-juego-iniciar" onclick="iniciarJuego()">
-            <span class="corazon-animado">💕</span>
-            Jugar para Tich
-            <span class="corazon-animado">💕</span>
-          </button>
-          <button class="btn-juego-iniciar" onclick="iniciarJuegoCamila()" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-            <span class="corazon-animado">💖</span>
-            Crear preguntas para Camila
-            <span class="corazon-animado">💖</span>
-          </button>
-        </div>
+        <button class="btn-juego-iniciar" onclick="iniciarJuego()">
+          <span class="corazon-animado">💕</span>
+          ¡Comenzar Juego!
+          <span class="corazon-animado">💕</span>
+        </button>
+        <button class="btn-juego-iniciar" onclick="iniciarJuegoCamila()" style="margin-top: 20px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+          <span class="corazon-animado">💖</span>
+          Crear preguntas para Camila
+          <span class="corazon-animado">💖</span>
+        </button>
       </div>
 
       <!-- Pantalla del juego -->
@@ -808,7 +812,7 @@
   <script src="./js/contenido-libro.js"></script>
   <script src="./js/conversaciones.js"></script>
   <script src="./js/loading-epic.js"></script>
-  <script src="./js/juego-te-extraño.js?v=3"></script>
+  <script src="./js/juego-te-extraño.js?v=4"></script>
   <script src="./js/script.js"></script>
 </body>
 </html>

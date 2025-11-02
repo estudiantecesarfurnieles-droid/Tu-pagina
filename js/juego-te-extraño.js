@@ -53,10 +53,29 @@ const PREGUNTAS_JUEGO = [
 
 // Inicializar el juego
 function iniciarJuego() {
+  // Detectar qué usuario está logueado
+  const usuarioActual = document.body.getAttribute('data-user');
+  
+  // Cargar preguntas según el usuario
+  if (usuarioActual === 'camila') {
+    // Camila ve sus preguntas guardadas en localStorage
+    const preguntasGuardadas = JSON.parse(localStorage.getItem('preguntas_de_camila') || '[]');
+    if (preguntasGuardadas.length > 0) {
+      preguntas = [...preguntasGuardadas];
+    } else {
+      // Si no tiene preguntas, mostrar mensaje
+      alert('Aún no has creado ninguna pregunta. ¡Crea algunas primero! 💕');
+      reiniciarJuego();
+      return;
+    }
+  } else {
+    // Tich ve las preguntas originales
+    preguntas = [...PREGUNTAS_JUEGO];
+  }
+  
   juegoActivo = true;
   preguntaActual = 0;
   puntuacion = 0;
-  preguntas = [...PREGUNTAS_JUEGO]; // Copia del array
   
   // Ocultar pantalla de inicio y mostrar pantalla de preguntas
   document.getElementById('juego-inicio').classList.add('hidden');
@@ -521,7 +540,8 @@ let preguntasDeCamila = [];
 
 // Iniciar juego de creación de preguntas
 function iniciarJuegoCamila() {
-  preguntasDeCamila = [];
+  // Cargar preguntas guardadas desde localStorage
+  preguntasDeCamila = JSON.parse(localStorage.getItem('preguntas_de_camila') || '[]');
   document.getElementById('juego-inicio').classList.add('hidden');
   document.getElementById('juego-crear-preguntas').classList.remove('hidden');
   actualizarVistaPreguntasCreadas();
@@ -581,6 +601,9 @@ function guardarNuevaPregunta() {
   // Agregar a la lista
   preguntasDeCamila.push(nuevaPregunta);
   
+  // Guardar en localStorage
+  localStorage.setItem('preguntas_de_camila', JSON.stringify(preguntasDeCamila));
+  
   // Cerrar modal
   cerrarModalPregunta();
   
@@ -633,6 +656,7 @@ function actualizarVistaPreguntasCreadas() {
 // Eliminar pregunta
 function eliminarPregunta(index) {
   preguntasDeCamila.splice(index, 1);
+  localStorage.setItem('preguntas_de_camila', JSON.stringify(preguntasDeCamila));
   actualizarVistaPreguntasCreadas();
   playButtonSound();
 }
