@@ -254,12 +254,12 @@ const contenidoLibro = [
   {
     titulo: "Capítulo 11: Volviendo a Hablar",
     autor: "Camilo - Bebé Koalita",
-    contenido: "Después de un mes y medio sin hablarnos, volvimos a comunicarnos. Empezamos a mandarnos mensajes de nuevo por WhatsApp, poco a poco, sin forzar nada. Hemos tenido video llamadas, nos hemos visto en Meet, hemos visto películas juntos y hemos hablado de muchas cosas."
+    contenido: "Después de mes y medio sin hablarnos, volvimos a hablar. Empezamos a mandarnos mensajes otra vez por WhatsApp, sin presión ni nada. Ya hemos tenido varias video llamadas, nos vemos en Meet, hemos visto películas juntos, y bueno... hablamos de todo un poco."
   },
   {
     titulo: "Capítulo 11: Volviendo a Hablar (cont.)",
     autor: "Camilo - Bebé Koalita",
-    contenido: "Honestamente, me siento bien. No estamos poniéndole nombre a lo que tenemos ahora, no somos novios, no somos amigos, simplemente nada. Solo estamos pasando un buen rato, disfrutando de la compañía del otro a distancia, compartiendo momentos en llamadas y diálogos sinceros. Y eso me hace sentir tranquilo."
+    contenido: "La verdad, me siento bien así. No estamos etiquetando lo nuestro. No somos novios, tampoco amigos, simplemente... nada. Solo pasamos el rato juntos, aunque sea a distancia, compartiendo llamadas y conversando tranquilamente. Y eso está bien, me siento tranquilo."
   }
 ];
 
