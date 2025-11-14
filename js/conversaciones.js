@@ -1,4 +1,48 @@
 const TODAS_LAS_CONVERSACIONES = [
+  // ========================================
+  // NUEVAS CONVERSACIONES - PELUCHES PREGUNTANDO POR EL PAPÁ
+  // ========================================
+  [
+    {peluche:'tich', texto:'Camilita, ¿dónde estará papi? Tiene ratos que no nos viene a visitar, nos tiene abandonados 🤔', tiempo: 8000},
+    {peluche:'camila', texto:'Tichito, no digas eso. Papi debe estar ocupado, seguro recuerda que consiguió trabajo y tiene que estudiar también. Debe ser que ha estado bastante saturado y no ha tenido tiempo, pero verás que pronto vendrá a vernos y a hablar con nosotros 💕', tiempo: 10000},
+    {peluche:'tich', texto:'Tienes razón, Camilita. Mami, ¿cuándo crees que papi vendrá a visitarnos? Lo extrañamos mucho 🥺', tiempo: 8000},
+    {peluche:'camila', texto:'Sí mami, queremos saber cuándo lo veremos. Le tenemos muchas cosas que contarle 💖', tiempo: 7000}
+  ],
+  [
+    {peluche:'tich', texto:'Mami, ¿papi está bien? Hace mucho que no lo vemos y nos preocupa 😔', tiempo: 7000},
+    {peluche:'camila', texto:'Sí mami, queremos saber si está comiendo bien y descansando. Tich y yo lo extrañamos mucho 💕', tiempo: 8000},
+    {peluche:'tich', texto:'Es que cuando papi estaba aquí, nos contaba historias y jugaba con nosotros. Ahora todo está muy callado 🥺', tiempo: 8000},
+    {peluche:'camila', texto:'Mami, ¿puedes decirle a papi que lo amamos y que esperamos verlo pronto? 💖', tiempo: 7000}
+  ],
+  [
+    {peluche:'camila', texto:'Tich, ¿crees que papi se acordó de nosotros? A veces me da miedo que nos haya olvidado 😢', tiempo: 8000},
+    {peluche:'tich', texto:'No digas eso, Camilita. Papi nunca nos olvidaría. Mami, ¿papi pregunta por nosotros? 🤔', tiempo: 8000},
+    {peluche:'camila', texto:'Sí mami, queremos saber si papi habla de nosotros. Le tenemos guardados muchos abrazos 💕', tiempo: 8000},
+    {peluche:'tich', texto:'Y también queremos contarle todas las aventuras que hemos tenido mientras él no está 🎉', tiempo: 7000}
+  ],
+  [
+    {peluche:'tich', texto:'Camilita, ¿cuánto tiempo más pasará hasta que veamos a papi? Ya perdí la cuenta de los días 😔', tiempo: 8000},
+    {peluche:'camila', texto:'Yo también, Tichito. Mami, ¿papi está muy lejos? ¿Por qué tarda tanto en venir? 🥺', tiempo: 8000},
+    {peluche:'tich', texto:'Es que extrañamos sus abrazos y sus risas. Mami, ¿puedes decirle que lo necesitamos aquí? 💕', tiempo: 8000},
+    {peluche:'camila', texto:'Sí, y que aunque entendemos que está ocupado, nuestro corazón lo espera siempre 💖', tiempo: 7000}
+  ],
+  [
+    {peluche:'camila', texto:'Tich, ¿te acuerdas cuando papi nos llevaba a pasear? Eso era lo mejor del mundo 🌟', tiempo: 8000},
+    {peluche:'tich', texto:'¡Sí! Y cuando nos contaba cuentos antes de dormir. Mami, ¿papi todavía nos recuerda? 😊', tiempo: 8000},
+    {peluche:'camila', texto:'Mami, cuando veas a papi, dale un abrazo de nuestra parte y dile que lo amamos mucho 💕', tiempo: 8000},
+    {peluche:'tich', texto:'Y que estamos aquí esperándolo, guardando todos nuestros besitos para cuando regrese 💖', tiempo: 7000}
+  ],
+  [
+    {peluche:'tich', texto:'Camilita, a veces siento que papi está muy lejos y me da tristeza. ¿Tú también sientes eso? 😢', tiempo: 8000},
+    {peluche:'camila', texto:'Sí Tichito, pero mami nos cuida mucho y eso nos da fuerza. Mami, ¿papi está bien de salud? 💕', tiempo: 8000},
+    {peluche:'tich', texto:'Sí mami, queremos saber si papi está comiendo bien y si está feliz. Nos preocupamos por él 🥺', tiempo: 8000},
+    {peluche:'camila', texto:'Y queremos que sepa que aunque no esté aquí, siempre está en nuestros corazones 💖', tiempo: 7000}
+  ],
+
+  // ========================================
+  // CONVERSACIONES ORIGINALES (COMENTADAS)
+  // ========================================
+  /*
   // CONVERSACIONES DE SCRIPT.JS
   [
     {peluche:'tich', texto:'Camilita… ¿lista como lo practicamos? 😏✨', tiempo: 6000},
@@ -1235,6 +1279,7 @@ const TODAS_LAS_CONVERSACIONES = [
     {peluche:'tich', texto:'Porque soy tu abracito en forma de palabras 🤗'},
     {peluche:'camila', texto:'Y yo tu sonrisa a la distancia 🌟'}
   ]
+  */
 ];
 
 // Función para iniciar conversaciones de peluches
